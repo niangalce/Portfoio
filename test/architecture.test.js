@@ -154,11 +154,19 @@ describe('Architecture Technique & Configuration Tests', () => {
 
   test('Les tokens CSS respectent les règles d\'interdiction et d\'accessibilité', () => {
     const tokens = fs.readFileSync(path.join(rootDir, 'styles', 'tokens.css'), 'utf8');
-    assert.ok(tokens.includes('--color-canvas-default: #FAF8F5'), 'Le canvas doit être lin albâtre');
-    assert.ok(tokens.includes('--color-text-primary: #0F141A'), 'Le texte principal doit être noir encre');
-    assert.ok(tokens.includes('--color-accent-primary: #BF5516'), 'L\'accent doit être ocre');
+    assert.ok(tokens.includes('--color-canvas-default: #FAF6ED'), 'Le canvas doit rester dans les tons ivoire chauds');
+    assert.ok(tokens.includes('--color-text-primary: #22271C'), 'Le texte principal doit rester très contrasté');
+    assert.ok(tokens.includes('--color-accent-primary: #20513B'), 'L\'accent doit rester vert forêt profond');
     assert.ok(!tokens.includes('Space Grotesk'), 'Space Grotesk est interdit');
     assert.ok(!tokens.includes('Instrument Serif'), 'Instrument Serif est interdit');
+  });
+
+  test('Le Hero associe le portrait réel au nom sans effets décoratifs', () => {
+    const hero = fs.readFileSync(path.join(rootDir, 'src', 'components', 'Hero.astro'), 'utf8');
+    assert.match(hero, /identity\.heroPortrait\.relativePath/);
+    assert.match(hero, /class="hero-avatar"/);
+    assert.match(hero, /border-radius:\s*50%/);
+    assert.doesNotMatch(hero, /linear-gradient|radial-gradient|backdrop-filter/i);
   });
 
   test('GitHub enrichit uniquement le projet éditorial sélectionné et prévoit un fallback local', () => {
@@ -176,6 +184,7 @@ describe('Architecture Technique & Configuration Tests', () => {
     );
 
     assert.match(projectComponent, /GitHubRepositoryMeta owner="niangalce" repository="TerangaDigital\.shop"/);
+    assert.match(projectComponent, /Voir le code sur GitHub/);
     assert.match(metadataComponent, /summary\.textContent = fallback\(lang\)/);
     assert.match(metadataComponent, /setTimeout\(\(\) => controller\.abort\(\), 6000\)/);
     assert.match(repositoryClient, /credentials: 'omit'/);

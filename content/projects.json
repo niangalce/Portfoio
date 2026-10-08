@@ -9,9 +9,9 @@
     },
     "category": "saas",
     "status": "In active development",
-    "role": "CEO & Lead Developer",
+    "role": "CEO & Developer",
     "featured": true,
-    "githubUrl": null,
+    "githubUrl": "https://github.com/niangalce/Jef",
     "liveUrl": null,
     "stack": [
       "Next.js",
@@ -110,15 +110,15 @@
     "slug": "terangadigital",
     "title": "TèrangaDigital",
     "tagline": {
-      "fr": "Marque et plateforme d'outils digitaux pratiques au service des entrepreneurs africains.",
-      "en": "Digital platform and toolkit brand empowering African entrepreneurs and creators."
+      "fr": "Marque numérique portée par des ressources pratiques, des supports visuels et une boutique en ligne.",
+      "en": "A digital brand expressed through practical resources, visual work, and an online storefront."
     },
     "category": "digital",
     "status": "Active Brand Project",
     "role": "Marque fondée par Alce Niang · Fondateur & Créateur Digital",
     "featured": true,
     "githubUrl": "https://github.com/niangalce/TerangaDigital.shop",
-    "liveUrl": null,
+    "liveUrl": "https://teranga-digital-rho.vercel.app/boutique.html",
     "stack": [
       "HTML5 Sémantique",
       "CSS3 Moderne",
@@ -126,7 +126,7 @@
       "Design Graphique",
       "E-commerce",
       "Git",
-      "GitHub Pages"
+      "Vercel"
     ],
     "metrics": {
       "fr": "Guide e-commerce de 30 pages documenté dans le projet et plusieurs supports visuels de marque.",
@@ -158,12 +158,12 @@
         "en": "A catalog organized around Freelance, Marketing, Photoshop, and Content packs, with navigation intended to support discovery and direct inquiries."
       },
       "development": {
-        "fr": "Boutique développée en HTML5 sémantique, CSS3 et JavaScript. L’URL GitHub Pages précédemment publiée répondait 404 lors de la vérification du 8 octobre 2026 ; elle n’est donc pas présentée comme une démo accessible.",
-        "en": "A storefront built with semantic HTML5, CSS3, and JavaScript. The previously listed GitHub Pages URL returned 404 when checked on October 8, 2026, so it is not presented as an accessible demo."
+        "fr": "Le dépôt public contient une boutique développée en HTML5 sémantique, CSS3 et JavaScript. La boutique actuellement accessible est publiée sur teranga-digital-rho.vercel.app/boutique.html.",
+        "en": "The public repository contains a storefront built with semantic HTML5, CSS3, and JavaScript. The currently accessible store is published at teranga-digital-rho.vercel.app/boutique.html."
       },
       "result": {
-        "fr": "Le dépôt public et les supports de marque sont consultables. L’URL de site précédemment référencée a répondu 404 le 8 octobre 2026 ; aucune démo en ligne n’est annoncée.",
-        "en": "The public repository and brand materials are available for review. The previously listed website URL returned 404 on October 8, 2026; no live demo is claimed."
+        "fr": "La boutique en ligne, le dépôt GitHub public et les supports de marque sont consultables. Les visuels conservés dans ce portfolio documentent le travail de marque ; les offres affichées sur la boutique peuvent différer.",
+        "en": "The online storefront, public GitHub repository, and brand materials are available for review. The visuals retained in this portfolio document the brand work; current storefront offers may differ."
       },
       "difficulties": {
         "fr": "Relier la rédaction d'un guide structuré à la conception du site et à la présentation cohérente des offres.",
@@ -194,12 +194,12 @@
         "en": "Mastery of the full digital publishing workflow: from authoring a 30-page structured handbook to storefront development and offer packaging."
       },
       "currentStatus": {
-        "fr": "Le dépôt GitHub public et les comptes Instagram et TikTok de la marque sont accessibles. Le lien GitHub Pages précédemment publié répondait 404 lors de sa vérification le 8 octobre 2026.",
-        "en": "The public GitHub repository and the brand’s Instagram and TikTok accounts are accessible. The previously listed GitHub Pages link returned 404 when checked on October 8, 2026."
+        "fr": "La boutique teranga-digital-rho.vercel.app/boutique.html est accessible ; le dépôt GitHub et les comptes Instagram et TikTok de la marque sont également consultables.",
+        "en": "The teranga-digital-rho.vercel.app/boutique.html storefront is accessible; the brand’s GitHub repository, Instagram, and TikTok accounts are also available."
       },
       "nextSteps": {
-        "fr": "Intégration d'un module de paiement par mobile money et enrichissement continu des guides et templates pour créateurs.",
-        "en": "Integration of mobile money checkout and continuous expansion of templates and guides for digital creators."
+        "fr": "Maintenir les ressources, les visuels et les offres présentés sur la boutique au fil de l’évolution de la marque.",
+        "en": "Keep the resources, visuals, and offers on the storefront aligned as the brand evolves."
       }
     }
   },

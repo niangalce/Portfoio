@@ -22,7 +22,7 @@ Astro est configuré avec `output: 'static'` et `build.format: 'directory'`, pro
 - `https://niangalce.github.io/about/` $\rightarrow$ Page À propos (FR)
 - `https://niangalce.github.io/projects/` $\rightarrow$ Réalisations (FR)
 - `https://niangalce.github.io/projects/jef/` $\rightarrow$ Case study JËF (FR)
-- `https://niangalce.github.io/projects/terangadigital/` $\rightarrow$ Case study TèrangaDigital (FR)
+- `https://niangalce.github.io/Portfoio/projects/terangadigital/` $\rightarrow$ Case study TèrangaDigital (FR)
 - `https://niangalce.github.io/certifications/` $\rightarrow$ Bibliothèque des 6 attestations (FR)
 - `https://niangalce.github.io/contact/` $\rightarrow$ Formulaire et coordonnées (FR)
 - `https://niangalce.github.io/en/` $\rightarrow$ Homepage in English

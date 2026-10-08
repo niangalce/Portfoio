@@ -2,7 +2,7 @@
   "name": "portfolio-alce-niang",
   "version": "1.0.0",
   "private": true,
-  "description": "Portfolio professionnel d'Alce Niang — Développeur Web Front-End Junior & Créateur Digital",
+  "description": "Portfolio professionnel d'Alce Niang — Développeur Web Full Stack & Créateur Digital",
   "type": "module",
   "scripts": {
     "dev": "astro dev --port 3000",

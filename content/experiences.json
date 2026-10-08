@@ -2,14 +2,14 @@
   {
     "id": "unv-volunteer",
     "role": {
-      "fr": "Volontaire en communication & sensibilisation numérique",
-      "en": "Volunteer in Digital Communications & Community Outreach"
+      "fr": "Volontaire relais de communication",
+      "en": "Communications Relay Volunteer"
     },
     "organization": "Volontaires des Nations Unies (UNV)",
     "location": "Sénégal",
     "period": {
-      "fr": "Mission d'engagement citoyen",
-      "en": "Civic Engagement Mission"
+      "fr": "Dates non communiquées",
+      "en": "Dates not provided"
     },
     "categories": ["Communication"],
     "current": false,
@@ -36,8 +36,8 @@
     "organization": "Natural's",
     "location": "Sénégal",
     "period": {
-      "fr": "Collaboration actuelle",
-      "en": "Current Collaboration"
+      "fr": "En cours · début non précisé",
+      "en": "Ongoing · start date not provided"
     },
     "categories": ["Communication"],
     "current": true,
@@ -73,7 +73,7 @@
     "current": true,
     "bulletPoints": {
       "fr": [
-        "Création et développement de la marque TèrangaDigital et déploiement de sa vitrine en ligne (TerangaDigital.shop).",
+        "Création et développement de la marque TèrangaDigital et déploiement de sa vitrine en ligne (teranga-digital-rho.vercel.app/boutique.html).",
         "Rédaction et structuration intégrale d'un guide pratique de 30 pages consacré à l'e-commerce en Afrique.",
         "Conception de supports graphiques, de maquettes visuelles et de contenus promotionnels destinés aux créateurs et PME.",
         "Gestion autonome de projets, relation directe avec les clients et suivi de bout en bout des livrables."

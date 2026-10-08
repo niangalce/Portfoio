@@ -21,8 +21,8 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
         </h2>
         <p class="cta-copy">
           {isFr
-            ? 'Que vous cherchiez un stagiaire Front-End rigoureux, un collaborateur bilingue polyvalent ou un artisan numérique pour concevoir le site web de votre entreprise, échangeons directement.'
-            : 'Whether you are looking for a disciplined Front-End intern, a versatile bilingual contributor, or a digital craftsman to build your business website, let us talk.'}
+            ? 'Que vous cherchiez un développeur web full stack rigoureux, un collaborateur bilingue polyvalent ou un artisan numérique pour concevoir le site web de votre entreprise, échangeons directement.'
+            : 'Whether you are looking for a disciplined full stack web developer, a versatile bilingual contributor, or a digital craftsman to build your business website, let us talk.'}
         </p>
 
         <div class="cta-actions">
@@ -96,7 +96,7 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-8);
-    box-shadow: var(--shadow-modal);
+    box-shadow: var(--shadow-card);
   }
 
   @media (min-width: 960px) {
@@ -111,7 +111,7 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     font-weight: var(--weight-semibold);
-    color: #ff9d66;
+    color: var(--color-accent-on-dark);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     margin-bottom: var(--space-2);
@@ -120,7 +120,7 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
   .cta-title {
     font-size: var(--font-size-2xl);
     font-weight: var(--weight-extrabold);
-    color: #ffffff;
+    color: var(--color-text-inverse);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
     margin-bottom: var(--space-4);
@@ -146,7 +146,7 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
     align-items: center;
     gap: var(--space-2);
     background-color: var(--color-accent-primary);
-    color: #ffffff;
+    color: var(--color-text-inverse);
     font-size: var(--font-size-sm);
     font-weight: var(--weight-semibold);
     padding: 13px 22px;
@@ -167,11 +167,11 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
     align-items: center;
     gap: var(--space-2);
     background-color: transparent;
-    color: #ffffff;
+    color: var(--color-text-inverse);
     font-size: var(--font-size-sm);
     font-weight: var(--weight-medium);
     padding: 12px 20px;
-    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border: 1.5px solid var(--color-border-dark);
     border-radius: var(--radius-sm);
     text-decoration: none;
     transition:
@@ -181,14 +181,14 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
   }
 
   .btn-cta-secondary:hover {
-    border-color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-text-inverse-muted);
+    background-color: var(--color-surface-dark-raised);
   }
 
   /* Boîte de contact direct */
   .cta-contact-box {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--color-surface-dark-raised);
+    border: 1px solid var(--color-border-dark);
     border-radius: var(--radius-md);
     padding: var(--space-6);
     display: flex;
@@ -201,7 +201,7 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #a3abb8;
+    color: var(--color-text-inverse-muted);
     margin-bottom: var(--space-4);
   }
 
@@ -220,18 +220,18 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
 
   .contact-lbl {
     font-size: 11px;
-    color: #8b95a5;
+    color: var(--color-text-inverse-muted);
   }
 
   .contact-val {
     font-size: var(--font-size-sm);
-    color: #ffffff;
+    color: var(--color-text-inverse);
     text-decoration: none;
     font-weight: var(--weight-medium);
   }
 
   .contact-val:hover {
-    color: #ff9d66;
+    color: var(--color-accent-on-dark);
     text-decoration: underline;
   }
 
@@ -239,13 +239,13 @@ const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: #4ade80 !important;
+    color: var(--color-verified-on-dark) !important;
   }
 
   .avail-dot {
     width: 6px;
     height: 6px;
-    background-color: #4ade80;
+    background-color: var(--color-verified-on-dark);
     border-radius: 50%;
   }
 </style>

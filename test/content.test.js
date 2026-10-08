@@ -56,7 +56,7 @@ describe('Content Architecture & Data Integrity Tests', () => {
       ['Communication', 'Digital', 'Entrepreneurship', 'Other', 'Tech']
     );
     assert.ok(experiences.every(experience => experience.role.fr && experience.role.en));
-    assert.equal(projects.find(project => project.id === 'jef')?.githubUrl, null);
+    assert.equal(projects.find(project => project.id === 'jef')?.githubUrl, 'https://github.com/niangalce/Jef');
     assert.ok(projects.find(project => project.id === 'terangadigital')?.githubUrl);
   });
 
@@ -93,7 +93,7 @@ describe('Content Architecture & Data Integrity Tests', () => {
     const jef = projects.find(p => p.id === 'jef');
     assert.ok(jef, 'Projet JËF manquant');
     assert.equal(jef.status, 'In active development', 'JËF ne doit jamais être présenté comme terminé ou commercialisé');
-    assert.equal(jef.role, 'CEO & Lead Developer');
+    assert.equal(jef.role, 'CEO & Developer');
   });
 
   test('Les études de cas des projets principaux couvrent les rubriques bilingues sans inventer de démo', () => {
@@ -129,11 +129,11 @@ describe('Content Architecture & Data Integrity Tests', () => {
     const jef = projects.find(item => item.id === 'jef');
     const portfolio = projects.find(item => item.id === 'portfolio');
     assert.match(teranga.role, /fondée par Alce Niang/i);
-    assert.equal(teranga.liveUrl, null, 'Aucune URL de démonstration inaccessible ne doit être publiée');
+    assert.equal(teranga.liveUrl, 'https://teranga-digital-rho.vercel.app/boutique.html', 'Seule la boutique active vérifiée est publiée');
     assert.equal(portfolio.githubUrl, null, 'Une page de profil GitHub ne doit pas être étiquetée comme dépôt');
     assert.equal(portfolio.liveUrl, null, 'Une URL de site qui retourne 404 ne doit pas être publiée');
     assert.equal(jef.liveUrl, null, 'Aucune démo publique ne doit être inventée pour JËF');
-    assert.equal(jef.githubUrl, null, 'Aucun dépôt JËF non public ne doit être publié comme preuve');
+    assert.equal(jef.githubUrl, 'https://github.com/niangalce/Jef', 'Le dépôt public vérifié doit être publié comme preuve');
     assert.match(jef.caseStudy.result.fr, /aucun produit final ni démo publique/i);
   });
 

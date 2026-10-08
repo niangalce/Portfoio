@@ -247,7 +247,7 @@ const jefScreens = [
     margin-inline: auto;
     object-fit: contain;
     border-radius: var(--radius-xs);
-    background: #fff;
+    background: var(--color-surface-card);
   }
 
   .teranga-preview-publications {
@@ -262,7 +262,7 @@ const jefScreens = [
     overflow: hidden;
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xs);
-    background: #fff;
+    background: var(--color-surface-card);
   }
 
   .teranga-preview-publications img {
@@ -283,10 +283,10 @@ const jefScreens = [
   .teranga-story {
     margin-block: var(--space-10);
     padding: clamp(var(--space-5), 5vw, var(--space-10));
-    border: 1px solid #edd7c9;
+    border: 1px solid var(--color-accent-border);
     border-radius: var(--radius-lg);
-    background: #fcf5ef;
-    color: #231810;
+    background: var(--color-accent-tint);
+    color: var(--color-text-primary);
   }
 
   .teranga-story-heading {
@@ -294,7 +294,7 @@ const jefScreens = [
   }
 
   .story-kicker {
-    color: #a9481c;
+    color: var(--color-accent-primary);
     font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
@@ -324,13 +324,13 @@ const jefScreens = [
     display: block;
     width: min(100%, 480px);
     height: auto;
-    border: 1px solid #eee3dc;
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-sm);
-    background: #fff;
+    background: var(--color-surface-card);
   }
 
   .teranga-masthead figcaption {
-    color: #685244;
+    color: var(--color-text-secondary);
     font-size: var(--font-size-xs);
   }
 
@@ -347,9 +347,9 @@ const jefScreens = [
 
   .publication-frame {
     overflow: hidden;
-    border: 1px solid #e6d7cd;
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-md);
-    background: #fff;
+    background: var(--color-surface-card);
     box-shadow: var(--shadow-card);
   }
 
@@ -373,12 +373,12 @@ const jefScreens = [
     gap: var(--space-3);
     align-items: baseline;
     margin-top: var(--space-3);
-    color: #514033;
+    color: var(--color-text-primary);
     font-size: var(--font-size-xs);
   }
 
   .teranga-publication figcaption span {
-    color: #a9481c;
+    color: var(--color-accent-primary);
     font-family: var(--font-mono);
   }
 
@@ -388,12 +388,12 @@ const jefScreens = [
 
   .teranga-story > .visual-note {
     margin-top: var(--space-6);
-    color: #685244;
+    color: var(--color-text-secondary);
   }
 
   .jef-preview {
-    border-color: #d8d9f5;
-    background: #f5f5ff;
+    border-color: var(--color-border-subtle);
+    background: var(--color-canvas-subtle);
   }
 
   .jef-preview-heading {
@@ -412,7 +412,7 @@ const jefScreens = [
   }
 
   .jef-preview-heading span {
-    color: #41439c;
+    color: var(--color-text-secondary);
     font-size: var(--font-size-xs);
     font-weight: var(--weight-semibold);
     text-align: right;
@@ -421,9 +421,9 @@ const jefScreens = [
   .jef-preview figure,
   .jef-screen-image {
     overflow: hidden;
-    border: 1px solid #d9dbea;
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-sm);
-    background: #fff;
+    background: var(--color-surface-card);
   }
 
   .jef-preview figure img,
@@ -444,18 +444,18 @@ const jefScreens = [
     margin-block: var(--space-10);
     scroll-margin-top: calc(72px + var(--space-4));
     padding: clamp(var(--space-5), 5vw, var(--space-10));
-    border: 1px solid #333d54;
+    border: 1px solid var(--color-border-dark);
     border-radius: var(--radius-lg);
-    background: #121923;
-    color: #f7f8fc;
+    background: var(--color-surface-dark);
+    color: var(--color-text-inverse);
   }
 
   .jef-story .story-kicker {
-    color: #b9baff;
+    color: var(--color-accent-on-dark);
   }
 
   .jef-story h2 {
-    color: #f7f8fc;
+    color: var(--color-text-inverse);
   }
 
   .jef-story-heading {
@@ -463,7 +463,7 @@ const jefScreens = [
   }
 
   .jef-story-heading > p:last-child {
-    color: #c2c9d6;
+    color: var(--color-text-inverse-muted);
   }
 
   .jef-screens {
@@ -482,8 +482,8 @@ const jefScreens = [
   }
 
   .jef-screen-image {
-    border-color: #354057;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-border-dark);
+    box-shadow: var(--shadow-card);
   }
 
   .jef-screen figcaption {
@@ -493,12 +493,12 @@ const jefScreens = [
   }
 
   .jef-screen figcaption strong {
-    color: #d4d5ff;
+    color: var(--color-text-inverse);
     font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
   }
 
   .jef-screen figcaption span {
-    color: #c2c9d6;
+    color: var(--color-text-inverse-muted);
     font-size: var(--font-size-xs);
     line-height: var(--leading-normal);
   }
@@ -509,7 +509,7 @@ const jefScreens = [
     gap: var(--space-2);
     margin-top: var(--space-8);
     padding-top: var(--space-5);
-    border-top: 1px solid #354057;
+    border-top: 1px solid var(--color-border-dark);
   }
 
   .jef-story-steps a {
@@ -517,9 +517,9 @@ const jefScreens = [
     min-height: 40px;
     align-items: center;
     padding: 0.5rem 0.75rem;
-    border: 1px solid #47516a;
+    border: 1px solid var(--color-border-dark);
     border-radius: var(--radius-full);
-    color: #f7f8fc;
+    color: var(--color-text-inverse);
     font-size: var(--font-size-xs);
     text-decoration: none;
     transition: background-color var(--duration-fast) var(--ease-out-quint),
@@ -527,12 +527,12 @@ const jefScreens = [
   }
 
   .jef-story-steps a:hover {
-    border-color: #9698ff;
-    background: #272c46;
+    border-color: var(--color-accent-on-dark);
+    background: var(--color-surface-dark-raised);
   }
 
   .jef-story-steps a:focus-visible {
-    outline: var(--focus-ring-width) solid #c5c6ff;
+    outline: var(--focus-ring-width) solid var(--color-accent-on-dark);
     outline-offset: var(--focus-ring-offset);
   }
 

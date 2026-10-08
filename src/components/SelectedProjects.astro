@@ -12,6 +12,8 @@ const { lang = 'fr' } = Astro.props;
 const isFr = lang === 'fr';
 
 const jef = projectsData.find((p) => p.id === 'jef')!;
+const jefGithubUrl = jef.githubUrl;
+if (!jefGithubUrl) throw new Error('JËF GitHub repository is not configured.');
 const teranga = projectsData.find((p) => p.id === 'terangadigital')!;
 const portfolio = projectsData.find((p) => p.id === 'portfolio')!;
 const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/projects/${slug}/`);
@@ -44,7 +46,23 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
             <span>{isFr ? 'En cours de développement' : 'In active development'}</span>
           </span>
         </div>
-        <span class="project-role-tag">{isFr ? 'SaaS personnel' : 'Personal SaaS'}</span>
+        <span class="project-role-tag">{isFr ? 'CEO & développeur' : 'CEO & Developer'}</span>
+      </div>
+
+      <div class="project-actions jef-primary-action">
+        <a
+          href={jefGithubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-link-btn"
+        >
+          <span>{isFr ? 'Voir le code sur GitHub' : 'View the code on GitHub'}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
       </div>
 
       <ProjectVisualStory projectId="jef" lang={lang} variant="preview" />
@@ -86,19 +104,6 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
             <a href={getCaseStudyUrl(jef.slug)} class="project-link-secondary">
               {isFr ? 'Lire l’étude de cas' : 'Read the case study'}
             </a>
-            {jef.githubUrl && <a
-              href={jef.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="project-link-btn"
-            >
-              <span>{isFr ? 'Dépôt GitHub (Jef)' : 'GitHub Repo (Jef)'}</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>}
           </div>
         </div>
       </div>
@@ -146,7 +151,7 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
             rel="noopener noreferrer"
             class="project-link-btn"
           >
-            <span>{isFr ? 'Visiter TerangaDigital.shop' : 'Visit TerangaDigital.shop'}</span>
+            <span>{isFr ? 'Visiter la boutique en ligne' : 'Visit the online store'}</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
               <polyline points="15 3 21 3 21 9"></polyline>
@@ -310,7 +315,7 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #d97706;
+    background-color: var(--color-status-dev-text);
   }
 
   .status-badge-active {
@@ -441,12 +446,16 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
     margin-top: auto;
   }
 
+  .jef-primary-action {
+    margin-block: var(--space-4) 0;
+  }
+
   .project-link-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     background-color: var(--color-text-primary);
-    color: #fff;
+    color: var(--color-text-inverse);
     font-size: var(--font-size-xs);
     font-weight: var(--weight-semibold);
     padding: 9px 15px;

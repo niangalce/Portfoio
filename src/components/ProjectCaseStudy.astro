@@ -25,7 +25,7 @@ const status = isJef
   ? (isFr ? 'SaaS personnel — en développement' : 'Personal SaaS — in development')
   : (isFr ? 'Marque fondée par Alce Niang' : 'Brand founded by Alce Niang');
 const projectRole = isJef
-  ? 'CEO & Lead Developer'
+  ? 'CEO & Developer'
   : (isFr ? 'Fondateur & Créateur Digital' : 'Founder & Digital Creator');
 const requireBilingual = (
   value: { fr: string; en: string } | undefined,
@@ -54,13 +54,13 @@ const links = [
   ...(project.liveUrl
     ? [{
         href: project.liveUrl,
-        label: isFr ? 'Visiter le site officiel' : 'Visit the official website'
+        label: isFr ? 'Visiter la boutique en ligne' : 'Visit the online store'
       }]
     : []),
   ...(project.githubUrl
     ? [{
         href: project.githubUrl,
-        label: isFr ? 'Consulter le dépôt GitHub' : 'View the GitHub repository'
+        label: isFr ? 'Voir le code sur GitHub' : 'View the code on GitHub'
       }]
     : [])
 ];

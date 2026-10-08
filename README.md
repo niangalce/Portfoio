@@ -1,6 +1,6 @@
 # Portfolio Professionnel — Alce Niang
 
-> Développeur Web Front-End Junior · Étudiant en Anglais (UCAD) · Créateur Digital & Entrepreneur  
+> Développeur Web Full Stack · Créateur Digital & Entrepreneur  
 > Dakar, Sénégal — Contact : [niangalce@gmail.com](mailto:niangalce@gmail.com)
 
 ---

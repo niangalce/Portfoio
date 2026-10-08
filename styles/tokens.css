@@ -1,7 +1,9 @@
 /**
  * DESIGN TOKENS — PORTFOLIO PROFESSIONNEL ALCE NIANG
  * Architecture CSS basée sur des variables sémantiques strictes.
- * Conformité WCAG 2.2 AA / AAA. Zéro dégradé violet/bleu. Zéro cliché IA.
+ * Palette « Ivoire & Vert Forêt » : papier d'ivoire chaud, encre de forêt,
+ * or vérifié et terre cuite d'usage. Conformité WCAG 2.2 AA / AAA.
+ * Zéro dégradé violet/bleu. Zéro cliché IA.
  */
 
 :root {
@@ -9,40 +11,44 @@
      1. PALETTE CHROMATIQUE FONDATRICE (Design Tokens)
      ========================================================================== */
   
-  /* Canvas & Surfaces (Tons Lin Chaud, Craie & Écrin Minéral) */
-  --color-canvas-default: #FAF8F5;       /* Lin Albâtre chaud, fond général */
-  --color-canvas-subtle: #F3EFEA;        /* Surface secondaire légèrement contrastée */
-  --color-surface-card: #FFFFFF;         /* Fond blanc pur pour cartes et élévations */
-  --color-surface-hover: #FDFBF7;        /* État de survol délicat */
-  --color-surface-dark: #12171E;         /* Fond sombre profond pour sections nocturnes choisies */
+  /* Toile papier d'ivoire, lin chaud et encre de forêt */
+  --color-canvas-default: #FAF6ED;
+  --color-canvas-subtle: #F0EADA;
+  --color-surface-card: #FFFDF7;
+  --color-surface-hover: #F6F1E3;
+  --color-surface-dark: #21271B;
+  --color-surface-dark-raised: #2D3524;
 
-  /* Bordures architecturales & Lignes de structure */
-  --color-border-subtle: #E8E3DA;        /* Bordure délicate (séparations, cartes neutres) */
-  --color-border-medium: #D5CEBE;        /* Bordure structurante (inputs, séparateurs forts) */
-  --color-border-focus: #BF5516;         /* Anneau de focus accessible */
+  /* Bordures et lignes de structure */
+  --color-border-subtle: #E4DCCA;
+  --color-border-medium: #C8BB9E;
+  --color-border-dark: #4C5440;
+  --color-border-focus: #20513B;
 
-  /* Textes & Hiérarchie typographique */
-  --color-text-primary: #0F141A;         /* Noir Encre minéral (Contraste 14.8:1 sur Lin) */
-  --color-text-secondary: #525866;       /* Gris Minéral chaud (Contraste 5.8:1 sur Lin) */
-  --color-text-tertiary: #7D8494;        /* Métadonnées & labels discrets (Contraste 3.5:1+) */
-  --color-text-inverse: #FAF8F5;         /* Texte clair sur surfaces sombres */
-  --color-text-inverse-muted: #A3ABB8;   /* Texte secondaire sur surfaces sombres */
+  /* Hiérarchie de texte */
+  --color-text-primary: #22271C;
+  --color-text-secondary: #535746;
+  --color-text-tertiary: #6E7160;
+  --color-text-inverse: #FAF6ED;
+  --color-text-inverse-muted: #B5BBA5;
 
-  /* Accent Identitaire : Ocre Sénégalais / Ambre Tèranga */
-  --color-accent-primary: #BF5516;       /* Terre de Sienne / Ocre affirmé (Boutons, CTA, liens) */
-  --color-accent-hover: #9E420C;         /* Survol interactif plus profond */
-  --color-accent-tint: #FDF4ED;          /* Fond doux d'accent (badges, surbrillance) */
-  --color-accent-border: #F3D2BA;        /* Bordure fine d'accent */
+  /* Accent vert forêt profond, réservé aux liens et actions */
+  --color-accent-primary: #20513B;
+  --color-accent-hover: #16392A;
+  --color-accent-on-dark: #A4C9AF;
+  --color-accent-tint: #E2EADA;
+  --color-accent-border: #BFD0B6;
 
-  /* Accent de Preuve & Fiabilité : Vert Sahel (Vérifications & Statuts) */
-  --color-verified-text: #174232;        /* Vert Sahel sombre (Contraste 8.2:1 sur fond clair) */
-  --color-verified-bg: #EDF6F1;          /* Lavis vert doux pour badges certifiés */
-  --color-verified-border: #C8E3D4;      /* Bordure vert doux */
+  /* Or discret réservé aux éléments vérifiés */
+  --color-verified-text: #7A5510;
+  --color-verified-on-dark: #E5B95C;
+  --color-verified-bg: #F7EFDC;
+  --color-verified-border: #E3CC9B;
 
-  /* Statut En Cours / In Development : Ambre Doré */
-  --color-status-dev-text: #8A4F08;      /* Ambre textuel */
-  --color-status-dev-bg: #FEF7EA;        /* Fond ambre doux */
-  --color-status-dev-border: #F9E0B2;    /* Bordure ambre */
+  /* Statut en cours — terre cuite d'usage */
+  --color-status-dev-text: #8E4220;
+  --color-status-dev-bg: #F7E9DF;
+  --color-status-dev-border: #E8C5AC;
 
   /* ==========================================================================
      2. TYPOGRAPHIE DISTINCTIVE (Headings: Plus Jakarta Sans / Body: Figtree)
@@ -116,10 +122,10 @@
   /* ==========================================================================
      5. OMBRES & ÉLÉVATIONS (Subtiles, atmosphériques, 0 effet gadget)
      ========================================================================== */
-  --shadow-subtle: 0 1px 3px rgba(15, 20, 26, 0.04), 0 1px 2px rgba(15, 20, 26, 0.02);
-  --shadow-card: 0 4px 12px rgba(15, 20, 26, 0.05), 0 1px 3px rgba(15, 20, 26, 0.03);
-  --shadow-hover: 0 12px 28px rgba(15, 20, 26, 0.08), 0 4px 8px rgba(15, 20, 26, 0.03);
-  --shadow-modal: 0 24px 64px rgba(15, 20, 26, 0.16), 0 8px 16px rgba(15, 20, 26, 0.08);
+  --shadow-subtle: 0 1px 3px rgba(34, 39, 28, 0.04), 0 1px 2px rgba(34, 39, 28, 0.02);
+  --shadow-card: 0 4px 12px rgba(34, 39, 28, 0.05), 0 1px 3px rgba(34, 39, 28, 0.03);
+  --shadow-hover: 0 12px 28px rgba(34, 39, 28, 0.08), 0 4px 8px rgba(34, 39, 28, 0.03);
+  --shadow-modal: 0 24px 64px rgba(34, 39, 28, 0.16), 0 8px 16px rgba(34, 39, 28, 0.08);
 
   /* ==========================================================================
      6. TRANSITIONS & TEMPORISATION (Motion UX fonctionnel)
@@ -136,7 +142,7 @@
      ========================================================================== */
   --focus-ring-offset: 2px;
   --focus-ring-width: 2px;
-  --focus-ring-color: #BF5516;
+  --focus-ring-color: #20513B;
 }
 
 /* Prise en compte stricte de la préférence utilisateur pour la réduction de mouvement */
