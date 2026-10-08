@@ -1,0 +1,223 @@
+---
+import '../../styles/tokens.css';
+import profileData from '../../content/profile.json';
+import { getAlternatePath, sitePath } from '../utils/urls';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'fr' | 'en';
+  canonicalUrl?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  lang = 'fr',
+  canonicalUrl,
+  ogImage = profileData.identity.heroPortrait.relativePath,
+  noIndex = false,
+  structuredData
+} = Astro.props;
+
+if (!Astro.site) {
+  throw new Error('Astro.site must be configured to generate canonical metadata.');
+}
+
+const currentPath = sitePath(Astro.url.pathname);
+const canonicalHref = canonicalUrl
+  ? new URL(canonicalUrl, Astro.site).href
+  : new URL(currentPath, Astro.site).href;
+const frenchAlternate = lang === 'fr'
+  ? canonicalHref
+  : new URL(getAlternatePath(Astro.url.pathname, 'en'), Astro.site).href;
+const englishAlternate = lang === 'en'
+  ? canonicalHref
+  : new URL(getAlternatePath(Astro.url.pathname, 'fr'), Astro.site).href;
+const imageHref = new URL(sitePath(ogImage), Astro.site).href;
+const structuredDataJson = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, '\\u003c')
+  : undefined;
+---
+
+<!doctype html>
+<html lang={lang} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self' https://api.github.com; upgrade-insecure-requests"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalHref} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    {!noIndex && (
+      <>
+        <link rel="alternate" hreflang="fr" href={frenchAlternate} />
+        <link rel="alternate" hreflang="en" href={englishAlternate} />
+        <link rel="alternate" hreflang="x-default" href={frenchAlternate} />
+      </>
+    )}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alce Niang" />
+    <meta property="og:url" content={canonicalHref} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageHref} />
+    <meta property="og:image:alt" content={profileData.identity.heroPortrait.alt[lang]} />
+    <meta property="og:image:width" content={String(profileData.identity.heroPortrait.width)} />
+    <meta property="og:image:height" content={String(profileData.identity.heroPortrait.height)} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageHref} />
+    <meta name="twitter:image:alt" content={profileData.identity.heroPortrait.alt[lang]} />
+    {structuredDataJson && (
+      <script type="application/ld+json" set:html={structuredDataJson} />
+    )}
+
+    <!-- Typographies : Plus Jakarta Sans (Display), Figtree (Body), JetBrains Mono (Tech) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles de base & Réinitialisation ergonomique -->
+    <style is:global>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        background-color: var(--color-canvas-default);
+        color: var(--color-text-primary);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: var(--leading-normal);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-display);
+        color: var(--color-text-primary);
+        line-height: var(--leading-heading);
+        letter-spacing: var(--tracking-tight);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button, input, select, textarea {
+        font: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      [data-reveal-ready="true"] {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+        transition:
+          opacity var(--duration-reveal) var(--ease-out-quint),
+          transform var(--duration-reveal) var(--ease-out-quint);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+
+      [data-reveal-ready="true"][data-revealed="true"] {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (max-width: 700px) {
+        [data-reveal-ready="true"] {
+          transform: translate3d(0, 6px, 0);
+          transition-duration: var(--duration-normal);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal-ready="true"] {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      /* Lien d'évitement accessible pour lecteur d'écran et navigation clavier */
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 1rem;
+        background: var(--color-accent-primary);
+        color: #fff;
+        padding: 0.75rem 1.25rem;
+        border-radius: var(--radius-sm);
+        font-weight: var(--weight-semibold);
+        z-index: 1000;
+        transition: top var(--duration-fast) var(--ease-out-quint);
+      }
+
+      .skip-link:focus {
+        top: 1rem;
+        outline: var(--focus-ring-width) solid #fff;
+      }
+
+      /* Conteneur de grille fluide standardisé */
+      .site-container {
+        width: 100%;
+        max-width: var(--container-max-width);
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--container-gutter);
+        padding-right: var(--container-gutter);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">
+      {lang === 'fr' ? 'Aller au contenu principal' : 'Skip to main content'}
+    </a>
+
+    <slot name="header" />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+
+    <script>
+      import { initializeProjectReveals } from '../utils/reveal';
+
+      initializeProjectReveals();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+{
+  "identity": {
+    "fullName": "Alce Niang",
+    "administrativeName": "Alcé Niang",
+    "titles": {
+      "fr": "Étudiant en Anglais · Développeur Web Front-End Junior · Créateur Digital · Entrepreneur",
+      "en": "English Major · Junior Front-End Web Developer · Digital Creator · Entrepreneur"
+    },
+    "shortTagline": {
+      "fr": "Je conçois des interfaces web soignées et transforme des idées en produits numériques utiles.",
+      "en": "I build clean web interfaces and turn practical ideas into useful digital products."
+    },
+    "strategicPositioning": {
+      "fr": "Profil hybride alliant développement Front-End moderne, rigueur académique en anglais et communication digitale orientée produit.",
+      "en": "Hybrid profile bridging modern Front-End development, academic English rigor, and product-focused digital communication."
+    },
+    "location": {
+      "city": "Dakar",
+      "country": "Sénégal",
+      "countryCode": "SN"
+    },
+    "contact": {
+      "email": "niangalce@gmail.com",
+      "phone": "+221 78 217 76 59",
+      "preferredContactMethod": "email"
+    },
+    "social": {
+      "github": "https://github.com/niangalce",
+      "linkedin": "https://www.linkedin.com/in/alce-niang-a87575336",
+      "facebook": "https://www.facebook.com/share/19XVHdBuP9/",
+      "instagram": "https://www.instagram.com/terangadigital221/",
+      "tiktok": "https://www.tiktok.com/@terangadigital221"
+    },
+    "cvDownload": {
+      "filename": "Alce_Niang_CV_Developpeur_Web_2026.pdf",
+      "relativePath": "/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf",
+      "label": {
+        "fr": "Télécharger le CV (PDF)",
+        "en": "Download Resume (PDF)"
+      }
+    },
+    "heroPortrait": {
+      "relativePath": "/photo profile/alce-portrait.webp",
+      "alt": {
+        "fr": "Portrait professionnel d'Alce Niang, veste de costume sombre",
+        "en": "Professional portrait of Alce Niang, tailored suit jacket"
+      },
+      "width": 1024,
+      "height": 1536
+    },
+    "aboutWorkspacePhoto": {
+      "relativePath": "/photo profile/alce-workspace.webp",
+      "alt": {
+        "fr": "Alce Niang travaillant sur ordinateur portable dans un espace de bureau lumineux",
+        "en": "Alce Niang working on a laptop in a bright modern workspace"
+      },
+      "width": 1448,
+      "height": 1086
+    }
+  },
+  "education": [
+    {
+      "id": "ucad-l2",
+      "degree": {
+        "fr": "Licence 2 en Anglais (En cours)",
+        "en": "Bachelor of Arts in English — Year 2 (In progress)"
+      },
+      "institution": "Université Cheikh Anta Diop de Dakar (UCAD)",
+      "faculty": {
+        "fr": "Faculté des Lettres et Sciences Humaines (FLSH)",
+        "en": "Faculty of Arts and Humanities"
+      },
+      "location": "Dakar, Sénégal",
+      "period": "2024 — Présent",
+      "status": "In progress",
+      "description": {
+        "fr": "Approfondissement linguistique, analyse textuelle, communication interculturelle et expression orale et écrite. Ce cursus renforce ma capacité à appréhender la documentation technique internationale et à collaborer avec des équipes globales.",
+        "en": "Linguistic training, textual analysis, intercultural communication, and advanced writing. This curriculum enables direct fluency with global technical documentation and international teamwork."
+      },
+      "skills": ["Anglais académique", "Analyse critique", "Traduction & Rédaction", "Veille internationale"]
+    },
+    {
+      "id": "bac-2024",
+      "degree": {
+        "fr": "Baccalauréat Série L'1",
+        "en": "High School Baccalaureate — Literature & Humanities (L'1)"
+      },
+      "institution": "Enseignement Secondaire Sénégalais",
+      "location": "Sénégal",
+      "period": "2024",
+      "status": "Completed",
+      "description": {
+        "fr": "Baccalauréat littéraire axé sur les langues, la littérature, la philosophie et les sciences humaines.",
+        "en": "Literature baccalaureate focused on languages, critical thinking, philosophy, and humanities."
+      },
+      "skills": ["Communication écrite", "Esprit de synthèse", "Rigueur d'analyse"]
+    }
+  ],
+  "languages": [
+    {
+      "name": "Français",
+      "level": {
+        "fr": "Courant (Langue de travail & d'études)",
+        "en": "Fluent (Instruction & work language)"
+      },
+      "status": "Fluent"
+    },
+    {
+      "name": "English",
+      "level": {
+        "fr": "Formation universitaire L2 UCAD & développement continu",
+        "en": "University Degree in Progress (Year 2 UCAD) & Continuous Practice"
+      },
+      "status": "Academic & Professional Working Proficiency"
+    },
+    {
+      "name": "Wolof",
+      "level": {
+        "fr": "Courant (Langue maternelle)",
+        "en": "Native / Fluent"
+      },
+      "status": "Native"
+    }
+  ]
+}

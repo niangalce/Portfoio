@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FaqPageContent from '../components/FaqPageContent.astro';
+---
+
+<BaseLayout
+  title="FAQ — Alce Niang | Portfolio"
+  description="Réponses aux questions fréquentes sur le recrutement, les services, les projets, la collaboration et le contact avec Alce Niang."
+  lang="fr"
+>
+  <Header slot="header" lang="fr" currentPath="/faq/" />
+  <FaqPageContent lang="fr" />
+  <Footer slot="footer" lang="fr" />
+</BaseLayout>

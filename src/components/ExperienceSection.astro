@@ -1,0 +1,332 @@
+---
+import experiencesData from '../../content/experiences.json';
+import projectsData from '../../content/projects.json';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case 'Tech':
+      return { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' };
+    case 'Digital':
+      return { bg: '#f3e8ff', text: '#6b21a8', border: '#e9d5ff' };
+    case 'Communication':
+      return { bg: 'var(--color-verified-bg)', text: 'var(--color-verified-text)', border: 'var(--color-verified-border)' };
+    case 'Entrepreneurship':
+      return { bg: 'var(--color-accent-tint)', text: 'var(--color-accent-primary)', border: 'var(--color-accent-border)' };
+    case 'Other':
+      return { bg: '#f1f5f9', text: '#475569', border: '#e2e8f0' };
+    default:
+      return { bg: '#f3f4f6', text: '#374151', border: '#e5e7eb' };
+  }
+};
+
+const getEvidenceLinks = (experienceId: string) => {
+  const project =
+    experienceId === 'tech-frontend-projects'
+      ? projectsData.find((item) => item.id === 'jef')
+      : experienceId === 'terangadigital-founder'
+        ? projectsData.find((item) => item.id === 'terangadigital')
+        : undefined;
+
+  if (!project) return [];
+
+  return [
+    ...(project.liveUrl
+      ? [{ href: project.liveUrl, label: isFr ? 'Voir le site associé' : 'View related website' }]
+      : []),
+    ...(project.githubUrl
+      ? [{ href: project.githubUrl, label: isFr ? 'Voir le dépôt GitHub' : 'View GitHub repository' }]
+      : [])
+  ];
+};
+
+const getCategoryLabel = (category: string) =>
+  isFr && category === 'Entrepreneurship' ? 'Entrepreneuriat' : category;
+---
+
+<section id="experience" class="experience-section" aria-labelledby="experience-title">
+  <div class="site-container">
+    <div class="section-heading">
+      <div class="heading-left">
+        <p class="section-kicker">{isFr ? 'Parcours & Expériences' : 'Work & Experience'}</p>
+        <h2 id="experience-title" class="section-title">
+          {isFr ? 'Rigueur, terrain et sens des responsabilités.' : 'Field discipline and real accountability.'}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'Des expériences distinctes en technologie, digital, communication, entrepreneuriat et sécurité, présentées à partir des projets et éléments disponibles.'
+          : 'Distinct experience across technology, digital work, communication, entrepreneurship, and security, grounded in the available projects and records.'}
+      </p>
+    </div>
+
+    <!-- Timeline des expériences structurée -->
+    <div class="experience-timeline">
+      {experiencesData.map((exp) => {
+        const evidenceLinks = getEvidenceLinks(exp.id);
+        return (
+          <article id={`experience-${exp.id}`} class="timeline-item" aria-labelledby={`experience-title-${exp.id}`}>
+            <div class="timeline-marker" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-line"></span>
+            </div>
+
+            <div class="timeline-content-card">
+              <div class="card-header">
+                <div class="role-group">
+                  <h3 id={`experience-title-${exp.id}`} class="role-title">{isFr ? exp.role.fr : exp.role.en}</h3>
+                  <p class="role-org">
+                    <strong>{exp.organization}</strong> · <span>{exp.location}</span>
+                  </p>
+                </div>
+                <div class="badge-group">
+                  {exp.categories.map((category) => {
+                    const catStyle = getCategoryColor(category);
+                    return (
+                      <span
+                        class="category-pill"
+                        style={`background-color: ${catStyle.bg}; color: ${catStyle.text}; border: 1px solid ${catStyle.border};`}
+                      >
+                        {getCategoryLabel(category)}
+                      </span>
+                    );
+                  })}
+                  <span class="period-text">{isFr ? exp.period.fr : exp.period.en}</span>
+                </div>
+              </div>
+
+              <ul class="bullet-list">
+                {(isFr ? exp.bulletPoints.fr : exp.bulletPoints.en).map((pt) => (
+                  <li>{pt}</li>
+                ))}
+              </ul>
+
+              {evidenceLinks.length > 0 && (
+                <div class="experience-evidence" aria-label={isFr ? 'Liens vers les réalisations' : 'Links to related work'}>
+                  {evidenceLinks.map((link) => (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}<span aria-hidden="true"> ↗</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              <div class="skills-chips">
+                {exp.skillsApplied.map((skill) => (
+                  <span class="skill-chip">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--space-2);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .section-intro {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: var(--leading-relaxed);
+  }
+
+  .experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .timeline-item {
+      grid-template-columns: 32px 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-accent-primary);
+    border: 3px solid var(--color-canvas-default);
+    box-shadow: 0 0 0 1px var(--color-border-medium);
+    margin-top: 24px;
+    z-index: 2;
+  }
+
+  .timeline-line {
+    flex: 1;
+    width: 1.5px;
+    background-color: var(--color-border-subtle);
+    margin-top: 4px;
+  }
+
+  .timeline-content-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    .card-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  .role-title {
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .role-org {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .role-org strong {
+    color: var(--color-text-primary);
+  }
+
+  .badge-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .experience-evidence {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .experience-evidence a {
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .experience-evidence a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .category-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .period-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+
+  .bullet-list {
+    list-style: square inside;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-5);
+  }
+
+  .skills-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+
+  .skill-chip {
+    font-size: 11px;
+    background-color: var(--color-canvas-subtle);
+    color: var(--color-text-secondary);
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+  }
+</style>

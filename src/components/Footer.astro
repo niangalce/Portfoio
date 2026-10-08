@@ -1,0 +1,215 @@
+---
+import profileData from '../../content/profile.json';
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const { identity } = profileData;
+const homePath = isFr ? '/' : '/en/';
+---
+
+<footer class="site-footer">
+  <div class="site-container">
+    <div class="footer-top-grid">
+      <!-- Identité de marque -->
+      <div class="footer-brand-col">
+        <div class="footer-brand-title">
+          <span class="brand-monogram">AN</span>
+          <strong>Alce Niang</strong>
+        </div>
+        <p class="footer-brand-desc">
+          {isFr
+            ? 'Développeur Web Front-End Junior & Créateur Digital. Étudiant en Licence 2 d’Anglais à l’UCAD. Conçu avec des standards web stricts et une véracité documentaire totale.'
+            : 'Junior Front-End Web Developer & Digital Creator. English Major at UCAD. Built with strict web engineering standards and complete factual truth.'}
+        </p>
+        <p class="footer-location">
+          📍 Dakar, Sénégal
+        </p>
+      </div>
+
+      <!-- Navigation utile -->
+      <div class="footer-links-col">
+        <h3 class="footer-col-title">{isFr ? 'Navigation' : 'Navigation'}</h3>
+        <ul class="footer-nav-list">
+          <li><a href={sitePath(`${homePath}#projects`)}>{isFr ? 'Réalisations' : 'Projects'}</a></li>
+          <li><a href={sitePath(`${homePath}#experience`)}>{isFr ? 'Parcours & Expériences' : 'Experience'}</a></li>
+          <li><a href={sitePath(`${homePath}#skills`)}>{isFr ? 'Compétences' : 'Skills'}</a></li>
+          <li><a href={sitePath(`${homePath}#services`)}>{isFr ? 'Services disponibles' : 'Services'}</a></li>
+          <li><a href={sitePath(`${homePath}#currently-learning`)}>{isFr ? 'Apprentissage continu' : 'Currently learning'}</a></li>
+          <li><a href={sitePath(`${homePath}#certifications`)}>{isFr ? 'Certifications' : 'Certifications'}</a></li>
+          <li><a href={sitePath(isFr ? '/contact/' : '/en/contact/')}>{isFr ? 'Contact direct' : 'Contact'}</a></li>
+          <li><a href={sitePath(isFr ? '/faq/' : '/en/faq/')}>FAQ</a></li>
+          <li><a href={sitePath(isFr ? '/privacy/' : '/en/privacy/')}>{isFr ? 'Confidentialité' : 'Privacy'}</a></li>
+        </ul>
+      </div>
+
+      <!-- Réseaux officiels & Initiatives -->
+      <div class="footer-social-col">
+        <h3 class="footer-col-title">{isFr ? 'Canaux & Initiatives' : 'Channels & Brands'}</h3>
+        <ul class="footer-social-list">
+          <li>
+            <a href={identity.social.github} target="_blank" rel="noopener noreferrer">
+              GitHub (niangalce) ↗
+            </a>
+          </li>
+          <li>
+            <a href={identity.social.linkedin} target="_blank" rel="noopener noreferrer">
+              LinkedIn ↗
+            </a>
+          </li>
+          <li>
+            <a href={identity.social.instagram} target="_blank" rel="noopener noreferrer">
+              Instagram (@terangadigital221) ↗
+            </a>
+          </li>
+          <li>
+            <a href={identity.social.tiktok} target="_blank" rel="noopener noreferrer">
+              TikTok (@terangadigital221) ↗
+            </a>
+          </li>
+          <li>
+            <a href={identity.social.facebook} target="_blank" rel="noopener noreferrer">
+              Facebook ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Pied de page bas -->
+    <div class="footer-bottom-bar">
+      <p class="footer-copy">
+        © 2026 Alce Niang. {isFr ? 'Tous droits réservés.' : 'All rights reserved.'}
+      </p>
+      <div class="footer-bottom-links">
+        <a href="#main-content" class="back-to-top">
+          ↑ {isFr ? 'Haut de page' : 'Back to top'}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-canvas-default);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+  }
+
+  .footer-top-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .footer-top-grid {
+      grid-template-columns: 1.4fr 0.8fr 0.8fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .footer-brand-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .brand-monogram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-text-primary);
+    color: var(--color-canvas-default);
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: 12px;
+    border-radius: var(--radius-xs);
+  }
+
+  .footer-brand-title strong {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+  }
+
+  .footer-brand-desc {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 440px;
+    margin-bottom: var(--space-3);
+  }
+
+  .footer-location {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-primary);
+    font-weight: var(--weight-medium);
+  }
+
+  .footer-col-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-nav-list,
+  .footer-social-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer-nav-list a,
+  .footer-social-list a {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-quint);
+  }
+
+  .footer-nav-list a:hover,
+  .footer-social-list a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .footer-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .footer-copy {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .back-to-top {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .back-to-top:hover {
+    color: var(--color-accent-primary);
+  }
+</style>

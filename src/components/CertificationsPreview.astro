@@ -1,0 +1,381 @@
+---
+import certificationsData from '../../content/certifications.json';
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const categories = [...new Set(certificationsData.map((cert) => cert.category))];
+const categoryLabels: Record<string, { fr: string; en: string }> = {
+  Productivity: { fr: 'Productivité', en: 'Productivity' },
+  Cybersecurity: { fr: 'Cybersécurité', en: 'Cybersecurity' },
+  AI: { fr: 'Intelligence artificielle', en: 'Artificial intelligence' },
+  Digital: { fr: 'Marketing digital', en: 'Digital' },
+  'Professional Development': { fr: 'Développement professionnel', en: 'Professional development' }
+};
+---
+
+<section id="certifications" class="certs-section" aria-labelledby="certs-title">
+  <div class="site-container">
+    <div class="section-heading">
+      <div class="heading-left">
+        <p class="section-kicker">{isFr ? 'Bibliothèque de certifications' : 'Certification library'}</p>
+        <h2 id="certs-title" class="section-title">
+          {isFr
+            ? `${certificationsData.length} certifications documentées`
+            : `${certificationsData.length} documented certifications`}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'Parcourez les attestations par domaine et consultez ou téléchargez directement le document justificatif.'
+          : 'Browse certificates by category and open or download each supporting document.'}
+      </p>
+    </div>
+
+    <div class="cert-filters" role="group" aria-label={isFr ? 'Filtrer par catégorie' : 'Filter by category'}>
+      <button type="button" class="cert-filter-button" data-cert-filter="all" aria-pressed="true">
+        {isFr ? 'Toutes' : 'All'}
+      </button>
+      {categories.map((category) => (
+        <button type="button" class="cert-filter-button" data-cert-filter={category} aria-pressed="false">
+          {categoryLabels[category]?.[lang] ?? category}
+        </button>
+      ))}
+    </div>
+
+    <p class="cert-results-count" aria-live="polite" data-cert-results-count>
+      {certificationsData.length} {isFr ? 'certifications' : 'certifications'}
+    </p>
+
+    <div class="certs-grid" id="certs-grid">
+      {certificationsData.map((cert) => (
+        <article
+          id={`certificate-${cert.id}`}
+          class="cert-card"
+          data-cert-card
+          data-category={cert.category}
+          aria-labelledby={`certificate-title-${cert.id}`}
+        >
+          <div class="cert-top">
+            <span class="cert-category-badge">
+              {categoryLabels[cert.category]?.[lang] ?? cert.category}
+            </span>
+            <time class="cert-date" datetime={cert.date}>
+              {isFr ? cert.displayDate.fr : cert.displayDate.en}
+            </time>
+          </div>
+
+          <h3 id={`certificate-title-${cert.id}`} class="cert-title">{cert.title}</h3>
+          <p class="cert-issuer"><strong>{cert.issuer}</strong></p>
+          {cert.program && <p class="cert-program">{cert.program}</p>}
+          <p class="cert-desc">{isFr ? cert.description.fr : cert.description.en}</p>
+
+          <details class="cert-details">
+            <summary>{isFr ? 'Détails de la formation' : 'Training details'}</summary>
+            <dl>
+              {cert.program && (
+                <>
+                  <dt>{isFr ? 'Programme' : 'Program'}</dt>
+                  <dd>{cert.program}</dd>
+                </>
+              )}
+              {cert.location && (
+                <>
+                  <dt>{isFr ? 'Lieu' : 'Location'}</dt>
+                  <dd>{cert.location}</dd>
+                </>
+              )}
+            </dl>
+          </details>
+
+          <div class="cert-footer">
+            <ul class="cert-skills" aria-label={isFr ? 'Compétences abordées' : 'Skills covered'}>
+              {cert.skills.map((skill) => <li class="cert-skill-tag">{skill}</li>)}
+            </ul>
+            <div class="cert-proof-actions">
+              <a href={sitePath(cert.verificationFile)} target="_blank" rel="noopener noreferrer" class="cert-proof-link">
+                {isFr ? 'Aperçu PDF' : 'Preview PDF'} <span aria-hidden="true">↗</span>
+              </a>
+              <a href={sitePath(cert.verificationFile)} download class="cert-proof-link">
+                {isFr ? 'Télécharger' : 'Download'}
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-cert-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-cert-card]');
+  const count = document.querySelector<HTMLElement>('[data-cert-results-count]');
+
+  filters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      const selectedCategory = filter.dataset.certFilter;
+      let visibleCount = 0;
+
+      filters.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button === filter));
+      });
+
+      cards.forEach((card) => {
+        const isVisible = selectedCategory === 'all' || card.dataset.category === selectedCategory;
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      if (count) {
+        count.textContent = `${visibleCount} certification${visibleCount === 1 ? '' : 's'}`;
+      }
+    });
+  });
+</script>
+
+<style>
+  .certs-section {
+    padding-block: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-10);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-2);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    line-height: var(--leading-tight);
+  }
+
+  .section-intro {
+    max-width: 480px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .cert-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .cert-filter-button {
+    min-height: 40px;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border-medium);
+    border-radius: var(--radius-full);
+    background: var(--color-surface-card);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+  }
+
+  .cert-filter-button[aria-pressed="true"] {
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-tint);
+    color: var(--color-accent-primary);
+  }
+
+  .cert-filter-button:focus-visible,
+  .cert-details summary:focus-visible,
+  .cert-proof-link:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .cert-results-count {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 640px) {
+    .certs-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .certs-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .cert-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .cert-card[hidden] {
+    display: none;
+  }
+
+  .cert-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .cert-category-badge {
+    padding: 3px 8px;
+    border: 1px solid var(--color-verified-border);
+    border-radius: var(--radius-xs);
+    background: var(--color-verified-bg);
+    color: var(--color-verified-text);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+  }
+
+  .cert-date {
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .cert-title {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-base);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+
+  .cert-issuer,
+  .cert-program {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: var(--leading-normal);
+    overflow-wrap: anywhere;
+  }
+
+  .cert-issuer strong {
+    color: var(--color-text-primary);
+  }
+
+  .cert-program {
+    margin-top: var(--space-1);
+  }
+
+  .cert-desc {
+    margin-block: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-normal);
+  }
+
+  .cert-details {
+    margin-bottom: var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--space-3);
+  }
+
+  .cert-details summary {
+    min-height: 40px;
+    color: var(--color-accent-primary);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+  }
+
+  .cert-details dl {
+    display: grid;
+    grid-template-columns: minmax(70px, auto) minmax(0, 1fr);
+    gap: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    overflow-wrap: anywhere;
+  }
+
+  .cert-details dt {
+    font-weight: var(--weight-semibold);
+  }
+
+  .cert-footer {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: auto;
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--space-4);
+  }
+
+  .cert-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .cert-skill-tag {
+    padding: 3px 7px;
+    border-radius: var(--radius-xs);
+    background: var(--color-canvas-subtle);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+  }
+
+  .cert-proof-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .cert-proof-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

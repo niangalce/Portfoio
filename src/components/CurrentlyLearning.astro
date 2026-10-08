@@ -1,0 +1,230 @@
+---
+import skillsData from '../../content/skills.json';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const roadmapStages = [
+  {
+    status: 'Comfortable',
+    title: { fr: 'Fondations web', en: 'Web foundations' },
+    description: {
+      fr: 'Socle Front-End déjà utilisé dans les projets.',
+      en: 'Front-End foundations already used in projects.'
+    }
+  },
+  {
+    status: 'Practicing',
+    title: { fr: 'Pratique régulière', en: 'Regular practice' },
+    description: {
+      fr: 'Consolider JavaScript, le style utilitaire et la sécurité des données.',
+      en: 'Strengthen JavaScript, utility styling, and data security.'
+    }
+  },
+  {
+    status: 'Building',
+    title: { fr: 'Construction d’applications', en: 'Application building' },
+    description: {
+      fr: 'Assembler interfaces, types, données et authentification dans JËF.',
+      en: 'Bring interfaces, types, data, and authentication together in JËF.'
+    }
+  },
+  {
+    status: 'Learning',
+    title: { fr: 'Prochaines briques', en: 'Next building blocks' },
+    description: {
+      fr: 'Approfondir le routage Next.js et les bases Python.',
+      en: 'Explore Next.js routing and Python fundamentals.'
+    }
+  }
+];
+
+const technicalSkills = skillsData.categories
+  .filter((category) => ['frontend', 'backend-data'].includes(category.id))
+  .flatMap((category) => category.skills);
+---
+
+<section id="currently-learning" class="learning-section" aria-labelledby="learning-title">
+  <div class="site-container">
+    <div class="section-heading">
+      <div class="heading-left">
+        <p class="section-kicker">{isFr ? 'Apprentissage continu' : 'Continuous learning'}</p>
+        <h2 id="learning-title" class="section-title">
+          {isFr ? 'Une progression réaliste vers le Full-Stack.' : 'A realistic progression toward Full-Stack.'}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'La roadmap reprend les statuts déjà déclarés pour les compétences techniques : elle distingue acquis, pratique, construction et apprentissage, sans pourcentage ni échéance inventée.'
+          : 'This roadmap uses the existing technical skill statuses to distinguish established foundations, practice, building, and learning—with no invented percentages or deadlines.'}
+      </p>
+    </div>
+
+    <ol class="roadmap-grid">
+      {roadmapStages.map((stage, index) => {
+        const stageSkills = technicalSkills.filter((skill) => skill.status === stage.status);
+        return (
+          <li class="roadmap-card">
+            <div class="roadmap-meta">
+              <span class="roadmap-step">{String(index + 1).padStart(2, '0')}</span>
+              <span class:list={['roadmap-status', `status-${stage.status.toLowerCase()}`]}>
+                {stage.status}
+              </span>
+            </div>
+            <h3 class="roadmap-title">{isFr ? stage.title.fr : stage.title.en}</h3>
+            <p class="roadmap-description">{isFr ? stage.description.fr : stage.description.en}</p>
+            <ul class="roadmap-skills">
+              {stageSkills.map((skill) => <li>{skill.name}</li>)}
+            </ul>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .learning-section {
+    padding-block: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-10);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-2);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    line-height: var(--leading-tight);
+  }
+
+  .section-intro {
+    max-width: 520px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 700px) {
+    .roadmap-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .roadmap-card {
+    min-width: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .roadmap-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .roadmap-step {
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-bold);
+  }
+
+  .roadmap-status {
+    padding: 3px 8px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+    background: var(--color-canvas-subtle);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+  }
+
+  .status-practicing {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+    color: #334155;
+  }
+
+  .status-building {
+    border-color: var(--color-status-dev-border);
+    background: var(--color-status-dev-bg);
+    color: var(--color-status-dev-text);
+  }
+
+  .status-learning {
+    border-color: var(--color-accent-border);
+    background: var(--color-accent-tint);
+    color: var(--color-accent-primary);
+  }
+
+  .roadmap-title {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-bold);
+  }
+
+  .roadmap-description {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-normal);
+  }
+
+  .roadmap-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .roadmap-skills li {
+    max-width: 100%;
+    padding: 3px 7px;
+    border-radius: var(--radius-xs);
+    background: var(--color-canvas-subtle);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+</style>

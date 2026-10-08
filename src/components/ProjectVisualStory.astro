@@ -1,0 +1,567 @@
+---
+import { sitePath } from '../utils/urls';
+
+type ProjectId = 'terangadigital' | 'jef';
+
+interface Props {
+  projectId: ProjectId;
+  lang?: 'fr' | 'en';
+  variant?: 'preview' | 'full';
+}
+
+const { projectId, lang = 'fr', variant = 'full' } = Astro.props;
+const isFr = lang === 'fr';
+const isPreview = variant === 'preview';
+const terangaPublications = [
+  {
+    src: '/project-assets/terangadigital-content-ideas.webp',
+    alt: isFr
+      ? 'Visuel TèrangaDigital : guide de 100 idées de contenus pour les réseaux sociaux'
+      : 'TèrangaDigital visual: a guide with 100 social media content ideas',
+    caption: isFr ? 'Contenus & réseaux sociaux' : 'Content & social media'
+  },
+  {
+    src: '/project-assets/terangadigital-freelance-guide.webp',
+    alt: isFr
+      ? 'Visuel TèrangaDigital : guide PDF pour lancer une activité freelance'
+      : 'TèrangaDigital visual: PDF guide to starting a freelance activity',
+    caption: isFr ? 'Guide pratique' : 'Practical guide'
+  },
+  {
+    src: '/project-assets/terangadigital-photoshop-course.webp',
+    alt: isFr
+      ? 'Visuel TèrangaDigital : formation vidéo Photoshop pour débutants'
+      : 'TèrangaDigital visual: Photoshop video training for beginners',
+    caption: isFr ? 'Formation vidéo' : 'Video training'
+  }
+];
+const jefScreens = [
+  {
+    src: '/project-assets/jef-product-overview.webp',
+    alt: isFr
+      ? 'Capture du site JËF et aperçu illustratif d’un espace professionnel avec données fictives'
+      : 'Screenshot of the JËF website and an illustrative workspace preview with fictitious data',
+    title: isFr ? '01 — Produit' : '01 — Product',
+    caption: isFr
+      ? 'Présentation du produit et aperçu explicitement illustratif.'
+      : 'Product presentation and explicitly illustrative preview.'
+  },
+  {
+    src: '/project-assets/jef-dashboard.webp',
+    alt: isFr
+      ? 'Capture illustrative du tableau de bord quotidien JËF ; les données affichées sont fictives'
+      : 'Illustrative screenshot of the JËF daily dashboard; all displayed data is fictitious',
+    title: isFr ? '02 — Tableau de bord' : '02 — Dashboard',
+    caption: isFr
+      ? 'Vue quotidienne envisagée ; les données de démonstration ne sont pas réelles.'
+      : 'Envisaged daily view; demonstration data is not real.'
+  },
+  {
+    src: '/project-assets/jef-mobile-interface.webp',
+    alt: isFr
+      ? 'Capture d’une interface JËF responsive, avec des exemples de clients fictifs'
+      : 'Screenshot of a responsive JËF interface containing fictitious example clients',
+    title: isFr ? '03 — Usage mobile' : '03 — Mobile use',
+    caption: isFr
+      ? 'Aperçu illustratif de l’interface sur un écran étroit.'
+      : 'Illustrative preview of the interface on a narrow screen.'
+  }
+];
+---
+
+{projectId === 'terangadigital' ? (
+  isPreview ? (
+    <div class="teranga-preview" aria-label={isFr ? 'Identité visuelle de TèrangaDigital' : 'TèrangaDigital visual identity'}>
+      <img
+        class="teranga-preview-logo"
+        src={sitePath('/project-assets/terangadigital-logo.webp')}
+        alt="Logo TèrangaDigital"
+        width="1400"
+        height="779"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="teranga-preview-publications">
+        {terangaPublications.map((publication, index) => (
+          <figure data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+            <img
+              src={sitePath(publication.src)}
+              alt={publication.alt}
+              width={index === 2 ? 1086 : 1024}
+              height={index === 2 ? 1448 : 1536}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ))}
+      </div>
+      <p class="visual-note">
+        {isFr
+          ? 'Supports visuels de la marque — les tarifs et offres imprimés sur ces créations ne sont pas présentés comme des offres actuelles.'
+          : 'Brand visuals — prices and offers printed in these designs are not presented as current offers.'}
+      </p>
+    </div>
+  ) : (
+    <section class="teranga-story" aria-labelledby="teranga-visual-title">
+      <div class="teranga-story-heading">
+        <p class="story-kicker">{isFr ? 'Identité & expression de marque' : 'Brand identity & expression'}</p>
+        <h2 id="teranga-visual-title">
+          {isFr ? 'Une marque qui prend forme à travers ses supports.' : 'A brand taking shape through its work.'}
+        </h2>
+        <p>
+          {isFr
+            ? 'TèrangaDigital est une marque numérique fondée par Alce Niang. Son identité et ses supports de communication racontent une démarche entrepreneuriale et créative.'
+            : 'TèrangaDigital is a digital brand founded by Alce Niang. Its identity and communication materials tell a creative, entrepreneurial story.'}
+        </p>
+      </div>
+
+      <figure class="teranga-masthead" data-reveal>
+        <img
+          src={sitePath('/project-assets/terangadigital-logo.webp')}
+          alt="Logo TèrangaDigital"
+          width="1400"
+          height="779"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>{isFr ? 'Identité visuelle de la marque' : 'The brand’s visual identity'}</figcaption>
+      </figure>
+
+      <div class="teranga-publications">
+        {terangaPublications.map((publication, index) => (
+          <figure class="teranga-publication" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
+            <div class="publication-frame">
+              <img
+                src={sitePath(publication.src)}
+                alt={publication.alt}
+                width={index === 2 ? 1086 : 1024}
+                height={index === 2 ? 1448 : 1536}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption>
+              <span>{`0${index + 1}`}</span>
+              <strong>{publication.caption}</strong>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="visual-note">
+        {isFr
+          ? 'Les offres et tarifs visibles dans les créations sont reproduits comme éléments des visuels fournis, pas comme une indication de disponibilité actuelle.'
+          : 'Offers and prices visible in the supplied artwork are shown as part of those visuals, not as a statement of current availability.'}
+      </p>
+    </section>
+  )
+) : (
+  isPreview ? (
+    <div class="jef-preview">
+      <div class="jef-preview-heading">
+        <img
+          src={sitePath('/project-assets/jef-mark.webp')}
+          alt="JËF"
+          width="1353"
+          height="471"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>{isFr ? 'Produit SaaS personnel · en développement' : 'Personal SaaS product · in development'}</span>
+      </div>
+      <figure data-reveal>
+        <img
+          src={sitePath(jefScreens[0].src)}
+          alt={jefScreens[0].alt}
+          width="1350"
+          height="634"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>{isFr ? 'Aperçu illustratif — données fictives' : 'Illustrative preview — fictitious data'}</figcaption>
+      </figure>
+    </div>
+  ) : (
+    <section class="jef-story" id="product-visual-story" aria-labelledby="jef-visual-title">
+      <div class="jef-story-heading">
+        <p class="story-kicker">{isFr ? 'Produit · Interface · Développement' : 'Product · Interface · Development'}</p>
+        <h2 id="jef-visual-title">
+          {isFr ? 'De la proposition produit aux vues d’interface.' : 'From product proposition to interface views.'}
+        </h2>
+        <p>
+          {isFr
+            ? 'Ces captures locales documentent des aperçus de démonstration avec données fictives ; elles ne constituent pas une démo publique ni un produit terminé.'
+            : 'These local screenshots document illustrative previews with fictitious data; they are not a public demo or a finished product.'}
+        </p>
+      </div>
+
+      <div class="jef-screens">
+        {jefScreens.map((screen, index) => (
+          <figure
+            class:list={['jef-screen', index === 0 && 'jef-screen-featured']}
+            data-reveal
+            style={`--reveal-delay: ${index * 70}ms`}
+          >
+            <div class="jef-screen-image">
+              <img
+                src={sitePath(screen.src)}
+                alt={screen.alt}
+                width="1350"
+                height={index === 1 ? 578 : 634}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption>
+              <strong>{screen.title}</strong>
+              <span>{screen.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <nav class="jef-story-steps" aria-label={isFr ? 'Étapes de l’étude de cas JËF' : 'JËF case study steps'}>
+        <a href="#context-title">{isFr ? 'Produit' : 'Product'}</a>
+        <a href="#product-visual-story">{isFr ? 'Interface' : 'Interface'}</a>
+        <a href="#decisions-title">{isFr ? 'Architecture' : 'Architecture'}</a>
+        <a href="#development-title">{isFr ? 'Développement' : 'Development'}</a>
+        <a href="#status-title">{isFr ? 'Suite' : 'Future'}</a>
+      </nav>
+    </section>
+  )
+)}
+
+<style>
+  .teranga-preview,
+  .jef-preview {
+    margin-block: var(--space-6);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas-subtle);
+  }
+
+  .teranga-preview-logo {
+    display: block;
+    width: min(100%, 210px);
+    height: 92px;
+    margin-inline: auto;
+    object-fit: contain;
+    border-radius: var(--radius-xs);
+    background: #fff;
+  }
+
+  .teranga-preview-publications {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .teranga-preview-publications figure {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+    background: #fff;
+  }
+
+  .teranga-preview-publications img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+  }
+
+  .visual-note {
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: var(--leading-normal);
+  }
+
+  .teranga-story {
+    margin-block: var(--space-10);
+    padding: clamp(var(--space-5), 5vw, var(--space-10));
+    border: 1px solid #edd7c9;
+    border-radius: var(--radius-lg);
+    background: #fcf5ef;
+    color: #231810;
+  }
+
+  .teranga-story-heading {
+    max-width: 760px;
+  }
+
+  .story-kicker {
+    color: #a9481c;
+    font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .teranga-story h2,
+  .jef-story h2 {
+    margin-top: var(--space-3);
+    font-size: var(--font-size-xl);
+    line-height: var(--leading-tight);
+  }
+
+  .teranga-story-heading > p:last-child,
+  .jef-story-heading > p:last-child {
+    margin-top: var(--space-3);
+    line-height: var(--leading-relaxed);
+  }
+
+  .teranga-masthead {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-3);
+    margin-block: var(--space-8);
+  }
+
+  .teranga-masthead img {
+    display: block;
+    width: min(100%, 480px);
+    height: auto;
+    border: 1px solid #eee3dc;
+    border-radius: var(--radius-sm);
+    background: #fff;
+  }
+
+  .teranga-masthead figcaption {
+    color: #685244;
+    font-size: var(--font-size-xs);
+  }
+
+  .teranga-publications {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(var(--space-3), 3vw, var(--space-6));
+    align-items: start;
+  }
+
+  .teranga-publication {
+    min-width: 0;
+  }
+
+  .publication-frame {
+    overflow: hidden;
+    border: 1px solid #e6d7cd;
+    border-radius: var(--radius-md);
+    background: #fff;
+    box-shadow: var(--shadow-card);
+  }
+
+  .publication-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-out-quint);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .publication-frame:hover img {
+      transform: scale(1.015);
+    }
+  }
+
+  .teranga-publication figcaption {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    margin-top: var(--space-3);
+    color: #514033;
+    font-size: var(--font-size-xs);
+  }
+
+  .teranga-publication figcaption span {
+    color: #a9481c;
+    font-family: var(--font-mono);
+  }
+
+  .teranga-publication figcaption strong {
+    font-weight: var(--weight-semibold);
+  }
+
+  .teranga-story > .visual-note {
+    margin-top: var(--space-6);
+    color: #685244;
+  }
+
+  .jef-preview {
+    border-color: #d8d9f5;
+    background: #f5f5ff;
+  }
+
+  .jef-preview-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .jef-preview-heading img {
+    width: 74px;
+    height: 38px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .jef-preview-heading span {
+    color: #41439c;
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    text-align: right;
+  }
+
+  .jef-preview figure,
+  .jef-screen-image {
+    overflow: hidden;
+    border: 1px solid #d9dbea;
+    border-radius: var(--radius-sm);
+    background: #fff;
+  }
+
+  .jef-preview figure img,
+  .jef-screen-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .jef-preview figcaption {
+    margin-top: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    text-align: right;
+  }
+
+  .jef-story {
+    margin-block: var(--space-10);
+    scroll-margin-top: calc(72px + var(--space-4));
+    padding: clamp(var(--space-5), 5vw, var(--space-10));
+    border: 1px solid #333d54;
+    border-radius: var(--radius-lg);
+    background: #121923;
+    color: #f7f8fc;
+  }
+
+  .jef-story .story-kicker {
+    color: #b9baff;
+  }
+
+  .jef-story h2 {
+    color: #f7f8fc;
+  }
+
+  .jef-story-heading {
+    max-width: 780px;
+  }
+
+  .jef-story-heading > p:last-child {
+    color: #c2c9d6;
+  }
+
+  .jef-screens {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .jef-screen {
+    min-width: 0;
+  }
+
+  .jef-screen-featured {
+    grid-column: 1 / -1;
+  }
+
+  .jef-screen-image {
+    border-color: #354057;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .jef-screen figcaption {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-3);
+  }
+
+  .jef-screen figcaption strong {
+    color: #d4d5ff;
+    font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
+  }
+
+  .jef-screen figcaption span {
+    color: #c2c9d6;
+    font-size: var(--font-size-xs);
+    line-height: var(--leading-normal);
+  }
+
+  .jef-story-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: 1px solid #354057;
+  }
+
+  .jef-story-steps a {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #47516a;
+    border-radius: var(--radius-full);
+    color: #f7f8fc;
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-out-quint),
+      border-color var(--duration-fast) var(--ease-out-quint);
+  }
+
+  .jef-story-steps a:hover {
+    border-color: #9698ff;
+    background: #272c46;
+  }
+
+  .jef-story-steps a:focus-visible {
+    outline: var(--focus-ring-width) solid #c5c6ff;
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 760px) {
+    .teranga-publications {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 420px;
+      margin-inline: auto;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .jef-screens {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .jef-screen-featured {
+      grid-column: auto;
+    }
+
+    .teranga-preview,
+    .jef-preview {
+      padding: var(--space-3);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .publication-frame img {
+      transition-duration: var(--duration-fast);
+    }
+  }
+</style>

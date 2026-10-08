@@ -1,0 +1,554 @@
+---
+import projectsData from '../../content/projects.json';
+import GitHubRepositoryMeta from './GitHubRepositoryMeta.astro';
+import ProjectVisualStory from './ProjectVisualStory.astro';
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+
+const jef = projectsData.find((p) => p.id === 'jef')!;
+const teranga = projectsData.find((p) => p.id === 'terangadigital')!;
+const portfolio = projectsData.find((p) => p.id === 'portfolio')!;
+const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/projects/${slug}/`);
+---
+
+<section id="projects" class="projects-section" aria-labelledby="projects-title">
+  <div class="site-container">
+    <!-- En-tête de section éditoriale -->
+    <div class="section-heading">
+      <div class="heading-left">
+        <p class="section-kicker">{isFr ? 'Réalisations & Projets' : 'Selected Projects'}</p>
+        <h2 id="projects-title" class="section-title">
+          {isFr ? 'Construire pour le monde réel.' : 'Building for real-world impact.'}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'Des initiatives numériques concrètes, développées avec rigueur technique et transparence sur l’état d’avancement de chaque solution.'
+          : 'Tangible digital initiatives built with software rigor and transparent reporting on the development status of each product.'}
+      </p>
+    </div>
+
+    <!-- Projet 1 : JËF (Mise en page d'ingénierie logicielle phare) -->
+    <article class="featured-project-card" aria-labelledby="jef-title">
+      <div class="project-header-bar">
+        <div class="header-meta">
+          <span class="project-category-tag">SaaS Architecture</span>
+          <span class="status-badge-dev">
+            <span class="status-dot"></span>
+            <span>{isFr ? 'En cours de développement' : 'In active development'}</span>
+          </span>
+        </div>
+        <span class="project-role-tag">{isFr ? 'SaaS personnel' : 'Personal SaaS'}</span>
+      </div>
+
+      <ProjectVisualStory projectId="jef" lang={lang} variant="preview" />
+
+      <div class="project-body-grid">
+        <div class="project-narrative">
+          <h3 id="jef-title" class="project-title">{jef.title}</h3>
+          <p class="project-tagline">{isFr ? jef.tagline.fr : jef.tagline.en}</p>
+          <p class="project-desc">{isFr ? jef.caseStudy.context.fr : jef.caseStudy.context.en}</p>
+
+          <div class="project-pillars">
+            <h4 class="pillars-title">{isFr ? 'Décisions d\'architecture clés :' : 'Key Architectural Decisions:'}</h4>
+            <ul class="pillars-list">
+              {jef.caseStudy.technicalDecisions.map((decision) => (
+                <li>
+                  <strong>{decision.topic}</strong> : {isFr ? decision.rationale.fr : decision.rationale.en}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-sidebar">
+          <div class="tech-stack-panel">
+            <h4 class="sidebar-title">{isFr ? 'Stack Technique' : 'Tech Stack'}</h4>
+            <div class="tech-tags">
+              {jef.stack.map((tech) => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="status-panel">
+            <h4 class="sidebar-title">{isFr ? 'État d\'avancement réel' : 'Current Engineering State'}</h4>
+            <p class="status-text">{isFr ? jef.caseStudy.currentStatus.fr : jef.caseStudy.currentStatus.en}</p>
+          </div>
+
+          <div class="project-actions">
+            <a href={getCaseStudyUrl(jef.slug)} class="project-link-secondary">
+              {isFr ? 'Lire l’étude de cas' : 'Read the case study'}
+            </a>
+            {jef.githubUrl && <a
+              href={jef.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link-btn"
+            >
+              <span>{isFr ? 'Dépôt GitHub (Jef)' : 'GitHub Repo (Jef)'}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>}
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Grille asymétrique pour TèrangaDigital et Portfolio -->
+    <div class="secondary-projects-grid">
+      <!-- Projet 2 : TèrangaDigital (Initiative de marque & Storefront) -->
+      <article class="brand-project-card" aria-labelledby="teranga-title">
+        <div class="project-header-bar">
+          <span class="project-category-tag">Digital Platform & Brand</span>
+          <span class="status-badge-active">
+            <span>{isFr ? 'Marque fondée par Alce' : 'Brand founded by Alce'}</span>
+          </span>
+        </div>
+
+        <ProjectVisualStory projectId="terangadigital" lang={lang} variant="preview" />
+
+        <h3 id="teranga-title" class="project-title">{teranga.title}</h3>
+        <p class="project-tagline">{isFr ? teranga.tagline.fr : teranga.tagline.en}</p>
+        <p class="project-desc">{isFr ? teranga.caseStudy.context.fr : teranga.caseStudy.context.en}</p>
+
+        <!-- Preuve matérielle : Le guide e-commerce rédigé de 30 pages -->
+        <div class="deliverable-callout">
+          <div class="deliverable-icon">📖</div>
+          <div class="deliverable-content">
+            <strong>{isFr ? 'Guide e-commerce de 30 pages' : '30-page E-commerce Guide'}</strong>
+            <p>{isFr ? '« Réussir sur l’e-commerce en Afrique en 30 jours » — rédigé, structuré et diffusé.' : '"Succeeding in African E-commerce in 30 Days" — fully authored and published.'}</p>
+          </div>
+        </div>
+
+        <div class="tech-tags" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+          {teranga.stack.slice(0, 5).map((tech) => (
+            <span class="tech-tag">{tech}</span>
+          ))}
+        </div>
+
+        <div class="project-actions">
+          <a href={getCaseStudyUrl(teranga.slug)} class="project-link-secondary">
+            {isFr ? 'Lire l’étude de cas' : 'Read the case study'}
+          </a>
+          {teranga.liveUrl && <a
+            href={teranga.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link-btn"
+          >
+            <span>{isFr ? 'Visiter TerangaDigital.shop' : 'Visit TerangaDigital.shop'}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>}
+          <a
+            href={teranga.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link-secondary"
+          >
+            {isFr ? 'Code GitHub' : 'GitHub Code'}
+          </a>
+        </div>
+        <GitHubRepositoryMeta owner="niangalce" repository="TerangaDigital.shop" lang={lang} />
+      </article>
+
+      <!-- Projet 3 : Portfolio Personnel (Standards Web & Performance) -->
+      <article class="standards-project-card" aria-labelledby="portfolio-title">
+        <div class="project-header-bar">
+          <span class="project-category-tag">Engineering Standards</span>
+          <span class="status-badge-active">
+            <span>Astro 7 + TypeScript</span>
+          </span>
+        </div>
+
+        <h3 id="portfolio-title" class="project-title">{portfolio.title}</h3>
+        <p class="project-tagline">{isFr ? portfolio.tagline.fr : portfolio.tagline.en}</p>
+        <p class="project-desc">
+          {isFr
+            ? portfolio.caseStudy.context.fr
+            : portfolio.caseStudy.context.en}
+        </p>
+
+        <div class="tech-tags" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+          {portfolio.stack.slice(0, 4).map((tech) => (
+            <span class="tech-tag">{tech}</span>
+          ))}
+        </div>
+
+        <div class="project-actions">
+          {portfolio.githubUrl && <a
+            href={portfolio.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link-btn"
+          >
+            <span>{isFr ? 'Dépôt GitHub du portfolio' : 'GitHub Repository'}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--space-2);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .section-intro {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Projet phare (JËF) */
+  .featured-project-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-8);
+  }
+
+  .project-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--color-border-subtle);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .project-category-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .status-badge-dev {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    color: var(--color-status-dev-text);
+    background-color: var(--color-status-dev-bg);
+    border: 1px solid var(--color-status-dev-border);
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #d97706;
+  }
+
+  .status-badge-active {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    color: var(--color-verified-text);
+    background-color: var(--color-verified-bg);
+    border: 1px solid var(--color-verified-border);
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .project-role-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .project-body-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 960px) {
+    .project-body-grid {
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .project-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .project-tagline {
+    font-size: var(--font-size-md);
+    color: var(--color-accent-primary);
+    font-weight: var(--weight-medium);
+    margin-bottom: var(--space-4);
+  }
+
+  .project-desc {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+  }
+
+  .project-pillars {
+    background-color: var(--color-canvas-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .pillars-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-3);
+    color: var(--color-text-primary);
+  }
+
+  .pillars-list {
+    list-style: square inside;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .pillars-list strong {
+    color: var(--color-text-primary);
+  }
+
+  /* Sidebar du projet phare */
+  .project-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .sidebar-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background-color: var(--color-canvas-subtle);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-subtle);
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+  }
+
+  .status-text {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .project-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .project-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--color-text-primary);
+    color: #fff;
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    padding: 9px 15px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-out-quint);
+  }
+
+  .project-link-btn:hover {
+    background-color: var(--color-accent-primary);
+  }
+
+  .project-link-secondary {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .project-link-secondary:hover {
+    color: var(--color-accent-primary);
+  }
+
+  /* Grille des 2 projets secondaires */
+  .secondary-projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 960px) {
+    .secondary-projects-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .brand-project-card,
+  .standards-project-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .deliverable-callout {
+    display: flex;
+    gap: var(--space-3);
+    background-color: var(--color-accent-tint);
+    border: 1px solid var(--color-accent-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+
+  .deliverable-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .deliverable-content strong {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-accent-primary);
+  }
+
+  .deliverable-content p {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    background-color: var(--color-canvas-subtle);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .metric-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .metric-val {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+  }
+
+  .metric-lbl {
+    font-size: 10px;
+    color: var(--color-text-secondary);
+  }
+</style>

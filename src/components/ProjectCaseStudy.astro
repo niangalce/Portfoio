@@ -1,0 +1,344 @@
+---
+import projectsData from '../../content/projects.json';
+import GitHubRepositoryMeta from './GitHubRepositoryMeta.astro';
+import ProjectVisualStory from './ProjectVisualStory.astro';
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  projectId: string;
+  lang?: 'fr' | 'en';
+}
+
+const { projectId, lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const project = projectsData.find(
+  (item) => item.id === projectId && 'process' in item.caseStudy
+);
+
+if (!project || !('process' in project.caseStudy)) {
+  throw new Error(`No detailed case study is configured for project "${projectId}".`);
+}
+
+const caseStudy = project.caseStudy;
+const isJef = project.id === 'jef';
+const status = isJef
+  ? (isFr ? 'SaaS personnel — en développement' : 'Personal SaaS — in development')
+  : (isFr ? 'Marque fondée par Alce Niang' : 'Brand founded by Alce Niang');
+const projectRole = isJef
+  ? 'CEO & Lead Developer'
+  : (isFr ? 'Fondateur & Créateur Digital' : 'Founder & Digital Creator');
+const requireBilingual = (
+  value: { fr: string; en: string } | undefined,
+  field: string
+) => {
+  if (!value?.fr || !value.en) {
+    throw new Error(`Missing bilingual "${field}" content for project "${projectId}".`);
+  }
+  return value;
+};
+
+const sections = [
+  { id: 'context', title: isFr ? 'Contexte' : 'Context', content: requireBilingual(caseStudy.context, 'context') },
+  { id: 'problem', title: isFr ? 'Problème' : 'Problem', content: requireBilingual(caseStudy.problem, 'problem') },
+  { id: 'objective', title: isFr ? 'Objectif' : 'Objective', content: requireBilingual(caseStudy.objective, 'objective') },
+  { id: 'role', title: isFr ? 'Rôle' : 'Role', content: requireBilingual(caseStudy.role, 'role') },
+  { id: 'process', title: isFr ? 'Processus' : 'Process', content: requireBilingual(caseStudy.process, 'process') },
+  { id: 'design', title: 'Design', content: requireBilingual(caseStudy.design, 'design') },
+  { id: 'development', title: isFr ? 'Développement' : 'Development', content: requireBilingual(caseStudy.development, 'development') },
+  { id: 'result', title: isFr ? 'Résultat documenté' : 'Documented result', content: requireBilingual(caseStudy.result, 'result') },
+  { id: 'difficulties', title: isFr ? 'Difficultés' : 'Difficulties', content: requireBilingual(caseStudy.difficulties, 'difficulties') },
+  { id: 'learning', title: isFr ? 'Apprentissages' : 'Learning', content: requireBilingual(caseStudy.learning, 'learning') }
+];
+
+const links = [
+  ...(project.liveUrl
+    ? [{
+        href: project.liveUrl,
+        label: isFr ? 'Visiter le site officiel' : 'Visit the official website'
+      }]
+    : []),
+  ...(project.githubUrl
+    ? [{
+        href: project.githubUrl,
+        label: isFr ? 'Consulter le dépôt GitHub' : 'View the GitHub repository'
+      }]
+    : [])
+];
+---
+
+<article class="case-study-main">
+  <div class="site-container">
+    <a class="back-link" href={sitePath(isFr ? '/#projects' : '/en/#projects')}>
+      <span aria-hidden="true">←</span> {isFr ? 'Retour aux projets' : 'Back to projects'}
+    </a>
+
+    <header class="case-study-header">
+      <p class="section-kicker">{isFr ? 'Étude de cas' : 'Case study'}</p>
+      <div class="title-row">
+        <h1 class="case-study-title">{project.title}</h1>
+        <span class:list={['status-pill', isJef && 'status-in-progress']}>{status}</span>
+      </div>
+      <p class="case-study-tagline">{isFr ? project.tagline.fr : project.tagline.en}</p>
+      <p class="case-study-role">
+        <strong>{isFr ? 'Rôle' : 'Role'} :</strong> {projectRole}
+      </p>
+    </header>
+
+    {(project.id === 'jef' || project.id === 'terangadigital') && (
+      <ProjectVisualStory projectId={project.id} lang={lang} variant="full" />
+    )}
+
+    <div class="case-study-layout">
+      <div class="case-study-sections">
+        {sections.map((section) => (
+          <section class="case-study-card" aria-labelledby={`${section.id}-title`}>
+            <h2 id={`${section.id}-title`} class="case-study-section-title">{section.title}</h2>
+            <p>{isFr ? section.content.fr : section.content.en}</p>
+          </section>
+        ))}
+
+        <section class="case-study-card" aria-labelledby="decisions-title">
+          <h2 id="decisions-title" class="case-study-section-title">
+            {isFr ? 'Décisions techniques' : 'Technical decisions'}
+          </h2>
+          <ul class="decisions-list">
+            {caseStudy.technicalDecisions.map((decision) => (
+              <li>
+                <h3>{decision.topic}</h3>
+                <p>{isFr ? decision.rationale.fr : decision.rationale.en}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <aside class="case-study-sidebar" aria-label={isFr ? 'Stack, statut et liens' : 'Stack, status and links'}>
+        <section class="sidebar-card" aria-labelledby="stack-title">
+          <h2 id="stack-title" class="case-study-section-title">{isFr ? 'Stack' : 'Stack'}</h2>
+          <ul class="stack-list">
+            {project.stack.map((technology) => <li>{technology}</li>)}
+          </ul>
+        </section>
+
+        <section class="sidebar-card status-card" aria-labelledby="status-title">
+          <h2 id="status-title" class="case-study-section-title">{isFr ? 'Statut' : 'Status'}</h2>
+          <p>{isFr ? caseStudy.currentStatus.fr : caseStudy.currentStatus.en}</p>
+          {isJef && (
+            <p class="no-demo-note">
+              {isFr ? 'Aucune démo publique n’est annoncée.' : 'No public demo is listed.'}
+            </p>
+          )}
+        </section>
+
+        <section class="sidebar-card" aria-labelledby="links-title">
+          <h2 id="links-title" class="case-study-section-title">{isFr ? 'Liens' : 'Links'}</h2>
+          <ul class="links-list">
+            {links.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}<span aria-hidden="true"> ↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+        {project.id === 'terangadigital' && project.githubUrl && (
+          <GitHubRepositoryMeta owner="niangalce" repository="TerangaDigital.shop" lang={lang} />
+        )}
+      </aside>
+    </div>
+  </div>
+</article>
+
+<style>
+  .case-study-main {
+    padding-block: var(--space-12) var(--space-20);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    margin-bottom: var(--space-8);
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .case-study-header {
+    max-width: 860px;
+    margin-bottom: var(--space-10);
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-3);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .case-study-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    line-height: var(--leading-tight);
+  }
+
+  .status-pill {
+    padding: 5px 10px;
+    border: 1px solid var(--color-verified-border);
+    border-radius: var(--radius-full);
+    background: var(--color-verified-bg);
+    color: var(--color-verified-text);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+  }
+
+  .status-in-progress {
+    border-color: var(--color-status-dev-border);
+    background: var(--color-status-dev-bg);
+    color: var(--color-status-dev-text);
+  }
+
+  .case-study-tagline {
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .case-study-role {
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .case-study-role strong {
+    color: var(--color-text-primary);
+  }
+
+  .case-study-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 960px) {
+    .case-study-layout {
+      grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.8fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .case-study-sections,
+  .case-study-sidebar {
+    display: grid;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+
+  .case-study-card,
+  .sidebar-card {
+    min-width: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .case-study-section-title {
+    margin-bottom: var(--space-3);
+    scroll-margin-top: calc(72px + var(--space-4));
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+
+  .case-study-card > p,
+  .sidebar-card > p,
+  .decisions-list p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-relaxed);
+    overflow-wrap: anywhere;
+  }
+
+  .decisions-list {
+    display: grid;
+    gap: var(--space-5);
+    padding-left: var(--space-5);
+  }
+
+  .decisions-list h3 {
+    margin-bottom: var(--space-1);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .stack-list,
+  .links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  .stack-list li {
+    padding: 4px 8px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xs);
+    background: var(--color-canvas-subtle);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .status-card {
+    background: var(--color-canvas-subtle);
+  }
+
+  .no-demo-note {
+    margin-top: var(--space-3);
+    font-weight: var(--weight-semibold);
+  }
+
+  .links-list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .links-list a {
+    display: inline-block;
+    min-height: 44px;
+    padding-block: var(--space-2);
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+
+  .back-link:focus-visible,
+  .links-list a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+</style>

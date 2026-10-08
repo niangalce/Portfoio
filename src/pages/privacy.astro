@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { sitePath } from '../utils/urls';
+---
+
+<BaseLayout
+  title="Politique de confidentialité — Alce Niang"
+  description="Informations sur les données techniques du site, les polices Google Fonts et le formulaire de contact d’Alce Niang."
+  lang="fr"
+>
+  <Header slot="header" lang="fr" currentPath="/privacy/" />
+  <article class="policy site-container">
+    <p class="section-kicker">Confidentialité</p>
+    <h1>Politique de confidentialité</h1>
+    <p class="updated">Mise à jour : <time datetime="2026-10-08">8 octobre 2026</time></p>
+
+    <section>
+      <h2>Qui est responsable du site ?</h2>
+      <p>Ce portfolio est celui d’Alce Niang, à Dakar, Sénégal. Pour toute question relative à la confidentialité, écrivez à <a href="mailto:niangalce@gmail.com">niangalce@gmail.com</a>.</p>
+    </section>
+
+    <section>
+      <h2>Informations techniques et hébergement</h2>
+      <p>Ce portfolio est conçu pour être diffusé sous forme de fichiers statiques. Le fournisseur d’hébergement effectivement utilisé peut traiter des informations techniques de requête et de journalisation (par exemple l’adresse IP, l’agent utilisateur et l’URL demandée) pour fournir et sécuriser le service, selon ses propres conditions et sa politique de confidentialité.</p>
+      <p>Le code du portfolio n’intègre pas de compte utilisateur, d’outil d’analytics, de publicité, de suivi comportemental ni de cookie non essentiel.</p>
+    </section>
+
+    <section>
+      <h2>Polices de caractères</h2>
+      <p>Le site charge ses polices depuis Google Fonts. À cette occasion, le navigateur contacte les serveurs de Google et peut leur transmettre des informations techniques telles que l’adresse IP. Vous pouvez consulter la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">politique de confidentialité de Google</a>.</p>
+    </section>
+
+    <section>
+      <h2>Formulaire de contact</h2>
+      <p>Le formulaire valide les champs dans votre navigateur et compose un brouillon à destination de niangalce@gmail.com avec votre application de messagerie. Le portfolio ne reçoit ni ne stocke ces informations. Aucun email n’est envoyé sans votre action de vérification et d’envoi dans cette application.</p>
+      <p>Une fois envoyé, le message et les coordonnées qu’il contient sont traités par les services de messagerie utilisés par l’expéditeur et le destinataire. Vous pouvez également choisir d’écrire directement à l’adresse email affichée.</p>
+    </section>
+
+    <section>
+      <h2>Liens vers des services externes</h2>
+      <p>Les liens vers les réseaux sociaux et les plateformes externes n’ouvrent leurs sites que si vous les choisissez. Ces services appliquent leurs propres politiques de confidentialité.</p>
+      <p>Sur l’accueil et l’étude de cas TèrangaDigital, le navigateur peut aussi interroger l’API publique de GitHub pour afficher la description, le nombre d’étoiles et la date de mise à jour du dépôt. Cette requête n’utilise ni compte, ni clé, ni cookie et n’envoie pas l’URL de référence ; GitHub reçoit néanmoins les informations techniques nécessaires à la requête, selon sa <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>. Si l’API est indisponible, le contenu local et le lien du dépôt restent utilisables.</p>
+    </section>
+
+    <section>
+      <h2>Vos demandes</h2>
+      <p>Pour poser une question relative aux informations personnelles contenues dans un email que vous avez envoyé, contactez Alce à <a href="mailto:niangalce@gmail.com">niangalce@gmail.com</a>.</p>
+    </section>
+
+    <a class="back-link" href={sitePath('/contact/')}>Contacter Alce Niang</a>
+  </article>
+  <Footer slot="footer" lang="fr" />
+</BaseLayout>
+
+<style>
+  .policy {
+    max-width: var(--container-narrow-width);
+    padding-block: var(--space-20);
+  }
+
+  .section-kicker {
+    color: var(--color-accent-primary);
+    font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-top: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .updated {
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  section {
+    margin-top: var(--space-8);
+  }
+
+  h2 {
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-md);
+  }
+
+  section p {
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    overflow-wrap: anywhere;
+  }
+
+  section a {
+    color: var(--color-accent-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: var(--space-10);
+    color: var(--color-accent-primary);
+    font-weight: var(--weight-semibold);
+  }
+</style>

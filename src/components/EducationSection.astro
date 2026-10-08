@@ -1,0 +1,219 @@
+---
+import profileData from '../../content/profile.json';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const { education } = profileData;
+
+const localizePeriod = (period: string) =>
+  isFr ? period : period.replace('Présent', 'Present');
+---
+
+<section id="education" class="education-section" aria-labelledby="education-title">
+  <div class="site-container">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">{isFr ? 'Formation' : 'Education'}</p>
+        <h2 id="education-title" class="section-title">
+          {isFr ? 'Les langues comme formation, l’analyse comme méthode.' : 'Language as a discipline, analysis as a method.'}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'Mon parcours universitaire en anglais est au cœur de mon profil : il relie communication, analyse et ouverture internationale à la création numérique.'
+          : 'My university studies in English are central to my profile, connecting communication, analysis, and international outlook with digital creation.'}
+      </p>
+    </div>
+
+    <div class="education-grid">
+      {education.map((item) => (
+        <article id={`education-${item.id}`} class:list={['education-card', item.id === 'ucad-l2' && 'education-card-featured']}>
+          <div class="education-meta">
+            <span class="education-period">{localizePeriod(item.period)}</span>
+            <span class="education-status">
+              {item.status === 'In progress'
+                ? (isFr ? 'En cours' : 'In progress')
+                : (isFr ? 'Obtenu' : 'Completed')}
+            </span>
+          </div>
+          <h3 class="education-degree">{isFr ? item.degree.fr : item.degree.en}</h3>
+          <p class="education-institution">{item.institution}</p>
+          {item.faculty && (
+            <p class="education-faculty">{isFr ? item.faculty.fr : item.faculty.en}</p>
+          )}
+          <p class="education-location">
+            {isFr ? item.location : item.location.replace('Sénégal', 'Senegal')}
+          </p>
+          <p class="education-description">{isFr ? item.description.fr : item.description.en}</p>
+        </article>
+      ))}
+    </div>
+
+    <a class="education-differentiator" href="#languages">
+      <span class="differentiator-label">{isFr ? 'Un parcours complémentaire' : 'A complementary background'}</span>
+      <span class="differentiator-points">
+        {isFr
+          ? 'Communication · Analyse · Langues · Ouverture internationale'
+          : 'Communication · Analysis · Languages · International outlook'}
+      </span>
+      <span class="differentiator-link">{isFr ? 'Découvrir les langues' : 'Explore languages'} <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .education-section {
+    padding-block: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-2);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    max-width: 720px;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    line-height: var(--leading-tight);
+  }
+
+  .section-intro {
+    max-width: 480px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .education-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 760px) {
+    .education-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .education-card {
+    min-width: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .education-card-featured {
+    border-color: var(--color-accent-border);
+    background: var(--color-accent-tint);
+  }
+
+  .education-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .education-period,
+  .education-status {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+
+  .education-period {
+    color: var(--color-text-secondary);
+  }
+
+  .education-status {
+    color: var(--color-verified-text);
+    font-weight: var(--weight-semibold);
+  }
+
+  .education-degree {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+    overflow-wrap: anywhere;
+  }
+
+  .education-institution {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .education-faculty,
+  .education-location {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .education-description {
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .education-differentiator {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    margin-top: var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas-subtle);
+  }
+
+  .differentiator-label {
+    width: 100%;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+  }
+
+  .differentiator-points {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .differentiator-link {
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-bold);
+  }
+</style>

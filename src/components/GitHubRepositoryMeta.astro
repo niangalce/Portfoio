@@ -1,0 +1,93 @@
+---
+interface Props {
+  owner: string;
+  repository: string;
+  lang?: 'fr' | 'en';
+}
+
+const { owner, repository, lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+---
+
+<aside
+  class="repository-meta"
+  data-github-repository
+  data-owner={owner}
+  data-repository={repository}
+  data-language={lang}
+  aria-label={isFr ? 'Informations publiques du dépôt GitHub' : 'Public GitHub repository information'}
+>
+  <p data-repository-summary role="status" aria-live="polite" aria-atomic="true">
+    {isFr
+      ? 'Résumé éditorial local ; données GitHub ajoutées lorsqu’elles sont disponibles.'
+      : 'Local editorial summary; GitHub data is added when available.'}
+  </p>
+  <p data-repository-description hidden></p>
+</aside>
+
+<script>
+  import { fetchPublicRepositoryMetadata } from '../utils/github-repository';
+
+  const fallback = (lang: string) =>
+    lang === 'fr'
+      ? 'Détails GitHub indisponibles pour le moment ; les informations du projet et le lien du dépôt restent accessibles.'
+      : 'GitHub details are temporarily unavailable; the project information and repository link remain available.';
+
+  for (const element of document.querySelectorAll<HTMLElement>('[data-github-repository]')) {
+    const owner = element.dataset.owner;
+    const repository = element.dataset.repository;
+    const lang = element.dataset.language ?? 'fr';
+    const summary = element.querySelector<HTMLElement>('[data-repository-summary]');
+    const description = element.querySelector<HTMLElement>('[data-repository-description]');
+
+    if (!owner || !repository || !summary || !description) {
+      throw new Error('GitHub repository metadata is missing a required field.');
+    }
+
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 6000);
+
+    fetchPublicRepositoryMetadata(owner, repository, controller.signal)
+      .then((metadata) => {
+        const locale = lang === 'fr' ? 'fr-FR' : 'en';
+        const date = new Intl.DateTimeFormat(locale, {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        }).format(metadata.updatedAt);
+
+        summary.textContent = lang === 'fr'
+          ? `${metadata.stars} étoile${metadata.stars > 1 ? 's' : ''} · Mis à jour le ${date}`
+          : `${metadata.stars} star${metadata.stars === 1 ? '' : 's'} · Updated ${date}`;
+
+        if (metadata.description) {
+          description.textContent = metadata.description;
+          description.hidden = false;
+        }
+      })
+      .catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === 'AbortError')) {
+          console.warn(`Unable to load public GitHub metadata for ${owner}/${repository}.`, error);
+        }
+
+        summary.textContent = fallback(lang);
+      })
+      .finally(() => window.clearTimeout(timeout));
+  }
+</script>
+
+<style>
+  .repository-meta {
+    margin-top: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--color-border-medium);
+    background: var(--color-canvas-subtle);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: var(--leading-normal);
+  }
+
+  [data-repository-description]:not([hidden]) {
+    margin-top: var(--space-1);
+  }
+</style>

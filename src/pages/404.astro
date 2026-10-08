@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sitePath } from '../utils/urls';
+
+if (!Astro.site) throw new Error('Astro.site must be configured for 404 metadata.');
+const canonicalUrl = new URL(sitePath('/404.html'), Astro.site).href;
+---
+
+<BaseLayout
+  title="404 — Alce Niang"
+  description="La page recherchée est introuvable. Page not found."
+  lang="fr"
+  canonicalUrl={canonicalUrl}
+  noIndex={true}
+>
+  <section class="not-found site-container" aria-labelledby="not-found-title">
+    <p class="error-code">404</p>
+    <h1 id="not-found-title">Cette page n’existe pas.</h1>
+    <p class="not-found-copy">Le lien est peut-être ancien ou incorrect. Vous pouvez reprendre la navigation en français ou en anglais.</p>
+    <p class="not-found-copy" lang="en">This page could not be found. Choose a link below to continue browsing.</p>
+    <nav aria-label="Navigation après erreur">
+      <a href={sitePath('/')}>Accueil</a>
+      <a href={sitePath('/#projects')}>Projets</a>
+      <a href={sitePath('/contact/')}>Contact</a>
+    </nav>
+    <nav lang="en" aria-label="English navigation after error">
+      <a href={sitePath('/en/')}>Home</a>
+      <a href={sitePath('/en/#projects')}>Projects</a>
+      <a href={sitePath('/en/contact/')}>Contact</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 62vh;
+    align-content: center;
+    justify-items: center;
+    padding-block: var(--space-16);
+    text-align: center;
+  }
+
+  .error-code {
+    margin-bottom: var(--space-3);
+    color: var(--color-accent-primary);
+    font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .not-found-copy {
+    max-width: 560px;
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+  }
+
+  nav a {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent-primary);
+    color: #fff;
+    font-weight: var(--weight-semibold);
+  }
+
+  nav a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+</style>

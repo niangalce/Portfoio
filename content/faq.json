@@ -1,0 +1,98 @@
+[
+  {
+    "id": "faq-recruitment",
+    "category": "Recruitment",
+    "question": {
+      "fr": "Êtes-vous disponible pour un stage ou une opportunité professionnelle ?",
+      "en": "Are you available for an internship or junior developer role?"
+    },
+    "answer": {
+      "fr": "Oui. Je recherche activement des opportunités stimulantes (stage de développement web Front-End, première expérience professionnelle, poste junior ou mission hybride tech/digital). Ma double compétence en anglais (Licence 2 à l'UCAD) et en intégration web me permet d'évoluer efficacement dans des environnements locaux et internationaux.",
+      "en": "Yes. I am actively seeking compelling opportunities: Front-End web development internships, junior roles, or hybrid tech/digital positions. My combined background in English (Year 2 BA at UCAD) and web integration enables me to contribute effectively to local and global teams."
+    }
+  },
+  {
+    "id": "faq-services",
+    "category": "Services",
+    "question": {
+      "fr": "Quels types de projets pouvez-vous réaliser pour une entreprise ou un indépendant ?",
+      "en": "What types of projects can you build for a business or freelancer?"
+    },
+    "answer": {
+      "fr": "Je réalise des sites vitrines, des landing pages rapides et ergonomiques, de l'intégration de maquettes en HTML/CSS/Tailwind, ainsi que des supports visuels et de communication digitale pour renforcer votre présence sur le web. Pour des projets SaaS complets, je suis ouvert à des collaborations techniques selon les besoins.",
+      "en": "I build business websites, high-speed landing pages, UI slicing into HTML/CSS/Tailwind, as well as visual and digital communications collateral to boost your online footprint. For full-stack SaaS projects, I am open to technical collaborations based on scope."
+    }
+  },
+  {
+    "id": "faq-english-tech",
+    "category": "Profile",
+    "question": {
+      "fr": "Comment conciliez-vous vos études d'anglais à l'UCAD et le développement web ?",
+      "en": "How do your English studies at UCAD complement your web development work?"
+    },
+    "answer": {
+      "fr": "L'anglais et la tech sont en parfaite synergie. L'anglais me permet d'accéder directement à la documentation officielle, de suivre l'état de l'art technologique mondial, d'échanger avec des développeurs internationaux et de rédiger des contenus bilingues avec rigueur et clarté.",
+      "en": "English and software development amplify each other. English gives me immediate access to primary technical documentation, keeps me aligned with global tech trends, and enables seamless communication and bilingual writing with precision."
+    }
+  },
+  {
+    "id": "faq-jef-status",
+    "category": "Projects",
+    "question": {
+      "fr": "Quel est le statut actuel du projet JËF ?",
+      "en": "What is the current status of the JËF project?"
+    },
+    "answer": {
+      "fr": "JËF est un projet personnel d'application SaaS actuellement en cours de développement actif (In active development). L'architecture de données sous Supabase/PostgreSQL et les flux d'authentification sont en place ; je finalise actuellement le tableau de bord et les modules transactionnels avant de lancer une phase de test Alpha.",
+      "en": "JËF is an independent SaaS project currently in active development. Database modeling with Supabase/PostgreSQL and authentication flows are completed; I am currently finalizing the dashboard UI and transactional modules ahead of an Alpha test release."
+    }
+  },
+  {
+    "id": "faq-teranga-vision",
+    "category": "Projects",
+    "question": {
+      "fr": "Qu'est-ce que TèrangaDigital et quelle est sa vocation ?",
+      "en": "What is TèrangaDigital and what is its mission?"
+    },
+    "answer": {
+      "fr": "TèrangaDigital est une marque et une initiative que j'ai fondée pour mettre à la disposition des créateurs et entrepreneurs africains des outils concrets : guides pratiques (dont un guide de 30 pages sur l'e-commerce en Afrique), packs de compétences numériques et services d'accompagnement digital.",
+      "en": "TèrangaDigital is an initiative and brand I founded to provide African entrepreneurs and creators with actionable tools: practical guides (including a 30-page handbook on e-commerce), digital skill packs, and online visibility services."
+    }
+  },
+  {
+    "id": "faq-contact-process",
+    "category": "Collaboration",
+    "question": {
+      "fr": "Comment se déroule une collaboration avec vous ?",
+      "en": "How does collaborating with you work?"
+    },
+    "answer": {
+      "fr": "Nous commençons par un échange direct par email ou via le formulaire pour définir vos besoins réels, vos délais et vos objectifs. J'établis une proposition claire et détaillée. Durant le projet, vous disposez d'un suivi transparent et régulier jusqu'à la livraison et la mise en ligne.",
+      "en": "We start with a direct exchange via email or the website form to clarify your exact requirements, timeline, and goals. I provide a clear, transparent scope of work. Throughout development, you receive regular updates until final deployment and handover."
+    }
+  },
+  {
+    "id": "faq-availability",
+    "category": "Availability",
+    "question": {
+      "fr": "Pour quelles opportunités puis-je vous contacter ?",
+      "en": "What opportunities can I contact you about?"
+    },
+    "answer": {
+      "fr": "Je suis ouvert aux opportunités de stage et aux missions correspondant à mon profil Front-End et digital. Indiquez le calendrier et le périmètre dans votre message afin que je puisse confirmer ma disponibilité.",
+      "en": "I am open to internship opportunities and projects that fit my Front-End and digital profile. Include the timeline and scope in your message so I can confirm my availability."
+    }
+  },
+  {
+    "id": "faq-contact",
+    "category": "Contact",
+    "question": {
+      "fr": "Comment vous contacter directement ?",
+      "en": "How can I contact you directly?"
+    },
+    "answer": {
+      "fr": "Écrivez à niangalce@gmail.com ou utilisez le formulaire de contact. Celui-ci prépare un brouillon dans votre application de messagerie ; vous pouvez le vérifier et l'envoyer vous-même.",
+      "en": "Email niangalce@gmail.com or use the contact form. The form prepares a draft in your mail app; you can review and send it yourself."
+    }
+  }
+]

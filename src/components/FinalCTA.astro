@@ -1,0 +1,250 @@
+---
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const resumeUrl = sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf');
+---
+
+<section id="contact" class="final-cta-section" aria-labelledby="cta-title">
+  <div class="site-container">
+    <div class="cta-inner-card">
+      <div class="cta-text-block">
+        <p class="cta-kicker">{isFr ? 'Contact & Collaboration' : 'Get In Touch'}</p>
+        <h2 id="cta-title" class="cta-title">
+          {isFr ? 'Prêt à construire ensemble ?' : 'Ready to build something meaningful?'}
+        </h2>
+        <p class="cta-copy">
+          {isFr
+            ? 'Que vous cherchiez un stagiaire Front-End rigoureux, un collaborateur bilingue polyvalent ou un artisan numérique pour concevoir le site web de votre entreprise, échangeons directement.'
+            : 'Whether you are looking for a disciplined Front-End intern, a versatile bilingual contributor, or a digital craftsman to build your business website, let us talk.'}
+        </p>
+
+        <div class="cta-actions">
+          <a
+            href="mailto:niangalce@gmail.com"
+            class="btn-cta-primary"
+          >
+            <span>{isFr ? 'M\'écrire par email' : 'Send an Email'}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+
+          <a
+            href={resumeUrl}
+            download
+            class="btn-cta-secondary"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>{isFr ? 'Télécharger le CV officiel' : 'Download Official Resume'}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coordonnées directes encadrées -->
+      <div class="cta-contact-box">
+        <h3 class="contact-box-title">{isFr ? 'Coordonnées directes' : 'Direct Contact'}</h3>
+        <ul class="contact-direct-list">
+          <li>
+            <span class="contact-lbl">Email</span>
+            <a href="mailto:niangalce@gmail.com" class="contact-val">niangalce@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-lbl">{isFr ? 'Téléphone' : 'Phone'}</span>
+            <a href="tel:+221782177659" class="contact-val">+221 78 217 76 59</a>
+          </li>
+          <li>
+            <span class="contact-lbl">{isFr ? 'Localisation' : 'Location'}</span>
+            <span class="contact-val">{isFr ? 'Dakar, Sénégal' : 'Dakar, Senegal'}</span>
+          </li>
+          <li>
+            <span class="contact-lbl">{isFr ? 'Disponibilité' : 'Availability'}</span>
+            <span class="contact-val contact-avail">
+              <span class="avail-dot"></span>
+              {isFr ? 'Stages & Missions' : 'Internships & Projects'}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta-section {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    background-color: var(--color-canvas-subtle);
+  }
+
+  .cta-inner-card {
+    background-color: var(--color-surface-dark);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    box-shadow: var(--shadow-modal);
+  }
+
+  @media (min-width: 960px) {
+    .cta-inner-card {
+      grid-template-columns: 1.3fr 0.7fr;
+      padding: var(--space-12);
+      gap: var(--space-12);
+    }
+  }
+
+  .cta-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    color: #ff9d66;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--space-2);
+  }
+
+  .cta-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    color: #ffffff;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-copy {
+    font-size: var(--font-size-base);
+    color: var(--color-text-inverse-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 540px;
+    margin-bottom: var(--space-8);
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .btn-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background-color: var(--color-accent-primary);
+    color: #ffffff;
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    padding: 13px 22px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-out-quint),
+                transform var(--duration-fast) var(--ease-out-quint);
+    min-height: 48px;
+  }
+
+  .btn-cta-primary:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .btn-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background-color: transparent;
+    color: #ffffff;
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-medium);
+    padding: 12px 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-out-quint),
+      border-color var(--duration-fast) var(--ease-out-quint);
+    min-height: 48px;
+  }
+
+  .btn-cta-secondary:hover {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Boîte de contact direct */
+  .cta-contact-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-box-title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a3abb8;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-direct-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .contact-direct-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact-lbl {
+    font-size: 11px;
+    color: #8b95a5;
+  }
+
+  .contact-val {
+    font-size: var(--font-size-sm);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: var(--weight-medium);
+  }
+
+  .contact-val:hover {
+    color: #ff9d66;
+    text-decoration: underline;
+  }
+
+  .contact-avail {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #4ade80 !important;
+  }
+
+  .avail-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #4ade80;
+    border-radius: 50%;
+  }
+</style>

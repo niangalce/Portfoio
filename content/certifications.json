@@ -1,0 +1,123 @@
+[
+  {
+    "id": "odc-bureautique",
+    "title": "Bureautique avancée",
+    "issuer": "Orange Digital Center Sénégal / Sonatel",
+    "program": "Tech KI / Tech Academy",
+    "date": "2026-09-18",
+    "displayDate": {
+      "fr": "18 septembre 2026",
+      "en": "September 18, 2026"
+    },
+    "location": "Dakar, Sénégal",
+    "signatory": "Nafissatou Chérif Niang (Directrice de Orange Digital Center)",
+    "category": "Productivity",
+    "verificationFile": "/certification/attestation_bureautique_avancee.pdf",
+    "skills": ["Bureautique avancée"],
+    "description": {
+      "fr": "Attestation de participation à une session de formation pratique consacrée à la bureautique avancée.",
+      "en": "Certificate of participation in a practical training session on advanced office software."
+    }
+  },
+  {
+    "id": "odc-cybersecurity",
+    "title": "Initiation à la cybersécurité",
+    "issuer": "Orange Digital Center Sénégal / Sonatel",
+    "program": "Tech KI / Tech Academy",
+    "date": "2026-09-11",
+    "displayDate": {
+      "fr": "11 septembre 2026",
+      "en": "September 11, 2026"
+    },
+    "location": "Dakar, Sénégal",
+    "signatory": "Nafissatou Chérif Niang (Directrice de Orange Digital Center)",
+    "category": "Cybersecurity",
+    "verificationFile": "/certification/attestation_initiation_a_la_cybersecurite.pdf",
+    "skills": ["Cybersécurité"],
+    "description": {
+      "fr": "Attestation de formation intitulée « Initiation à la cybersécurité », délivrée par Orange Digital Center Sénégal / Sonatel.",
+      "en": "Certificate for the training titled “Introduction to Cybersecurity,” issued by Orange Digital Center Senegal / Sonatel."
+    }
+  },
+  {
+    "id": "odc-ai",
+    "title": "Initiation à l'Intelligence Artificielle",
+    "issuer": "Orange Digital Center Sénégal / Sonatel",
+    "program": "Tech KI / Tech Academy",
+    "date": "2026-08-28",
+    "displayDate": {
+      "fr": "28 août 2026",
+      "en": "August 28, 2026"
+    },
+    "location": "Dakar, Sénégal",
+    "signatory": "Nafissatou Chérif Niang (Directrice de Orange Digital Center)",
+    "category": "AI",
+    "verificationFile": "/certification/attestation_initiation_a_l_intelligence_artificielle.pdf",
+    "skills": ["Intelligence artificielle"],
+    "description": {
+      "fr": "Attestation de formation intitulée « Initiation à l'Intelligence Artificielle », délivrée par Orange Digital Center Sénégal / Sonatel.",
+      "en": "Certificate for the training titled “Introduction to Artificial Intelligence,” issued by Orange Digital Center Senegal / Sonatel."
+    }
+  },
+  {
+    "id": "odc-marketing",
+    "title": "Marketing Digital",
+    "issuer": "Orange Digital Center Sénégal / Sonatel",
+    "program": "Tech KI / Tech Academy",
+    "date": "2026-08-13",
+    "displayDate": {
+      "fr": "13 août 2026",
+      "en": "August 13, 2026"
+    },
+    "location": "Dakar, Sénégal",
+    "signatory": "Nafissatou Chérif Niang (Directrice de Orange Digital Center)",
+    "category": "Digital",
+    "verificationFile": "/certification/attestation_marketing_digital.pdf",
+    "skills": ["Marketing digital"],
+    "description": {
+      "fr": "Attestation de formation intitulée « Marketing Digital », délivrée par Orange Digital Center Sénégal / Sonatel.",
+      "en": "Certificate for the training titled “Digital Marketing,” issued by Orange Digital Center Senegal / Sonatel."
+    }
+  },
+  {
+    "id": "unodc-cybercrime",
+    "title": "Cybercrime eLearning Course",
+    "issuer": "United Nations Office on Drugs and Crime (UNODC) / SPARK",
+    "program": "UNODC Global eLearning Programme",
+    "date": "2026-05-15",
+    "displayDate": {
+      "fr": "15 mai 2026",
+      "en": "May 15, 2026"
+    },
+    "location": "International / En ligne",
+    "signatory": "UNODC / SPARK Verification Service",
+    "category": "Cybersecurity",
+    "verificationFile": "/certification/UNODC e-Learning Certificate.pdf",
+    "hasQrCode": true,
+    "skills": ["Cybercriminalité"],
+    "description": {
+      "fr": "Certificat de complétion du cours eLearning « Cybercrime », délivré par l'UNODC / SPARK.",
+      "en": "Certificate of completion for the “Cybercrime” eLearning course, issued by UNODC / SPARK."
+    }
+  },
+  {
+    "id": "powerup-career",
+    "title": "READY, SET, CAREER",
+    "issuer": "Power UP & Ambassade des États-Unis à Dakar",
+    "program": "Soutenu par le U.S. Department of State",
+    "date": "2026-06-30",
+    "displayDate": {
+      "fr": "30 juin 2026",
+      "en": "June 30, 2026"
+    },
+    "location": "Dakar, Sénégal",
+    "signatory": "Ahmad Ba (Directeur exécutif Power UP) & Vanessa Arness (Attachée culturelle, Ambassade des États-Unis)",
+    "category": "Professional Development",
+    "verificationFile": "/certification/Vecto_Attestion_UAM_Data Set 12.pdf",
+    "skills": ["Préparation de carrière"],
+    "description": {
+      "fr": "Attestation associée au programme « READY, SET, CAREER », délivrée par Power UP et l'Ambassade des États-Unis à Dakar.",
+      "en": "Certificate associated with the “READY, SET, CAREER” program, issued by Power UP and the U.S. Embassy in Dakar."
+    }
+  }
+]

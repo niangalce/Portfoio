@@ -1,0 +1,347 @@
+---
+import profileData from '../../content/profile.json';
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const { identity } = profileData;
+const resumeUrl = sitePath(identity.cvDownload.relativePath);
+const portraitUrl = sitePath(identity.heroPortrait.relativePath);
+---
+
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="site-container hero-grid">
+    <!-- Colonne Contenu Éditorial & Preuves -->
+    <div class="hero-content">
+      <!-- Sur-titre discret d'ancrage local & académique -->
+      <p class="hero-origin">
+        <span class="origin-dot" aria-hidden="true"></span>
+        <span>{isFr ? 'Dakar, Sénégal · Licence 2 Anglais (UCAD)' : 'Dakar, Senegal · English Major (UCAD)'}</span>
+      </p>
+
+      <!-- Titre d'identité puissant sans badge gadget -->
+      <h1 id="hero-title" class="hero-title">
+        {identity.fullName}
+      </h1>
+
+      <!-- Sous-titre de positionnement clair & net -->
+      <p class="hero-role">
+        {isFr ? identity.titles.fr : identity.titles.en}
+      </p>
+
+      <!-- Proposition de valeur humaine et concrète (sans buzzwords) -->
+      <p class="hero-pitch">
+        {isFr
+          ? 'Je conçois des interfaces web soignées, accessibles et performantes, et je transforme des idées de terrain en produits numériques utiles. Mon parcours associe l’apprentissage méthodique du Front-End moderne à la rigueur d’analyse et l’ouverture internationale forgées par mes études d’anglais à l’UCAD.'
+          : 'I craft clean, accessible, high-performance web interfaces and turn practical ideas into useful digital products. My background combines rigorous self-taught Front-End development with the analytical discipline and global perspective built through my English studies at UCAD.'}
+      </p>
+
+      <!-- Les 2 CTAs complémentaires (Primaire : Projets / Secondaire : CV) -->
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">
+          <span>{isFr ? 'Explorer les réalisations' : 'Explore Projects'}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <a
+          href={resumeUrl}
+          download
+          class="btn-secondary"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>{isFr ? 'Télécharger le CV (PDF)' : 'Download Resume (PDF)'}</span>
+        </a>
+      </div>
+
+      <!-- Bandeau de Preuves Vérifiées directement rattaché au Hero -->
+      <div class="hero-proofs">
+        <div class="proof-item">
+          <span class="proof-number">L2</span>
+          <span class="proof-label">{isFr ? 'Anglais UCAD en cours' : 'English Degree (UCAD)'}</span>
+        </div>
+        <div class="proof-separator" aria-hidden="true">/</div>
+        <div class="proof-item">
+          <span class="proof-number">6</span>
+          <span class="proof-label">{isFr ? 'Certifications officielles' : 'Verified Certificates'}</span>
+        </div>
+        <div class="proof-separator" aria-hidden="true">/</div>
+        <div class="proof-item">
+          <span class="proof-number">100%</span>
+          <span class="proof-label">{isFr ? 'Faits réels & vérifiés' : 'Fact-checked profile'}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne Photographie Officielle (Portrait Studio 2:3) -->
+    <div class="hero-media">
+      <div class="photo-frame">
+        <img
+          src={portraitUrl}
+          alt={isFr ? identity.heroPortrait.alt.fr : identity.heroPortrait.alt.en}
+          width={1024}
+          height={1536}
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          class="hero-photo"
+        />
+        <div class="photo-caption">
+          <span class="caption-status"></span>
+          <span class="caption-text">{isFr ? 'Disponible pour stages & missions' : 'Available for roles & projects'}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-16);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: radial-gradient(circle at 92% 12%, rgba(217, 107, 39, 0.05) 0%, transparent 40%), var(--color-canvas-default);
+  }
+
+  @media (min-width: 960px) {
+    .hero-section {
+      padding-top: var(--space-20);
+      padding-bottom: var(--space-24);
+    }
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-16);
+    }
+  }
+
+  /* Contenu Hero */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-origin {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--space-3);
+  }
+
+  .origin-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-accent-primary);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-hero);
+    font-weight: var(--weight-extrabold);
+    color: var(--color-text-primary);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-snug);
+    margin-bottom: var(--space-5);
+  }
+
+  .hero-pitch {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 580px;
+    margin-bottom: var(--space-8);
+  }
+
+  /* CTAs complémentaires */
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background-color: var(--color-accent-primary);
+    color: #ffffff;
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    padding: 14px 24px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(191, 85, 22, 0.22);
+    transition: background-color var(--duration-fast) var(--ease-out-quint),
+                transform var(--duration-fast) var(--ease-out-quint),
+                box-shadow var(--duration-fast) var(--ease-out-quint);
+    min-height: 48px;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(191, 85, 22, 0.32);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background-color: var(--color-surface-card);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    padding: 13px 22px;
+    border: 1.5px solid var(--color-border-medium);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-out-quint),
+      border-color var(--duration-fast) var(--ease-out-quint),
+      color var(--duration-fast) var(--ease-out-quint),
+      transform var(--duration-fast) var(--ease-out-quint);
+    min-height: 48px;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-text-primary);
+    background-color: var(--color-canvas-subtle);
+    transform: translateY(-1px);
+  }
+
+  /* Bandeau de Preuves */
+  .hero-proofs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-subtle);
+    flex-wrap: wrap;
+  }
+
+  .proof-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .proof-number {
+    font-family: var(--font-display);
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+
+  .proof-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .proof-separator {
+    color: var(--color-border-medium);
+    font-family: var(--font-mono);
+    user-select: none;
+  }
+
+  /* Colonne Photo */
+  .hero-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero-media {
+      justify-content: flex-end;
+    }
+  }
+
+  .photo-frame {
+    position: relative;
+    max-width: 380px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-card);
+    padding: 10px;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: var(--radius-md);
+  }
+
+  .photo-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    background-color: rgba(15, 20, 26, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .caption-status {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+  }
+
+  .caption-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.01em;
+  }
+</style>

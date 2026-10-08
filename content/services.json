@@ -1,0 +1,124 @@
+{
+  "availableServices": [
+    {
+      "id": "landing-pages-web",
+      "title": {
+        "fr": "Création de Sites Vitrines & Landing Pages",
+        "en": "Landing Pages & Business Website Development"
+      },
+      "tagline": {
+        "fr": "Des sites web rapides, élégants, adaptés au mobile et optimisés pour le référencement.",
+        "en": "Fast, elegant, mobile-first websites optimized for search engines and conversions."
+      },
+      "description": {
+        "fr": "Conception et intégration de sites vitrines sur-mesure pour indépendants, artisans et PME. Structure sémantique propre, temps de chargement ultra-rapide sur mobile et mise en valeur claire de votre offre.",
+        "en": "Custom website design and development for freelancers and SMEs. Clean semantic markup, lightning-fast mobile load times, and clear presentation of your core services."
+      },
+      "deliverables": {
+        "fr": [
+          "Site responsive (mobile, tablette, desktop)",
+          "Balisage sémantique & optimisation SEO de base",
+          "Formulaire de contact fonctionnel",
+          "Déploiement et mise en ligne sécurisée"
+        ],
+        "en": [
+          "Fully responsive layout (mobile, tablet, desktop)",
+          "Semantic HTML markup & foundational SEO",
+          "Functional contact form setup",
+          "Secure deployment and launch"
+        ]
+      },
+      "badge": "Disponible / Available"
+    },
+    {
+      "id": "front-end-integration",
+      "title": {
+        "fr": "Développement Front-End & Intégration",
+        "en": "Front-End Integration & UI Slicing"
+      },
+      "tagline": {
+        "fr": "Transformation fidèle de maquettes en code HTML5, CSS3, Tailwind et composants React.",
+        "en": "Translating UI designs into clean HTML5, CSS3, Tailwind, and React components."
+      },
+      "description": {
+        "fr": "Intégration d'interfaces web conformes aux maquettes graphiques, respectant les standards d'accessibilité, le responsive design et les bonnes pratiques de découpage modulaire.",
+        "en": "Crafting polished web interfaces from design mockups, ensuring accessibility, responsive behavior, and clean modular code."
+      },
+      "deliverables": {
+        "fr": [
+          "Code propre, commenté et sans dette technique",
+          "Respect rigoureux des maquettes et espacements",
+          "Gestion des états interactifs (hover, focus, active)",
+          "Compatibilité navigateurs modernes"
+        ],
+        "en": [
+          "Clean, documented, maintainable code",
+          "Pixel-accurate layout alignment",
+          "Interactive state handling (hover, focus, active)",
+          "Modern cross-browser compatibility"
+        ]
+      },
+      "badge": "Disponible / Available"
+    },
+    {
+      "id": "digital-communication-content",
+      "title": {
+        "fr": "Communication Digitale & Création de Contenus",
+        "en": "Digital Communications & Content Strategy"
+      },
+      "tagline": {
+        "fr": "Valorisation de votre image en ligne, rédaction de contenus et supports visuels.",
+        "en": "Elevating online brand presence, copywriting, and visual collateral."
+      },
+      "description": {
+        "fr": "Élaboration de supports visuels de communication pour réseaux sociaux, rédaction de guides ou articles spécialisés, et structuration de la présence digitale pour toucher votre audience cible.",
+        "en": "Designing engaging social media visual assets, authoring guides or articles, and structuring your digital footprint to connect with target audiences."
+      },
+      "deliverables": {
+        "fr": [
+          "Visuels promotionnels et templates réseaux sociaux",
+          "Rédaction claire et structurée de contenus",
+          "Conseil en visibilité numérique locale",
+          "Cohérence de marque sur l'ensemble des canaux"
+        ],
+        "en": [
+          "Social media promo graphics and templates",
+          "Structured, high-clarity written copy",
+          "Practical guidance on local digital visibility",
+          "Consistent visual branding across channels"
+        ]
+      },
+      "badge": "Disponible / Available"
+    },
+    {
+      "id": "sme-digital-support",
+      "title": {
+        "fr": "Accompagnement Digital pour Entrepreneurs & PME",
+        "en": "Digital Enablement for Entrepreneurs & SMEs"
+      },
+      "tagline": {
+        "fr": "Audit simple, outillage numérique pratique et mise en place d'outils de gestion.",
+        "en": "Practical digital audit, tooling setup, and workflow organization."
+      },
+      "description": {
+        "fr": "Aide concrète pour structurer votre présence sur le web, organiser vos données d'activité (bureautique, fiches produits) et adopter les bons outils numériques du quotidien.",
+        "en": "Hands-on guidance to organize your online business presence, streamline productivity tools, and structure day-to-day operations."
+      },
+      "deliverables": {
+        "fr": [
+          "Diagnostic de votre présence numérique",
+          "Aide au choix d'outils adaptés et abordables",
+          "Mise en place de documents de suivi propres",
+          "Formation pratique à la prise en main"
+        ],
+        "en": [
+          "Rapid digital footprint evaluation",
+          "Tool selection adapted to local realities",
+          "Setup of clean tracking sheets and docs",
+          "Practical onboarding and handover"
+        ]
+      },
+      "badge": "Disponible / Available"
+    }
+  ]
+}

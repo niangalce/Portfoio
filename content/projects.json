@@ -1,0 +1,273 @@
+[
+  {
+    "id": "jef",
+    "slug": "jef",
+    "title": "JËF",
+    "tagline": {
+      "fr": "Application SaaS de gestion épurée conçue pour simplifier le pilotage d'activité.",
+      "en": "Minimalist SaaS management platform engineered to streamline business operations."
+    },
+    "category": "saas",
+    "status": "In active development",
+    "role": "CEO & Lead Developer",
+    "featured": true,
+    "githubUrl": null,
+    "liveUrl": null,
+    "stack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Git",
+      "GitHub"
+    ],
+    "metrics": {
+      "fr": "Architecture SaaS multi-utilisateurs en cours de consolidation technique.",
+      "en": "Multi-tenant SaaS architecture currently in active development."
+    },
+    "caseStudy": {
+      "context": {
+        "fr": "Les indépendants, consultants et micro-entreprises africains utilisent fréquemment des outils disparates (cahiers, tableurs non synchronisés, messageries) pour suivre leurs ventes, commandes et encaissements, générant pertes de temps et erreurs de suivi.",
+        "en": "African freelancers and small businesses often rely on disconnected tools (paper ledgers, manual spreadsheets, chat apps) to manage sales, orders, and payments, leading to lost time and tracking errors."
+      },
+      "problem": {
+        "fr": "Les logiciels de gestion d'entreprise classiques sont généralement coûteux, surchargés de fonctionnalités superflues et peu adaptés à un usage mobile simple sur réseau à bande passante variable.",
+        "en": "Conventional ERP and management tools are often costly, bloated with unnecessary complexity, and poorly optimized for lightweight mobile usage over variable-bandwidth networks."
+      },
+      "objective": {
+        "fr": "Concevoir une application SaaS moderne, rapide et focalisée sur l'essentiel : authentification sécurisée, tableau de bord réactif, enregistrement fluide des transactions et isolation stricte des données de chaque utilisateur.",
+        "en": "Build a modern, lightweight SaaS app focused on core essentials: secure authentication, responsive dashboard, frictionless record keeping, and strict data isolation per user."
+      },
+      "role": {
+        "fr": "Conception de l'architecture logicielle, modélisation relationnelle PostgreSQL sur Supabase, intégration de l'interface en Next.js (App Router), TypeScript et Tailwind CSS.",
+        "en": "Software architecture design, PostgreSQL relational modeling on Supabase, UI integration with Next.js (App Router), TypeScript, and Tailwind CSS."
+      },
+      "process": {
+        "fr": "Conception de l'architecture, modélisation relationnelle de la base PostgreSQL sur Supabase, puis intégration de l'interface avec Next.js, TypeScript et Tailwind CSS.",
+        "en": "Architecture design, relational PostgreSQL data modeling on Supabase, followed by interface implementation with Next.js, TypeScript, and Tailwind CSS."
+      },
+      "design": {
+        "fr": "Direction minimaliste avec Tailwind CSS, attention portée aux contrastes et interface pensée pour s'adapter aux smartphones.",
+        "en": "A minimal direction with Tailwind CSS, attention to contrast, and an interface designed to adapt to smartphones."
+      },
+      "development": {
+        "fr": "Application Next.js App Router et TypeScript ; Supabase/PostgreSQL pour les données, l'authentification et les règles Row-Level Security. Le statut communiqué indique que le schéma et l'authentification fonctionnent ; le tableau de bord et la saisie restent en cours.",
+        "en": "A Next.js App Router and TypeScript application; Supabase/PostgreSQL for data, authentication, and Row-Level Security. The recorded status says the schema and authentication are operational, while the dashboard and data-entry flows remain in progress."
+      },
+      "result": {
+        "fr": "Projet personnel toujours en développement. Le schéma de données et l'authentification sont indiqués comme opérationnels ; aucun produit final ni démo publique n'est annoncé.",
+        "en": "The personal project remains in development. The data schema and authentication are recorded as operational; no finished product or public demo is claimed."
+      },
+      "difficulties": {
+        "fr": "Synchronisation de l'état asynchrone, typage strict des schémas Supabase et configuration fine des permissions PostgreSQL.",
+        "en": "Asynchronous state synchronization, strict typing of Supabase schemas, and fine-grained PostgreSQL permission management."
+      },
+      "learning": {
+        "fr": "Approfondissement de la synchronisation d'état asynchrone, du typage TypeScript des données et des permissions PostgreSQL.",
+        "en": "Deeper practice with asynchronous state synchronization, TypeScript data typing, and PostgreSQL permissions."
+      },
+      "technicalDecisions": [
+        {
+          "topic": "Architecture Next.js App Router & TypeScript",
+          "rationale": {
+            "fr": "Séparation stricte entre Server Components pour les requêtes initiales rapides et Client Components pour l'interactivité du tableau de bord.",
+            "en": "Strict boundary between Server Components for fast initial data loads and Client Components for dashboard interactivity."
+          }
+        },
+        {
+          "topic": "Supabase & Row-Level Security (RLS)",
+          "rationale": {
+            "fr": "Mise en place de règles RLS au niveau de PostgreSQL pour garantir qu'aucun utilisateur ne puisse accéder aux données financières d'un tiers, assurant la sécurité directement au niveau de la couche données.",
+            "en": "PostgreSQL Row-Level Security (RLS) enforcement ensuring absolute tenant data isolation directly at the database layer."
+          }
+        },
+        {
+          "topic": "Tailwind CSS & Design System Minimaliste",
+          "rationale": {
+            "fr": "Contrôle millimétré des contrastes, composants légers sans surcharge de styles et réactivité native sur smartphone.",
+            "en": "Precision contrast control, lightweight bundle size, and native mobile-first responsiveness."
+          }
+        }
+      ],
+      "difficultiesAndLearnings": {
+        "fr": "Apprentissage approfondi de la synchronisation d'état asynchrone, du typage strict des schémas Supabase avec TypeScript et de la gestion fine des permissions PostgreSQL.",
+        "en": "Deep learning curve around asynchronous state synchronization, strict TypeScript database typing with Supabase, and fine-grained PostgreSQL permission management."
+      },
+      "currentStatus": {
+        "fr": "En cours de développement actif. Modélisation de la base de données et authentification opérationnelles ; dashboard et modules de saisie en cours de finalisation.",
+        "en": "In active development. Database schema and authentication operational; dashboard and transactional workflows currently being completed."
+      },
+      "nextSteps": {
+        "fr": "Finalisation du tableau de bord d'analyse, tests de charge, recueil de premiers retours utilisateurs et ouverture d'une version Alpha fermée.",
+        "en": "Completion of analytics dashboard, stress testing, early user feedback loops, and private Alpha release."
+      }
+    }
+  },
+  {
+    "id": "terangadigital",
+    "slug": "terangadigital",
+    "title": "TèrangaDigital",
+    "tagline": {
+      "fr": "Marque et plateforme d'outils digitaux pratiques au service des entrepreneurs africains.",
+      "en": "Digital platform and toolkit brand empowering African entrepreneurs and creators."
+    },
+    "category": "digital",
+    "status": "Active Brand Project",
+    "role": "Marque fondée par Alce Niang · Fondateur & Créateur Digital",
+    "featured": true,
+    "githubUrl": "https://github.com/niangalce/TerangaDigital.shop",
+    "liveUrl": null,
+    "stack": [
+      "HTML5 Sémantique",
+      "CSS3 Moderne",
+      "JavaScript",
+      "Design Graphique",
+      "E-commerce",
+      "Git",
+      "GitHub Pages"
+    ],
+    "metrics": {
+      "fr": "Guide e-commerce de 30 pages documenté dans le projet et plusieurs supports visuels de marque.",
+      "en": "A 30-page e-commerce guide documented in the project and a set of brand visuals."
+    },
+    "caseStudy": {
+      "context": {
+        "fr": "De nombreux jeunes créateurs et entrepreneurs au Sénégal souhaitent lancer une activité en ligne mais manquent de guides concrets, de méthodologie et de supports adaptés aux réalités économiques locales.",
+        "en": "Many young creators and small business founders across Senegal look to launch online activities but lack structured, locally adapted guidance and resources."
+      },
+      "problem": {
+        "fr": "Les ressources existantes en ligne sont souvent théoriques, coûteuses ou déconnectées des canaux de vente réels en Afrique de l'Ouest (WhatsApp, commerce informel, paiements mobiles).",
+        "en": "Existing online resources are often overly theoretical, expensive, or detached from West African commercial dynamics (WhatsApp sales, mobile money, informal markets)."
+      },
+      "objective": {
+        "fr": "Créer une marque identifiable, concevoir une boutique en ligne légère et autonome, et publier des contenus actionnables accessibles à tous.",
+        "en": "Establish an identifiable digital brand, develop a lightweight standalone storefront, and produce highly actionable business resources."
+      },
+      "role": {
+        "fr": "Positionnement de la marque, rédaction intégrale du guide e-commerce de 30 pages, création des maquettes visuelles des packs, développement du site vitrine et animation des réseaux.",
+        "en": "Brand positioning, complete authoring of the 30-page e-commerce guide, visual pack designs, storefront development, and social media presence."
+      },
+      "process": {
+        "fr": "Positionnement de la marque, rédaction du guide e-commerce de 30 pages, création de maquettes visuelles pour les packs, développement de la boutique en ligne et présence sur les réseaux sociaux.",
+        "en": "Brand positioning, writing a 30-page e-commerce guide, creating visual pack mockups, developing the online storefront, and maintaining a social media presence."
+      },
+      "design": {
+        "fr": "Catalogue organisé autour des packs Freelance, Marketing, Photoshop et Contenu, avec navigation pensée pour faciliter leur découverte et permettre une prise de contact directe.",
+        "en": "A catalog organized around Freelance, Marketing, Photoshop, and Content packs, with navigation intended to support discovery and direct inquiries."
+      },
+      "development": {
+        "fr": "Boutique développée en HTML5 sémantique, CSS3 et JavaScript. L’URL GitHub Pages précédemment publiée répondait 404 lors de la vérification du 8 octobre 2026 ; elle n’est donc pas présentée comme une démo accessible.",
+        "en": "A storefront built with semantic HTML5, CSS3, and JavaScript. The previously listed GitHub Pages URL returned 404 when checked on October 8, 2026, so it is not presented as an accessible demo."
+      },
+      "result": {
+        "fr": "Le dépôt public et les supports de marque sont consultables. L’URL de site précédemment référencée a répondu 404 le 8 octobre 2026 ; aucune démo en ligne n’est annoncée.",
+        "en": "The public repository and brand materials are available for review. The previously listed website URL returned 404 on October 8, 2026; no live demo is claimed."
+      },
+      "difficulties": {
+        "fr": "Relier la rédaction d'un guide structuré à la conception du site et à la présentation cohérente des offres.",
+        "en": "Connecting a structured guide-writing effort with storefront design and coherent presentation of the offers."
+      },
+      "learning": {
+        "fr": "Pratique de la chaîne éditoriale complète : rédaction d'un guide de 30 pages, conception d'un site web et préparation des offres de services.",
+        "en": "Practice across the full publishing workflow: writing a 30-page guide, designing a website, and packaging service offers."
+      },
+      "technicalDecisions": [
+        {
+          "topic": "Storefront Léger en HTML5 / CSS3 Pur",
+          "rationale": {
+            "fr": "Temps de chargement instantané sans framework lourd, essentiel pour les mobinautes disposant de connexions 3G/4G contraintes.",
+            "en": "Instant loading time with zero framework overhead, essential for mobile users on constrained 3G/4G data connections."
+          }
+        },
+        {
+          "topic": "Panier et Navigation Produits Sans Friction",
+          "rationale": {
+            "fr": "Interface claire facilitant la découverte des packs (Freelance, Marketing, Photoshop, Contenu) et la prise de contact directe.",
+            "en": "Clear catalog UI streamlining pack discovery (Freelance, Marketing, Photoshop, Content) and direct inquiry."
+          }
+        }
+      ],
+      "difficultiesAndLearnings": {
+        "fr": "Apprentissage de la chaîne éditoriale complète : de la rédaction d'un guide structuré de 30 pages à la conception d'un site web et au packaging d'offres de services.",
+        "en": "Mastery of the full digital publishing workflow: from authoring a 30-page structured handbook to storefront development and offer packaging."
+      },
+      "currentStatus": {
+        "fr": "Le dépôt GitHub public et les comptes Instagram et TikTok de la marque sont accessibles. Le lien GitHub Pages précédemment publié répondait 404 lors de sa vérification le 8 octobre 2026.",
+        "en": "The public GitHub repository and the brand’s Instagram and TikTok accounts are accessible. The previously listed GitHub Pages link returned 404 when checked on October 8, 2026."
+      },
+      "nextSteps": {
+        "fr": "Intégration d'un module de paiement par mobile money et enrichissement continu des guides et templates pour créateurs.",
+        "en": "Integration of mobile money checkout and continuous expansion of templates and guides for digital creators."
+      }
+    }
+  },
+  {
+    "id": "portfolio",
+    "slug": "portfolio",
+    "title": "Portfolio Professionnel",
+    "tagline": {
+      "fr": "Conception d'une plateforme personnelle premium, bilingue, accessible et performante.",
+      "en": "Crafting a premium, bilingual, accessible, and high-performance personal web platform."
+    },
+    "category": "web",
+    "status": "Completed / Current",
+    "role": "Concepteur & Développeur Front-End",
+    "featured": true,
+    "githubUrl": null,
+    "liveUrl": null,
+    "stack": [
+      "Front-End Moderne",
+      "TypeScript",
+      "CSS Architecture",
+      "SEO & OpenGraph",
+      "Accessibilité WCAG 2.2 AA",
+      "i18n Natif (FR/EN)",
+      "GitHub Pages"
+    ],
+    "metrics": {
+      "fr": "Site statique bilingue construit avec Astro et TypeScript, sans service d’analytics.",
+      "en": "Bilingual static site built with Astro and TypeScript, without an analytics service."
+    },
+    "caseStudy": {
+      "context": {
+        "fr": "Faire la transition entre un simple CV statique et une véritable plateforme d'ingénierie et de communication mettant en valeur un profil hybride crédible.",
+        "en": "Evolving from a simple static resume to an engineering and communication platform showcasing a verified hybrid profile."
+      },
+      "problem": {
+        "fr": "Éviter les modèles préfabriqués génériques d'IA et concevoir une expérience sur-mesure, respectant une stricte éthique de véracité documentaire.",
+        "en": "Bypassing cookie-cutter AI templates in favor of a tailor-made experience grounded in strict factual truth."
+      },
+      "objective": {
+        "fr": "Démontrer la maîtrise des standards web : performance extrême, typographie soignée, accessibilité universelle, sécurité des données et maintenabilité.",
+        "en": "Demonstrate mastery of modern web standards: top performance, typographic craft, universal accessibility, and maintainable architecture."
+      },
+      "role": {
+        "fr": "Architecture technique, design system, intégration et rédaction bilingue intégrale.",
+        "en": "Technical architecture, design system, front-end integration, and bilingual content."
+      },
+      "technicalDecisions": [
+        {
+          "topic": "Découplage Contenu / Logique",
+          "rationale": {
+            "fr": "Toutes les données sont stockées dans des modèles JSON typés, permettant d'ajouter ou modifier un projet sans altérer le code de l'interface.",
+            "en": "All data resides in typed JSON schemas, allowing project updates without touching UI markup."
+          }
+        }
+      ],
+      "difficultiesAndLearnings": {
+        "fr": "Synthèse harmonieuse d'un parcours pluridisciplinaire sans créer de dispersion pour le recruteur.",
+        "en": "Harmonious presentation of multidisciplinary background without diluting core engineering clarity."
+      },
+      "currentStatus": {
+        "fr": "Déployé et maintenu sur GitHub Pages avec pipeline d'intégration continue.",
+        "en": "Deployed and maintained on GitHub Pages with automated continuous integration."
+      },
+      "nextSteps": {
+        "fr": "Enrichissement continu des études de cas au fil des jalons atteints sur JËF.",
+        "en": "Ongoing enrichment of case studies alongside milestones achieved on JËF."
+      }
+    }
+  }
+]

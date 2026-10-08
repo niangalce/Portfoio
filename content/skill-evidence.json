@@ -1,0 +1,29 @@
+{
+  "HTML5 Sémantique": [{ "type": "project", "id": "terangadigital" }],
+  "CSS3 Moderne & Responsive": [{ "type": "project", "id": "terangadigital" }],
+  "JavaScript (ES6+)": [{ "type": "project", "id": "terangadigital" }],
+  "Tailwind CSS": [{ "type": "project", "id": "jef" }],
+  "React & Composants": [{ "type": "project", "id": "jef" }],
+  "TypeScript": [{ "type": "project", "id": "jef" }],
+  "Next.js (App Router)": [{ "type": "project", "id": "jef" }],
+  "Supabase & PostgreSQL": [{ "type": "project", "id": "jef" }],
+  "Row-Level Security (RLS)": [{ "type": "project", "id": "jef" }],
+  "Authentification & Sessions": [{ "type": "project", "id": "jef" }],
+  "Git & GitHub": [{ "type": "project", "id": "terangadigital" }],
+  "Bureautique Avancée": [{ "type": "certification", "id": "odc-bureautique" }],
+  "Prompting & Outils IA": [{ "type": "certification", "id": "odc-ai" }],
+  "Sensibilisation Cybersécurité": [
+    { "type": "certification", "id": "odc-cybersecurity" },
+    { "type": "certification", "id": "unodc-cybercrime" }
+  ],
+  "Rédaction & Structuration de Contenus": [
+    { "type": "project", "id": "terangadigital" },
+    { "type": "training", "id": "ucad-l2" }
+  ],
+  "Création Graphique & Identité": [
+    { "type": "project", "id": "terangadigital" },
+    { "type": "experience", "id": "terangadigital-founder" }
+  ],
+  "Relation Client & Écoute Active": [{ "type": "experience", "id": "naturals-sales" }],
+  "Rigueur Opérationnelle": [{ "type": "experience", "id": "security-agent" }]
+}

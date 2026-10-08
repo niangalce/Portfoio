@@ -1,0 +1,132 @@
+---
+import faqData from '../../content/faq.json';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const categoryOrder = ['Recruitment', 'Services', 'Projects', 'Collaboration', 'Availability', 'Contact', 'Profile'];
+const categoryLabels: Record<string, { fr: string; en: string }> = {
+  Recruitment: { fr: 'Recrutement', en: 'Recruitment' },
+  Services: { fr: 'Services', en: 'Services' },
+  Projects: { fr: 'Projets', en: 'Projects' },
+  Collaboration: { fr: 'Collaboration', en: 'Collaboration' },
+  Availability: { fr: 'Disponibilité', en: 'Availability' },
+  Contact: { fr: 'Contact', en: 'Contact' },
+  Profile: { fr: 'Profil', en: 'Profile' }
+};
+const categories = categoryOrder.filter((category) =>
+  faqData.some((item) => item.category === category)
+);
+---
+
+<article class="faq-page site-container">
+  <header class="faq-header">
+    <p class="section-kicker">{isFr ? 'Questions fréquentes' : 'Frequently asked questions'}</p>
+    <h1>{isFr ? 'Quelques réponses avant de nous écrire.' : 'A few answers before you get in touch.'}</h1>
+    <p>
+      {isFr
+        ? 'À propos des opportunités, des services, des projets et des collaborations.'
+        : 'About opportunities, services, projects, and collaboration.'}
+    </p>
+  </header>
+
+  {categories.map((category) => (
+    <section class="faq-category" aria-labelledby={`faq-${category.toLowerCase()}`}>
+      <h2 id={`faq-${category.toLowerCase()}`}>{categoryLabels[category][lang]}</h2>
+      <div class="faq-list">
+        {faqData.filter((item) => item.category === category).map((item) => (
+          <details class="faq-item">
+            <summary>{item.question[lang]}</summary>
+            <p>{item.answer[lang]}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  ))}
+</article>
+
+<style>
+  .faq-page {
+    padding-block: var(--space-20);
+  }
+
+  .faq-header {
+    max-width: 760px;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-3);
+    color: var(--color-accent-primary);
+    font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-2xl);
+  }
+
+  .faq-header > p:last-child {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .faq-category {
+    margin-top: var(--space-12);
+  }
+
+  .faq-category h2 {
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-lg);
+  }
+
+  .faq-list {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .faq-item summary {
+    position: relative;
+    padding: var(--space-5) var(--space-8) var(--space-5) 0;
+    cursor: pointer;
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    position: absolute;
+    right: 0;
+    content: '+';
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-md);
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item summary:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .faq-item p {
+    max-width: 780px;
+    padding: 0 var(--space-8) var(--space-5) 0;
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+</style>

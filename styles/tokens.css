@@ -1,0 +1,150 @@
+/**
+ * DESIGN TOKENS — PORTFOLIO PROFESSIONNEL ALCE NIANG
+ * Architecture CSS basée sur des variables sémantiques strictes.
+ * Conformité WCAG 2.2 AA / AAA. Zéro dégradé violet/bleu. Zéro cliché IA.
+ */
+
+:root {
+  /* ==========================================================================
+     1. PALETTE CHROMATIQUE FONDATRICE (Design Tokens)
+     ========================================================================== */
+  
+  /* Canvas & Surfaces (Tons Lin Chaud, Craie & Écrin Minéral) */
+  --color-canvas-default: #FAF8F5;       /* Lin Albâtre chaud, fond général */
+  --color-canvas-subtle: #F3EFEA;        /* Surface secondaire légèrement contrastée */
+  --color-surface-card: #FFFFFF;         /* Fond blanc pur pour cartes et élévations */
+  --color-surface-hover: #FDFBF7;        /* État de survol délicat */
+  --color-surface-dark: #12171E;         /* Fond sombre profond pour sections nocturnes choisies */
+
+  /* Bordures architecturales & Lignes de structure */
+  --color-border-subtle: #E8E3DA;        /* Bordure délicate (séparations, cartes neutres) */
+  --color-border-medium: #D5CEBE;        /* Bordure structurante (inputs, séparateurs forts) */
+  --color-border-focus: #BF5516;         /* Anneau de focus accessible */
+
+  /* Textes & Hiérarchie typographique */
+  --color-text-primary: #0F141A;         /* Noir Encre minéral (Contraste 14.8:1 sur Lin) */
+  --color-text-secondary: #525866;       /* Gris Minéral chaud (Contraste 5.8:1 sur Lin) */
+  --color-text-tertiary: #7D8494;        /* Métadonnées & labels discrets (Contraste 3.5:1+) */
+  --color-text-inverse: #FAF8F5;         /* Texte clair sur surfaces sombres */
+  --color-text-inverse-muted: #A3ABB8;   /* Texte secondaire sur surfaces sombres */
+
+  /* Accent Identitaire : Ocre Sénégalais / Ambre Tèranga */
+  --color-accent-primary: #BF5516;       /* Terre de Sienne / Ocre affirmé (Boutons, CTA, liens) */
+  --color-accent-hover: #9E420C;         /* Survol interactif plus profond */
+  --color-accent-tint: #FDF4ED;          /* Fond doux d'accent (badges, surbrillance) */
+  --color-accent-border: #F3D2BA;        /* Bordure fine d'accent */
+
+  /* Accent de Preuve & Fiabilité : Vert Sahel (Vérifications & Statuts) */
+  --color-verified-text: #174232;        /* Vert Sahel sombre (Contraste 8.2:1 sur fond clair) */
+  --color-verified-bg: #EDF6F1;          /* Lavis vert doux pour badges certifiés */
+  --color-verified-border: #C8E3D4;      /* Bordure vert doux */
+
+  /* Statut En Cours / In Development : Ambre Doré */
+  --color-status-dev-text: #8A4F08;      /* Ambre textuel */
+  --color-status-dev-bg: #FEF7EA;        /* Fond ambre doux */
+  --color-status-dev-border: #F9E0B2;    /* Bordure ambre */
+
+  /* ==========================================================================
+     2. TYPOGRAPHIE DISTINCTIVE (Headings: Plus Jakarta Sans / Body: Figtree)
+     ========================================================================== */
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, Menlo, monospace;
+
+  /* Échelle modulaire fluide (Mobile -> Desktop avec clamp) */
+  --font-size-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);    /* 12px -> 13px */
+  --font-size-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);   /* 14px -> 15px */
+  --font-size-base: clamp(1rem, 0.97rem + 0.18vw, 1.0625rem);      /* 16px -> 17px */
+  --font-size-md: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);     /* 18px -> 20px */
+  --font-size-lg: clamp(1.375rem, 1.30rem + 0.4vw, 1.625rem);     /* 22px -> 26px */
+  --font-size-xl: clamp(1.75rem, 1.60rem + 0.8vw, 2.25rem);       /* 28px -> 36px */
+  --font-size-2xl: clamp(2.25rem, 2.00rem + 1.4vw, 3.125rem);     /* 36px -> 50px */
+  --font-size-hero: clamp(2.75rem, 2.30rem + 2.2vw, 4.25rem);     /* 44px -> 68px */
+
+  /* Hauteurs de ligne (Line-Heights) */
+  --leading-tight: 1.1;
+  --leading-heading: 1.25;
+  --leading-snug: 1.4;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Graisses (Font Weights) */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* Interlettrage (Letter Spacing) */
+  --tracking-tight: -0.035em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+
+  /* ==========================================================================
+     3. ESPACEMENTS & GRILLE (Échelle 4px stricte)
+     ========================================================================== */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+
+  /* Conteneurs & Largeurs de Grille */
+  --container-max-width: 1220px;
+  --container-narrow-width: 780px;
+  --container-gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* ==========================================================================
+     4. RAYONS DE COURBURE (Architectural & Mesuré)
+     ========================================================================== */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     5. OMBRES & ÉLÉVATIONS (Subtiles, atmosphériques, 0 effet gadget)
+     ========================================================================== */
+  --shadow-subtle: 0 1px 3px rgba(15, 20, 26, 0.04), 0 1px 2px rgba(15, 20, 26, 0.02);
+  --shadow-card: 0 4px 12px rgba(15, 20, 26, 0.05), 0 1px 3px rgba(15, 20, 26, 0.03);
+  --shadow-hover: 0 12px 28px rgba(15, 20, 26, 0.08), 0 4px 8px rgba(15, 20, 26, 0.03);
+  --shadow-modal: 0 24px 64px rgba(15, 20, 26, 0.16), 0 8px 16px rgba(15, 20, 26, 0.08);
+
+  /* ==========================================================================
+     6. TRANSITIONS & TEMPORISATION (Motion UX fonctionnel)
+     ========================================================================== */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-relaxed: 400ms;
+  --duration-reveal: 420ms;
+
+  /* ==========================================================================
+     7. FOCUS ACCESSIBLE (WCAG 2.2 compliant)
+     ========================================================================== */
+  --focus-ring-offset: 2px;
+  --focus-ring-width: 2px;
+  --focus-ring-color: #BF5516;
+}
+
+/* Prise en compte stricte de la préférence utilisateur pour la réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

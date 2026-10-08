@@ -1,0 +1,124 @@
+---
+import profileData from '../../content/profile.json';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const { languages } = profileData;
+
+const getLanguageName = (name: string) => {
+  if (name === 'English') return isFr ? 'Anglais' : 'English';
+  if (name === 'Français') return isFr ? 'Français' : 'French';
+  return name;
+};
+---
+
+<section id="languages" class="languages-section" aria-labelledby="languages-title">
+  <div class="site-container">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">{isFr ? 'Langues' : 'Languages'}</p>
+        <h2 id="languages-title" class="section-title">
+          {isFr ? 'Des langues pratiquées, sans niveaux inventés.' : 'Languages described without inflated ratings.'}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'Le parcours universitaire en anglais est en cours à l’UCAD ; les langues sont présentées avec leur contexte réel.'
+          : 'University studies in English are ongoing at UCAD; each language is described in its actual context.'}
+      </p>
+    </div>
+
+    <ul class="languages-grid">
+      {languages.map((language) => (
+        <li class="language-card">
+          <h3 class="language-name">{getLanguageName(language.name)}</h3>
+          <p class="language-level">{isFr ? language.level.fr : language.level.en}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .languages-section {
+    padding-block: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-2);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    max-width: 720px;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    line-height: var(--leading-tight);
+  }
+
+  .section-intro {
+    max-width: 480px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .languages-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    list-style: none;
+  }
+
+  @media (min-width: 640px) {
+    .languages-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .language-card {
+    min-width: 0;
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-card);
+  }
+
+  .language-name {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-bold);
+  }
+
+  .language-level {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-relaxed);
+    overflow-wrap: anywhere;
+  }
+</style>

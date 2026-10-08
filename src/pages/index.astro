@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import CredibilityBanner from '../components/CredibilityBanner.astro';
+import SelectedProjects from '../components/SelectedProjects.astro';
+import SkillsSection from '../components/SkillsSection.astro';
+import AboutStory from '../components/AboutStory.astro';
+import EducationSection from '../components/EducationSection.astro';
+import LanguagesSection from '../components/LanguagesSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import CertificationsPreview from '../components/CertificationsPreview.astro';
+import CurrentlyLearning from '../components/CurrentlyLearning.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+import profileData from '../../content/profile.json';
+import { getPortfolioStructuredData } from '../utils/structured-data';
+
+const { identity } = profileData;
+if (!Astro.site) throw new Error('Astro.site must be configured for structured metadata.');
+const structuredData = getPortfolioStructuredData(Astro.site, 'fr');
+---
+
+<BaseLayout
+  title={`${identity.fullName} — ${identity.titles.fr}`}
+  description={identity.shortTagline.fr}
+  lang="fr"
+  structuredData={structuredData}
+>
+  <Header slot="header" lang="fr" currentPath="/" />
+
+  <!-- Hero principal avec identité, portrait 2:3 et preuves -->
+  <Hero lang="fr" />
+
+  <!-- Bandeau d'accréditation et réassurance institutionnelle -->
+  <CredibilityBanner lang="fr" />
+
+  <!-- Projets sélectionnés avec études de cas asymétriques -->
+  <SelectedProjects lang="fr" />
+
+  <!-- Compétences avec statuts qualitatifs honnêtes (0 faux pourcentages) -->
+  <SkillsSection lang="fr" />
+
+  <AboutStory lang="fr" />
+
+  <EducationSection lang="fr" />
+
+  <LanguagesSection lang="fr" />
+
+  <!-- Parcours et expériences (5 catégories équilibrées) -->
+  <ExperienceSection lang="fr" />
+
+  <!-- Services disponibles vs feuille de route d'apprentissage -->
+  <ServicesSection lang="fr" />
+
+  <!-- Bibliothèque de certifications avec accès aux PDFs officiels -->
+  <CertificationsPreview lang="fr" />
+
+  <!-- Feuille de route d'apprentissage Full-Stack transparent -->
+  <CurrentlyLearning lang="fr" />
+
+  <!-- CTA final et coordonnées directes -->
+  <FinalCTA lang="fr" />
+
+  <Footer slot="footer" lang="fr" />
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import CredibilityBanner from '../../components/CredibilityBanner.astro';
+import SelectedProjects from '../../components/SelectedProjects.astro';
+import SkillsSection from '../../components/SkillsSection.astro';
+import AboutStory from '../../components/AboutStory.astro';
+import EducationSection from '../../components/EducationSection.astro';
+import LanguagesSection from '../../components/LanguagesSection.astro';
+import ExperienceSection from '../../components/ExperienceSection.astro';
+import ServicesSection from '../../components/ServicesSection.astro';
+import CertificationsPreview from '../../components/CertificationsPreview.astro';
+import CurrentlyLearning from '../../components/CurrentlyLearning.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+import profileData from '../../../content/profile.json';
+import { getPortfolioStructuredData } from '../../utils/structured-data';
+
+const { identity } = profileData;
+if (!Astro.site) throw new Error('Astro.site must be configured for structured metadata.');
+const structuredData = getPortfolioStructuredData(Astro.site, 'en');
+---
+
+<BaseLayout
+  title={`${identity.fullName} — ${identity.titles.en}`}
+  description={identity.shortTagline.en}
+  lang="en"
+  structuredData={structuredData}
+>
+  <Header slot="header" lang="en" currentPath="/en/" />
+
+  <!-- Main Hero section with identity, 2:3 studio portrait and proof points -->
+  <Hero lang="en" />
+
+  <!-- Accreditation and institutional credibility banner -->
+  <CredibilityBanner lang="en" />
+
+  <!-- Selected projects with asymmetric case study layouts -->
+  <SelectedProjects lang="en" />
+
+  <!-- Capabilities with honest qualitative statuses (zero fake percentages) -->
+  <SkillsSection lang="en" />
+
+  <AboutStory lang="en" />
+
+  <EducationSection lang="en" />
+
+  <LanguagesSection lang="en" />
+
+  <!-- Work and field experience (5 balanced categories) -->
+  <ExperienceSection lang="en" />
+
+  <!-- Available business services vs continuous learning roadmap -->
+  <ServicesSection lang="en" />
+
+  <!-- Verified certifications library with direct access to official PDFs -->
+  <CertificationsPreview lang="en" />
+
+  <!-- Transparent Full-Stack growth roadmap -->
+  <CurrentlyLearning lang="en" />
+
+  <!-- Final call to action & direct contact info -->
+  <FinalCTA lang="en" />
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "unv-volunteer",
+    "role": {
+      "fr": "Volontaire en communication & sensibilisation numérique",
+      "en": "Volunteer in Digital Communications & Community Outreach"
+    },
+    "organization": "Volontaires des Nations Unies (UNV)",
+    "location": "Sénégal",
+    "period": {
+      "fr": "Mission d'engagement citoyen",
+      "en": "Civic Engagement Mission"
+    },
+    "categories": ["Communication"],
+    "current": false,
+    "bulletPoints": {
+      "fr": [
+        "Appui aux actions de communication et de sensibilisation communautaire sur les canaux numériques.",
+        "Vulgarisation de messages d'intérêt public et participation à la diffusion de contenus d'information responsable.",
+        "Travail en équipe pluridisciplinaire dans le respect des valeurs éthiques et déontologiques des Nations Unies."
+      ],
+      "en": [
+        "Support for community outreach and digital communications across online channels.",
+        "Dissemination of public interest messaging and production of responsible informational content.",
+        "Collaborative teamwork adhering to United Nations ethical and professional standards."
+      ]
+    },
+    "skillsApplied": ["Communication d'intérêt public", "Sensibilisation numérique", "Travail d'équipe", "Éthique professionnelle"]
+  },
+  {
+    "id": "naturals-sales",
+    "role": {
+      "fr": "Représentant commercial",
+      "en": "Commercial Sales Representative"
+    },
+    "organization": "Natural's",
+    "location": "Sénégal",
+    "period": {
+      "fr": "Collaboration actuelle",
+      "en": "Current Collaboration"
+    },
+    "categories": ["Communication"],
+    "current": true,
+    "bulletPoints": {
+      "fr": [
+        "Présentation et valorisation de gammes de produits auprès de prospects et clients dans la localité.",
+        "Écoute active, identification des besoins spécifiques et adaptation sur-mesure du discours commercial.",
+        "Participation active à la dynamique de commercialisation et fidélisation de la clientèle.",
+        "Développement soutenu du sens de l'aisance relationnelle, du contact humain et de la négociation directe."
+      ],
+      "en": [
+        "Presentation and promotion of product lines to prospects and local customers.",
+        "Active listening, identifying client needs, and adapting value propositions accordingly.",
+        "Direct contribution to sales growth, customer relationship building, and retention.",
+        "Continuous development of interpersonal negotiation, active listening, and public speaking skills."
+      ]
+    },
+    "skillsApplied": ["Négociation commerciale", "Écoute active", "Prise de parole", "Relation client"]
+  },
+  {
+    "id": "terangadigital-founder",
+    "role": {
+      "fr": "Entrepreneur & Freelance — Marketing / Communication / Digital",
+      "en": "Founder & Digital Freelancer — Marketing / Web / Content"
+    },
+    "organization": "TèrangaDigital & Indépendant",
+    "location": "Sénégal",
+    "period": {
+      "fr": "2024 — Présent",
+      "en": "2024 — Present"
+    },
+    "categories": ["Digital", "Entrepreneurship"],
+    "current": true,
+    "bulletPoints": {
+      "fr": [
+        "Création et développement de la marque TèrangaDigital et déploiement de sa vitrine en ligne (TerangaDigital.shop).",
+        "Rédaction et structuration intégrale d'un guide pratique de 30 pages consacré à l'e-commerce en Afrique.",
+        "Conception de supports graphiques, de maquettes visuelles et de contenus promotionnels destinés aux créateurs et PME.",
+        "Gestion autonome de projets, relation directe avec les clients et suivi de bout en bout des livrables."
+      ],
+      "en": [
+        "Creation and growth of the TèrangaDigital brand and live deployment of its online storefront.",
+        "Authoring and structured editing of a 30-page actionable guide on African e-commerce.",
+        "Design of visual branding assets, templates, and promotional social content for creators and SMEs.",
+        "Autonomous project management, client communication, and end-to-end delivery of digital solutions."
+      ]
+    },
+    "skillsApplied": ["Création de marque", "Rédaction de contenu (Guide 30p)", "E-commerce", "Gestion de projet autonome"]
+  },
+  {
+    "id": "security-agent",
+    "role": {
+      "fr": "Agent de sécurité",
+      "en": "Security Officer"
+    },
+    "organization": "Services de Sécurité",
+    "location": "Sénégal",
+    "period": {
+      "fr": "Expérience professionnelle formatrice",
+      "en": "Professional Foundation Experience"
+    },
+    "categories": ["Other"],
+    "current": false,
+    "bulletPoints": {
+      "fr": [
+        "Application stricte et rigoureuse des protocoles opérationnels et consignes de sûreté.",
+        "Sens aiguisé des responsabilités, ponctualité irréprochable et vigilance continue face aux imprévus.",
+        "Gestion du sang-froid et accueil professionnel de différents publics dans un cadre exigeant."
+      ],
+      "en": [
+        "Strict adherence to operational security protocols, safety procedures, and guidelines.",
+        "Heightened sense of accountability, impeccable punctuality, and sustained situational vigilance.",
+        "Calm composure under pressure and professional interaction with diverse audiences."
+      ]
+    },
+    "skillsApplied": ["Rigueur procédurale", "Sens des responsabilités", "Vigilance & Calme", "Ponctualité"]
+  },
+  {
+    "id": "tech-frontend-projects",
+    "role": {
+      "fr": "Développeur Front-End autodidacte & Concepteur SaaS",
+      "en": "Self-Taught Front-End Developer & SaaS Builder"
+    },
+    "organization": "Projets Personnels & Code",
+    "location": "Dakar, Sénégal",
+    "period": {
+      "fr": "En progression continue",
+      "en": "Continuous Progression"
+    },
+    "categories": ["Tech"],
+    "current": true,
+    "bulletPoints": {
+      "fr": [
+        "Apprentissage rigoureux et autonome des standards du web moderne : HTML5, CSS3, JavaScript, TypeScript, React et Next.js.",
+        "Conception de l'architecture logicielle du SaaS personnel JËF avec Supabase (PostgreSQL, Auth, RLS) et Tailwind CSS.",
+        "Pratique continue du versioning avec Git/GitHub et intégration de principes d'accessibilité et de performance."
+      ],
+      "en": [
+        "Rigorous self-directed learning of modern web standards: HTML5, CSS3, JavaScript, TypeScript, React, and Next.js.",
+        "Architecting personal SaaS product JËF using Supabase (PostgreSQL, Auth, RLS) and Tailwind CSS.",
+        "Active code versioning with Git/GitHub and integration of performance and accessibility best practices."
+      ]
+    },
+    "skillsApplied": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Git & GitHub"]
+  }
+]

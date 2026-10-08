@@ -1,0 +1,436 @@
+---
+import { getAlternatePath, sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+  currentPath?: string;
+}
+
+const { lang = 'fr', currentPath = '/' } = Astro.props;
+
+const isFr = lang === 'fr';
+const alternateUrl = getAlternatePath(currentPath, lang);
+const homePath = isFr ? '/' : '/en/';
+const isHome = currentPath === '/' || currentPath === '/en/';
+const sectionUrl = (section: string) => {
+  if (section === 'contact') return sitePath(isFr ? '/contact/' : '/en/contact/');
+  return isHome
+    ? `#${section}`
+    : `${sitePath(homePath)}#${section}`;
+};
+
+const navItems = isFr
+  ? [
+      { label: 'Réalisations', href: sectionUrl('projects') },
+      { label: 'À propos', href: sectionUrl('about') },
+      { label: 'Formation', href: sectionUrl('education') },
+      { label: 'Langues', href: sectionUrl('languages') },
+      { label: 'Parcours', href: sectionUrl('experience') },
+      { label: 'Compétences', href: sectionUrl('skills') },
+      { label: 'Services', href: sectionUrl('services') },
+      { label: 'Certifications', href: sectionUrl('certifications') },
+      { label: 'Contact', href: sectionUrl('contact') }
+    ]
+  : [
+      { label: 'Projects', href: sectionUrl('projects') },
+      { label: 'About', href: sectionUrl('about') },
+      { label: 'Education', href: sectionUrl('education') },
+      { label: 'Languages', href: sectionUrl('languages') },
+      { label: 'Experience', href: sectionUrl('experience') },
+      { label: 'Skills', href: sectionUrl('skills') },
+      { label: 'Services', href: sectionUrl('services') },
+      { label: 'Certifications', href: sectionUrl('certifications') },
+      { label: 'Contact', href: sectionUrl('contact') }
+    ];
+---
+
+<header class="site-header">
+  <div class="site-container header-inner">
+    <!-- Identité / Marque -->
+    <a href={sitePath(homePath)} class="brand-link" aria-label={isFr ? 'Alce Niang — Accueil' : 'Alce Niang — Home'}>
+      <span class="brand-monogram">AN</span>
+      <span class="brand-text">
+        <strong class="brand-name">Alce Niang</strong>
+        <span class="brand-role">{isFr ? 'Développeur Front-End · UCAD L2' : 'Front-End Developer · UCAD'}</span>
+      </span>
+    </a>
+
+    <!-- Navigation Bureau -->
+    <nav class="desktop-nav" aria-label={isFr ? 'Navigation principale' : 'Main navigation'}>
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="nav-link">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Actions & Switcher de Langue -->
+    <div class="header-actions">
+      <!-- Sélecteur de langue bilingue accessible -->
+      <a
+        href={alternateUrl}
+        class="lang-switch"
+        aria-label={isFr ? 'Switch to English version' : 'Passer à la version française'}
+        title={isFr ? 'English' : 'Français'}
+      >
+        <span class={isFr ? 'lang-active' : ''}>FR</span>
+        <span class="lang-sep">/</span>
+        <span class={!isFr ? 'lang-active' : ''}>EN</span>
+      </a>
+
+      <!-- CTA direct CV -->
+      <a
+        href={sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf')}
+        download
+        class="header-cv-btn"
+      >
+        <span>CV</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </a>
+
+      <!-- Bouton Menu Mobile (Hamburger accessible) -->
+      <button
+        type="button"
+        class="mobile-menu-btn"
+        id="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+        aria-label={isFr ? 'Ouvrir le menu de navigation' : 'Open navigation menu'}
+        data-label-open={isFr ? 'Ouvrir le menu de navigation' : 'Open navigation menu'}
+        data-label-close={isFr ? 'Fermer le menu de navigation' : 'Close navigation menu'}
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tiroir de Navigation Mobile -->
+  <div class="mobile-drawer" id="mobile-nav-drawer" hidden>
+    <div class="mobile-drawer-inner">
+      <nav aria-label={isFr ? 'Navigation mobile' : 'Mobile navigation'}>
+        <ul class="mobile-nav-list">
+          {navItems.map((item) => (
+            <li>
+              <a href={item.href} class="mobile-nav-link">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="mobile-drawer-footer">
+        <a
+          href={sitePath('/CV/Alce_Niang_CV_Developpeur_Web_2026 (1).pdf')}
+          download
+          class="btn-primary-mobile"
+        >
+          {isFr ? 'Télécharger le CV (PDF)' : 'Download Resume (PDF)'}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(250, 248, 245, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border-subtle);
+    transition: border-color var(--duration-fast) var(--ease-out-quint);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--space-4);
+  }
+
+  /* Marque */
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    outline-offset: 4px;
+  }
+
+  .brand-monogram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-text-primary);
+    color: var(--color-canvas-default);
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-sm);
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .brand-role {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    font-weight: var(--weight-regular);
+  }
+
+  /* Navigation bureau */
+  .desktop-nav {
+    display: none;
+  }
+
+  @media (min-width: 1200px) {
+    .desktop-nav {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+  }
+
+  .nav-link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-quint);
+    position: relative;
+    padding: var(--space-1) 0;
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent-primary);
+  }
+
+  /* Actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    background-color: var(--color-canvas-subtle);
+    border: 1px solid var(--color-border-subtle);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    transition:
+      background-color var(--duration-fast) var(--ease-out-quint),
+      border-color var(--duration-fast) var(--ease-out-quint),
+      color var(--duration-fast) var(--ease-out-quint);
+    min-height: 38px;
+    min-width: 58px;
+    justify-content: center;
+  }
+
+  .lang-switch:hover {
+    border-color: var(--color-border-medium);
+    color: var(--color-text-primary);
+  }
+
+  .lang-active {
+    font-weight: var(--weight-bold);
+    color: var(--color-accent-primary);
+  }
+
+  .lang-sep {
+    color: var(--color-border-medium);
+  }
+
+  .header-cv-btn {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+    background-color: var(--color-text-primary);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-fast) var(--ease-out-quint), transform var(--duration-fast) var(--ease-out-quint);
+    min-height: 38px;
+  }
+
+  @media (min-width: 640px) {
+    .header-cv-btn {
+      display: inline-flex;
+    }
+  }
+
+  .header-cv-btn:hover {
+    background-color: var(--color-accent-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Hamburger Mobile */
+  .mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-text-primary);
+    padding: 0;
+  }
+
+  .mobile-menu-btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (min-width: 1200px) {
+    .mobile-menu-btn {
+      display: none;
+    }
+  }
+
+  .hamburger-bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 1px;
+    transition: transform var(--duration-fast) var(--ease-out-quint);
+  }
+
+  /* Tiroir mobile */
+  .mobile-drawer {
+    border-top: 1px solid var(--color-border-subtle);
+    background-color: var(--color-canvas-default);
+    box-shadow: var(--shadow-card);
+  }
+
+  .mobile-drawer[hidden] {
+    display: none;
+  }
+
+  .mobile-drawer-inner {
+    padding: var(--space-6) var(--container-gutter) var(--space-8);
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .mobile-nav-link {
+    display: block;
+    font-size: var(--font-size-md);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-primary);
+    padding: var(--space-2) 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-drawer-footer {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .btn-primary-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    background-color: var(--color-accent-primary);
+    color: #fff;
+    font-weight: var(--weight-semibold);
+    border-radius: var(--radius-sm);
+    text-align: center;
+  }
+</style>
+
+<script>
+  // Gestion accessible du menu mobile sans framework JS lourd
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-nav-drawer');
+
+  if (toggleBtn && drawer) {
+    const openLabel = toggleBtn.dataset.labelOpen;
+    const closeLabel = toggleBtn.dataset.labelClose;
+
+    const setMenuOpen = (isOpen: boolean, restoreFocus = false) => {
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      toggleBtn.setAttribute('aria-label', isOpen ? closeLabel ?? '' : openLabel ?? '');
+      drawer.toggleAttribute('hidden', !isOpen);
+
+      if (restoreFocus) {
+        toggleBtn.focus();
+      }
+    };
+
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      setMenuOpen(!isExpanded);
+    });
+
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false, true);
+      }
+    });
+
+    window.matchMedia('(min-width: 1200px)').addEventListener('change', (event) => {
+      if (event.matches) {
+        setMenuOpen(false);
+      }
+    });
+  }
+</script>

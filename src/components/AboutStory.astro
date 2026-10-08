@@ -1,0 +1,266 @@
+---
+import profileData from '../../content/profile.json';
+import { sitePath } from '../utils/urls';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const { identity } = profileData;
+const workspacePhoto = sitePath(identity.aboutWorkspacePhoto.relativePath);
+---
+
+<section id="about" class="about-story-section" aria-labelledby="about-title">
+  <div class="site-container">
+    <div class="about-grid">
+      <!-- Colonne Visuelle : Photo 1 en situation de bureau -->
+      <div class="about-media-col">
+        <div class="workspace-card">
+          <img
+            src={workspacePhoto}
+            alt={isFr ? identity.aboutWorkspacePhoto.alt.fr : identity.aboutWorkspacePhoto.alt.en}
+            width={1448}
+            height={1086}
+            loading="lazy"
+            decoding="async"
+            class="workspace-photo"
+          />
+          <div class="workspace-meta">
+            <span class="meta-dot" aria-hidden="true"></span>
+            <span class="meta-caption">
+              {isFr ? 'Alce Niang — En situation de travail & conception' : 'Alce Niang — At work, building & designing'}
+            </span>
+          </div>
+        </div>
+
+        <!-- Citation éditoriale d'ancrage -->
+        <blockquote class="editorial-quote">
+          <p>
+            {isFr
+              ? '« Le code donne vie aux idées ; les langues et la communication leur donnent du sens et une portée humaine. »'
+              : '“Code gives life to ideas; languages and communication give them human purpose and reach.”'}
+          </p>
+        </blockquote>
+      </div>
+
+      <!-- Colonne Récit Narratif : La progression réelle -->
+      <div class="about-narrative-col">
+        <p class="section-kicker">{isFr ? 'Histoire & Philosophie' : 'Story & Philosophy'}</p>
+        <h2 id="about-title" class="about-heading">
+          {isFr ? 'L’artisan numérique entre lettres et code.' : 'A digital craftsman bridging letters and code.'}
+        </h2>
+
+        <div class="narrative-body">
+          <p>
+            {isFr
+              ? 'Je suis Alce Niang, développeur web Front-End junior, créateur digital et entrepreneur à Dakar. Mon parcours relie les sciences humaines, la communication et la création numérique.'
+              : 'I am Alce Niang, a junior Front-End web developer, digital creator, and entrepreneur based in Dakar. My path brings together humanities, communication, and digital creation.'}
+          </p>
+
+          <p>
+            {isFr
+              ? 'Après un baccalauréat littéraire série L’1 obtenu en 2024, je poursuis depuis 2024 une Licence 2 en Anglais à l’Université Cheikh Anta Diop de Dakar (UCAD). Ce parcours universitaire en anglais est un différenciateur : il développe conjointement mes compétences linguistiques, mon analyse textuelle, ma communication interculturelle et mon ouverture aux contenus internationaux.'
+              : 'After completing the Literature and Humanities Baccalaureate (L’1) in 2024, I progressed to Year 2 of a university degree in English at Cheikh Anta Diop University in Dakar (UCAD), where I have studied since 2024. This academic path is a differentiator: it develops my language skills, textual analysis, intercultural communication, and openness to international perspectives.'}
+          </p>
+
+          <p>
+            {isFr
+              ? 'En parallèle, je me forme en autodidacte au développement web, de HTML et CSS à JavaScript, TypeScript, React et Next.js. J’ai appliqué ces apprentissages à TèrangaDigital, une marque et boutique en ligne accompagnée d’un guide pratique de 30 pages, puis à JËF, un SaaS de gestion qui reste en cours de développement.'
+              : 'Alongside my studies, I am teaching myself web development, from HTML and CSS to JavaScript, TypeScript, React, and Next.js. I have applied this learning to TèrangaDigital, a brand and online storefront with a 30-page practical guide, and to JËF, a management SaaS that remains in active development.'}
+          </p>
+
+          <p>
+            {isFr
+              ? 'Mes expériences en communication et sensibilisation, en représentation commerciale et dans la sécurité complètent cette progression. Elles mettent en pratique l’écoute, la transmission de messages et le respect de procédures — des qualités utiles pour comprendre un besoin et travailler avec méthode.'
+              : 'My experience in communications and community outreach, commercial representation, and security adds another dimension to this path. It puts listening, clear messaging, and following procedures into practice—useful foundations for understanding needs and working methodically.'}
+          </p>
+        </div>
+
+        <div class="about-pillars-grid">
+          <div class="pillar-box">
+            <span class="pillar-number">01</span>
+            <strong class="pillar-name">{isFr ? 'Langues & analyse' : 'Languages & analysis'}</strong>
+            <p>{isFr ? 'Études universitaires en anglais et analyse textuelle à l’UCAD.' : 'University English studies and textual analysis at UCAD.'}</p>
+          </div>
+          <div class="pillar-box">
+            <span class="pillar-number">02</span>
+            <strong class="pillar-name">{isFr ? 'Artisanat du code' : 'Software Craft'}</strong>
+            <p>{isFr ? 'Apprentissage autonome appliqué à des projets web concrets.' : 'Self-directed learning applied to practical web projects.'}</p>
+          </div>
+          <div class="pillar-box">
+            <span class="pillar-number">03</span>
+            <strong class="pillar-name">{isFr ? 'Sens du terrain' : 'Field Maturity'}</strong>
+            <p>{isFr ? 'Communication, relation client et respect des procédures.' : 'Communication, customer relations, and following procedures.'}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-story-section {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 960px) {
+    .about-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--space-16);
+    }
+  }
+
+  /* Colonne média */
+  .about-media-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .workspace-card {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 10px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .workspace-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--radius-md);
+  }
+
+  .workspace-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: var(--space-3) var(--space-2) var(--space-1);
+  }
+
+  .meta-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent-primary);
+    border-radius: 50%;
+  }
+
+  .meta-caption {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  .editorial-quote {
+    background-color: var(--color-canvas-subtle);
+    border-left: 3px solid var(--color-accent-primary);
+    padding: var(--space-5) var(--space-6);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .editorial-quote p {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-primary);
+    line-height: var(--leading-snug);
+    font-style: italic;
+  }
+
+  /* Colonne texte */
+  .about-narrative-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--space-2);
+  }
+
+  .about-heading {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-6);
+  }
+
+  .narrative-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+
+  .narrative-body p {
+    margin: 0;
+  }
+
+  .about-pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @media (min-width: 640px) {
+    .about-pillars-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .pillar-box {
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pillar-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--weight-bold);
+    color: var(--color-accent-primary);
+  }
+
+  .pillar-name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+  }
+
+  .pillar-box p {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    line-height: 1.35;
+    margin: 0;
+  }
+</style>

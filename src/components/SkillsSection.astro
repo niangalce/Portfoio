@@ -1,0 +1,364 @@
+---
+import skillsData from '../../content/skills.json';
+import skillEvidence from '../../content/skill-evidence.json';
+import projectsData from '../../content/projects.json';
+import experiencesData from '../../content/experiences.json';
+import certificationsData from '../../content/certifications.json';
+import profileData from '../../content/profile.json';
+import { sitePath } from '../utils/urls';
+
+type EvidenceType = 'project' | 'experience' | 'certification' | 'training';
+interface SkillEvidenceReference {
+  type: EvidenceType;
+  id: string;
+}
+interface ResolvedEvidenceLink {
+  href: string;
+  label: string;
+  type: EvidenceType;
+}
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+const evidenceLabels: Record<EvidenceType, { fr: string; en: string }> = {
+  project: { fr: 'Projet', en: 'Project' },
+  experience: { fr: 'Expérience', en: 'Experience' },
+  certification: { fr: 'Certification', en: 'Certification' },
+  training: { fr: 'Formation', en: 'Training' }
+};
+
+const getEvidenceLinks = (skillName: string): ResolvedEvidenceLink[] => {
+  const references = (skillEvidence as Record<string, SkillEvidenceReference[]>)[skillName] ?? [];
+  const links: ResolvedEvidenceLink[] = [];
+
+  for (const reference of references) {
+    if (reference.type === 'project') {
+      const project = projectsData.find((item) => item.id === reference.id);
+        if (!project) {
+          throw new Error(`Skill evidence references unknown project "${reference.id}" for "${skillName}".`);
+        }
+        links.push({
+          href: sitePath(`${lang === 'fr' ? '' : '/en'}/projects/${project.slug}/`),
+          label: project.title,
+          type: reference.type
+        });
+        continue;
+      }
+
+      if (reference.type === 'experience') {
+        const experience = experiencesData.find((item) => item.id === reference.id);
+        if (!experience) {
+          throw new Error(`Skill evidence references unknown experience "${reference.id}" for "${skillName}".`);
+        }
+        links.push({
+          href: sitePath(`${lang === 'fr' ? '' : '/en/'}#experience-${experience.id}`),
+          label: `${isFr ? experience.role.fr : experience.role.en} · ${experience.organization}`,
+          type: reference.type
+        });
+        continue;
+      }
+
+      if (reference.type === 'certification') {
+        const certification = certificationsData.find((item) => item.id === reference.id);
+        if (!certification) {
+          throw new Error(`Skill evidence references unknown certification "${reference.id}" for "${skillName}".`);
+        }
+        links.push({
+          href: sitePath(`${lang === 'fr' ? '' : '/en/'}#certificate-${certification.id}`),
+          label: certification.title,
+          type: reference.type
+        });
+        continue;
+      }
+
+      if (reference.type !== 'training') {
+        throw new Error(`Skill evidence has unknown type "${reference.type}" for "${skillName}".`);
+      }
+
+      const training = profileData.education.find((item) => item.id === reference.id);
+      if (!training) {
+        throw new Error(`Skill evidence references unknown training "${reference.id}" for "${skillName}".`);
+      }
+      links.push({
+        href: sitePath(`${lang === 'fr' ? '' : '/en/'}#education-${training.id}`),
+        label: isFr ? training.degree.fr : training.degree.en,
+        type: reference.type
+      });
+    }
+
+  return links;
+};
+
+const getStatusBadgeClass = (status: string) => {
+  switch (status) {
+    case 'Comfortable':
+      return 'badge-comfortable';
+    case 'Practicing':
+      return 'badge-practicing';
+    case 'Building':
+      return 'badge-building';
+    case 'Learning':
+      return 'badge-learning';
+    default:
+      return 'badge-default';
+  }
+};
+---
+
+<section id="skills" class="skills-section" aria-labelledby="skills-title">
+  <div class="site-container">
+    <div class="section-heading">
+      <div class="heading-left">
+        <p class="section-kicker">{isFr ? 'Compétences & Maîtrise' : 'Skills & Capabilities'}</p>
+        <h2 id="skills-title" class="section-title">
+          {isFr ? 'Des savoir-faire ancrés dans la pratique.' : 'Capabilities grounded in practice.'}
+        </h2>
+      </div>
+      <p class="section-intro">
+        {isFr
+          ? 'Aucun pourcentage : chaque statut reste qualitatif. Les références vers un projet, une expérience, une certification ou une formation sont affichées lorsqu’elles existent.'
+          : 'No percentages: skill statuses remain qualitative. Links to projects, experience, certifications, or education are shown where available.'}
+      </p>
+    </div>
+
+    <!-- Grille des 4 domaines -->
+    <div class="skills-categories-grid">
+      {skillsData.categories.map((category) => (
+        <div class="skill-category-card">
+          <h3 class="category-title">{isFr ? category.title.fr : category.title.en}</h3>
+          <ul class="skills-list">
+            {category.skills.map((skill) => {
+              const evidenceLinks = getEvidenceLinks(skill.name);
+              return (
+                <li class="skill-item">
+                <div class="skill-header">
+                  <span class="skill-name">{skill.name}</span>
+                  <span class={`skill-status ${getStatusBadgeClass(skill.status)}`}>
+                    {skill.status}
+                  </span>
+                </div>
+                <p class="skill-context">
+                  {isFr ? skill.context.fr : skill.context.en}
+                </p>
+                {evidenceLinks.length > 0 ? (
+                  <ul class="skill-evidence" aria-label={isFr ? 'Preuves associées' : 'Related evidence'}>
+                    {evidenceLinks.map((evidence) => (
+                      <li>
+                        <a href={evidence.href}>
+                          <span class="evidence-type">{evidenceLabels[evidence.type][lang]}</span>
+                          <span>{evidence.label}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="skill-no-evidence">
+                    {isFr ? 'Aucune preuve publiée pour le moment.' : 'No published evidence yet.'}
+                  </p>
+                )}
+              </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background-color: var(--color-canvas-subtle);
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 960px) {
+    .section-heading {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .section-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--space-2);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--weight-extrabold);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .section-intro {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: var(--leading-relaxed);
+  }
+
+  .skills-categories-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-width: 0;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .skills-categories-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .skills-categories-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .skill-category-card {
+    min-width: 0;
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-subtle);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+    margin-bottom: var(--space-5);
+  }
+
+  .skills-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .skill-item {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .skill-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .skill-name {
+    min-width: 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    overflow-wrap: anywhere;
+  }
+
+  .skill-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    white-space: nowrap;
+  }
+
+  .badge-comfortable {
+    background-color: var(--color-verified-bg);
+    color: var(--color-verified-text);
+    border: 1px solid var(--color-verified-border);
+  }
+
+  .badge-practicing {
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+  }
+
+  .badge-building {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+  }
+
+  .badge-learning {
+    background-color: var(--color-accent-tint);
+    color: var(--color-accent-primary);
+    border: 1px solid var(--color-accent-border);
+  }
+
+  .skill-context {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .skill-evidence {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .skill-evidence a {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-2);
+    color: var(--color-accent-primary);
+    font-size: 11px;
+    line-height: var(--leading-snug);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .skill-no-evidence {
+    margin-top: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  .evidence-type {
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-decoration: none;
+  }
+</style>

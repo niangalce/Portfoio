@@ -1,0 +1,192 @@
+{
+  "categories": [
+    {
+      "id": "frontend",
+      "title": {
+        "fr": "Développement Front-End",
+        "en": "Front-End Engineering"
+      },
+      "skills": [
+        {
+          "name": "HTML5 Sémantique",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Structure accessible, SEO technique, balisage propre appliqué sur tous les projets.",
+            "en": "Accessible structure, technical SEO, and clean semantic markup applied across projects."
+          }
+        },
+        {
+          "name": "CSS3 Moderne & Responsive",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Flexbox, CSS Grid, custom properties (variables), media queries mobile-first.",
+            "en": "Flexbox, CSS Grid, custom properties, and mobile-first responsive layout design."
+          }
+        },
+        {
+          "name": "JavaScript (ES6+)",
+          "status": "Practicing",
+          "context": {
+            "fr": "Manipulation du DOM, requêtes asynchrones Fetch, modularité et logique applicative.",
+            "en": "DOM manipulation, asynchronous Fetch queries, modular code, and app logic."
+          }
+        },
+        {
+          "name": "Tailwind CSS",
+          "status": "Practicing",
+          "context": {
+            "fr": "Design systems utilitaires, contrastes accessibles et intégration rapide.",
+            "en": "Utility-first design tokens, accessible contrast, and rapid component styling."
+          }
+        },
+        {
+          "name": "React & Composants",
+          "status": "Building",
+          "context": {
+            "fr": "Découpage en composants réutilisables, hooks (useState, useEffect), gestion d'état.",
+            "en": "Reusable component patterns, React hooks, and reactive UI state management."
+          }
+        },
+        {
+          "name": "TypeScript",
+          "status": "Building",
+          "context": {
+            "fr": "Typage des données, interfaces, props et fiabilisation du code applicatif.",
+            "en": "Data contracts, strict interfaces, typed props, and resilient front-end logic."
+          }
+        },
+        {
+          "name": "Next.js (App Router)",
+          "status": "Learning",
+          "context": {
+            "fr": "Exploration Server Components vs Client Components, routage dynamique sur le projet JËF.",
+            "en": "Exploring Server Components vs Client Components and dynamic routing on JËF."
+          }
+        }
+      ]
+    },
+    {
+      "id": "backend-data",
+      "title": {
+        "fr": "Bases de Données & Backend",
+        "en": "Databases & Backend"
+      },
+      "skills": [
+        {
+          "name": "Supabase & PostgreSQL",
+          "status": "Building",
+          "context": {
+            "fr": "Création de tables relationnelles, clés étrangères, requêtes SQL simples pour JËF.",
+            "en": "Relational schema design, foreign keys, and SQL queries powering JËF."
+          }
+        },
+        {
+          "name": "Row-Level Security (RLS)",
+          "status": "Practicing",
+          "context": {
+            "fr": "Sécurisation de l'accès aux données utilisateur au niveau de la base de données.",
+            "en": "Enforcing multi-tenant data access control at the database layer."
+          }
+        },
+        {
+          "name": "Authentification & Sessions",
+          "status": "Building",
+          "context": {
+            "fr": "Mise en place de flux de connexion/inscription sécurisés.",
+            "en": "Configuring secure user sign-up/login authentication flows."
+          }
+        },
+        {
+          "name": "Python (Notions)",
+          "status": "Learning",
+          "context": {
+            "fr": "Bases algorithmiques et découverte de scripts d'automatisation.",
+            "en": "Core algorithmic foundations and automation scripting exploration."
+          }
+        }
+      ]
+    },
+    {
+      "id": "tools-workflow",
+      "title": {
+        "fr": "Outils & Méthodes",
+        "en": "Tools & Workflow"
+      },
+      "skills": [
+        {
+          "name": "Git & GitHub",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Gestion de versions, commits structurés, branches et déploiement continu.",
+            "en": "Version control, clear commit histories, branches, and continuous deployment."
+          }
+        },
+        {
+          "name": "Bureautique Avancée",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Certifié Orange Digital Center : traitement de texte, tableurs, présentations.",
+            "en": "Certified by Orange Digital Center: documents, spreadsheets, presentations."
+          }
+        },
+        {
+          "name": "Prompting & Outils IA",
+          "status": "Practicing",
+          "context": {
+            "fr": "Certifié Orange Digital Center : structuration de prompts, veille, documentation.",
+            "en": "Certified by Orange Digital Center: prompt structuring, research, and documentation."
+          }
+        },
+        {
+          "name": "Sensibilisation Cybersécurité",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Certifié UNODC & ODC : hygiène numérique, prévention phishing, sécurisation des flux.",
+            "en": "Certified by UNODC & ODC: cyber hygiene, anti-phishing, credential protection."
+          }
+        }
+      ]
+    },
+    {
+      "id": "transversal",
+      "title": {
+        "fr": "Communication & Création Digitale",
+        "en": "Communication & Digital Creation"
+      },
+      "skills": [
+        {
+          "name": "Rédaction & Structuration de Contenus",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Rédaction d'un guide de 30 pages sur l'e-commerce, synthèse éditoriale bilingue.",
+            "en": "Authored 30-page African e-commerce guide; bilingual writing and synthesis."
+          }
+        },
+        {
+          "name": "Création Graphique & Identité",
+          "status": "Practicing",
+          "context": {
+            "fr": "Conception des maquettes de packs TèrangaDigital et visuels pour réseaux sociaux.",
+            "en": "Designed visual mockups for TèrangaDigital packs and social media creatives."
+          }
+        },
+        {
+          "name": "Relation Client & Écoute Active",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Expérience terrain chez Natural's : négociation, présentation, empathie client.",
+            "en": "Field sales experience at Natural's: negotiation, active listening, client care."
+          }
+        },
+        {
+          "name": "Rigueur Opérationnelle",
+          "status": "Comfortable",
+          "context": {
+            "fr": "Expérience en sécurité : ponctualité, respect strict des protocoles et sang-froid.",
+            "en": "Security officer background: punctuality, strict protocol adherence, composure."
+          }
+        }
+      ]
+    }
+  ]
+}
