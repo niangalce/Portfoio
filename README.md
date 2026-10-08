@@ -80,11 +80,10 @@ doit correspondre à une entrée existante. Les statuts de progression sont
 
 Les routes françaises sont à la racine (`/`) et les routes anglaises sous
 `/en/`. Contact, FAQ, Confidentialité et les études de cas sont bilingues.
-Le formulaire valide les champs dans le navigateur et prépare un brouillon `mailto:`
-vers `niangalce@gmail.com` ; l’utilisateur l’ouvre, le vérifie puis l’envoie depuis
-sa messagerie. Le portfolio ne reçoit pas les champs et ne confirme pas un envoi.
-Un lien email direct reste disponible comme solution de repli ; aucun backend d’envoi
-n’est installé.
+Les liens de contact ouvrent directement l’application de messagerie avec
+`niangalce@gmail.com` et un objet prérempli. La page Contact affiche aussi l’adresse
+et permet de la copier. Le portfolio n’a ni formulaire d’envoi, ni backend, ni service
+email et ne confirme jamais l’envoi d’un message.
 
 Les projets restent une sélection éditoriale locale. La page d’accueil et l’étude
 de cas TèrangaDigital enrichissent uniquement le dépôt public vérifié avec ses
@@ -124,7 +123,7 @@ permettant de configurer des en-têtes reste nécessaire pour ces protections.
 
 La politique de confidentialité décrit les demandes techniques de l’hébergement,
 le chargement des polices Google Fonts, la requête optionnelle à l’API publique de
-GitHub et le comportement du formulaire. Le site n’intègre pas d’analytics ni de
+GitHub et le comportement des liens email. Le site n’intègre pas d’analytics ni de
 suivi publicitaire. Le lien LinkedIn fourni reste présent, mais son état n’a pas pu
 être confirmé automatiquement (réponse anti-robot HTTP 999).
 

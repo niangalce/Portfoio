@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { sitePath } from '../utils/urls';
+import { contactMailto } from '../utils/contact';
 ---
 
 <BaseLayout
   title="Politique de confidentialité — Alce Niang"
-  description="Informations sur les données techniques du site, les polices Google Fonts et le formulaire de contact d’Alce Niang."
+  description="Informations sur les données techniques du site, les polices Google Fonts et les liens email d’Alce Niang."
   lang="fr"
 >
   <Header slot="header" lang="fr" currentPath="/privacy/" />
@@ -33,9 +33,9 @@ import { sitePath } from '../utils/urls';
     </section>
 
     <section>
-      <h2>Formulaire de contact</h2>
-      <p>Le formulaire valide les champs dans votre navigateur et compose un brouillon à destination de niangalce@gmail.com avec votre application de messagerie. Le portfolio ne reçoit ni ne stocke ces informations. Aucun email n’est envoyé sans votre action de vérification et d’envoi dans cette application.</p>
-      <p>Une fois envoyé, le message et les coordonnées qu’il contient sont traités par les services de messagerie utilisés par l’expéditeur et le destinataire. Vous pouvez également choisir d’écrire directement à l’adresse email affichée.</p>
+      <h2>Contact par email</h2>
+      <p>Le site ne comporte pas de formulaire d’envoi. Les liens de contact ouvrent votre application de messagerie avec l’adresse d’Alce et un objet prérempli. Le portfolio ne reçoit ni ne stocke les informations que vous choisissez d’inclure dans votre email. Vous gardez la main pour vérifier le message et l’envoyer.</p>
+      <p>Si vous envoyez un email, son contenu et les coordonnées qu’il contient sont traités par les services de messagerie utilisés par l’expéditeur et le destinataire. Vous pouvez aussi copier l’adresse affichée et l’utiliser dans l’application de votre choix.</p>
     </section>
 
     <section>
@@ -46,10 +46,10 @@ import { sitePath } from '../utils/urls';
 
     <section>
       <h2>Vos demandes</h2>
-      <p>Pour poser une question relative aux informations personnelles contenues dans un email que vous avez envoyé, contactez Alce à <a href="mailto:niangalce@gmail.com">niangalce@gmail.com</a>.</p>
+      <p>Pour poser une question relative aux informations personnelles contenues dans un email que vous avez envoyé, contactez Alce à <a href={contactMailto('fr')}>niangalce@gmail.com</a>.</p>
     </section>
 
-    <a class="back-link" href={sitePath('/contact/')}>Contacter Alce Niang</a>
+    <a class="back-link" href={contactMailto('fr')}>Contacter Alce Niang</a>
   </article>
   <Footer slot="footer" lang="fr" />
 </BaseLayout>

@@ -112,20 +112,36 @@ describe('Architecture Technique & Configuration Tests', () => {
     assert.match(urls, /BASE_URL/, 'Les URLs locales doivent respecter le base path Astro');
   });
 
-  test('Le formulaire de contact ne transmet pas de données à un endpoint tiers', () => {
-    const form = fs.readFileSync(path.join(rootDir, 'src', 'components', 'ContactForm.astro'), 'utf8');
-    for (const field of ['name', 'email', 'company', 'need', 'budget', 'message']) {
-      assert.match(form, new RegExp(`name="${field}"`), `Champ du formulaire manquant : ${field}`);
+  test('Les CTA de contact ouvrent directement la messagerie sans formulaire ni endpoint', () => {
+    const panel = fs.readFileSync(path.join(rootDir, 'src', 'components', 'ContactPanel.astro'), 'utf8');
+    const contact = fs.readFileSync(path.join(rootDir, 'src', 'utils', 'contact.ts'), 'utf8');
+    const contactSurfaces = [
+      'src/components/Header.astro',
+      'src/components/Footer.astro',
+      'src/components/FinalCTA.astro',
+      'src/pages/404.astro',
+      'src/pages/privacy.astro',
+      'src/pages/en/privacy.astro'
+    ];
+
+    assert.match(contact, /profileData\.identity\.contact\.email/);
+    assert.match(contact, /mailto:\$\{contactEmail\}\?subject=/);
+    assert.match(panel, /href=\{contactMailto\(lang\)\}/);
+    assert.match(panel, /Ouvrir ma messagerie/);
+    assert.match(panel, /Open my email app/);
+    assert.match(panel, /data-copy-email/);
+    assert.match(panel, /role="status" aria-live="polite"/);
+    assert.doesNotMatch(panel, /<form\b|data-contact-form|data-draft-link|honeypot|FormData|fetch\(/i);
+
+    for (const surface of contactSurfaces) {
+      const source = fs.readFileSync(path.join(rootDir, surface), 'utf8');
+      assert.match(source, /contactMailto/, `${surface} doit utiliser le lien email partagé`);
     }
-    assert.match(form, /data-contact-form/);
-    assert.match(form, /data-form-status role="status"/, 'Un état de confirmation accessible est requis');
-    assert.match(form, /reportValidity/, 'La validation native doit être conservée');
-    assert.match(form, /mailto:/, 'Le formulaire doit préparer un brouillon email');
-    assert.match(form, /data-draft-link/, 'Le brouillon préparé doit être ouvert par une action explicite');
-    assert.match(form, /draftLink\.focus\(\)/, 'Le focus doit accompagner la confirmation du brouillon');
-    assert.match(form, /class="honeypot" aria-hidden="true"/, 'Le honeypot doit être écarté des technologies d’assistance');
-    assert.match(form, /name="website"/, 'Le honeypot anti-spam doit exister');
-    assert.doesNotMatch(form, /action="https?:\/\//, 'Aucun endpoint tiers ne doit recevoir les champs');
+
+    for (const route of ['src/pages/contact.astro', 'src/pages/en/contact.astro']) {
+      const page = fs.readFileSync(path.join(rootDir, route), 'utf8');
+      assert.match(page, /ContactPanel/);
+    }
   });
 
   test('La politique de confidentialité ne présume pas du fournisseur de publication', () => {

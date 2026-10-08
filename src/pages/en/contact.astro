@@ -2,15 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ContactForm from '../../components/ContactForm.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 ---
 
 <BaseLayout
   title="Contact — Alce Niang | Portfolio"
-  description="Contact Alce Niang about an opportunity, web project, or collaboration. Bilingual contact form prepares an email draft."
+  description="Email Alce Niang about an opportunity, web project, or collaboration."
   lang="en"
 >
   <Header slot="header" lang="en" currentPath="/en/contact/" />
-  <ContactForm lang="en" />
+  <ContactPanel lang="en" />
   <Footer slot="footer" lang="en" />
 </BaseLayout>

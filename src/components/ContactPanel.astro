@@ -1,0 +1,202 @@
+---
+import { contactEmail, contactMailto } from '../utils/contact';
+
+interface Props {
+  lang?: 'fr' | 'en';
+}
+
+const { lang = 'fr' } = Astro.props;
+const isFr = lang === 'fr';
+---
+
+<section class="contact-section" aria-labelledby="contact-title">
+  <div class="site-container contact-layout">
+    <div class="contact-intro">
+      <p class="section-kicker">{isFr ? 'Contact & collaboration' : 'Contact & collaboration'}</p>
+      <h1 id="contact-title">
+        {isFr ? 'Parlons de votre besoin.' : 'Let’s discuss what you need.'}
+      </h1>
+      <p class="contact-lead">
+        {isFr
+          ? 'Écrivez-moi directement par email au sujet d’une opportunité, d’un projet ou d’une collaboration.'
+          : 'Email me directly about an opportunity, a project, or a collaboration.'}
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <p class="contact-label">{isFr ? 'Adresse email' : 'Email address'}</p>
+      <a class="direct-email" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      <div class="contact-actions">
+        <a class="contact-button" href={contactMailto(lang)}>
+          {isFr ? 'Ouvrir ma messagerie' : 'Open my email app'}
+          <span aria-hidden="true">→</span>
+        </a>
+        <button
+          class="copy-button"
+          type="button"
+          data-copy-email
+          data-email={contactEmail}
+        >
+          {isFr ? 'Copier l’adresse' : 'Copy email address'}
+        </button>
+      </div>
+      <p class="copy-status" data-copy-status role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+  const copyStatus = document.querySelector<HTMLElement>('[data-copy-status]');
+
+  copyButton?.addEventListener('click', async () => {
+    const email = copyButton.dataset.email;
+    const isFr = document.documentElement.lang === 'fr';
+
+    if (!email || !copyStatus) {
+      throw new Error('The contact email copy control is not configured.');
+    }
+
+    if (!navigator.clipboard?.writeText) {
+      copyStatus.textContent = isFr
+        ? 'La copie automatique est indisponible. Sélectionnez et copiez l’adresse affichée.'
+        : 'Automatic copying is unavailable. Select and copy the displayed address.';
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(email);
+      copyStatus.textContent = isFr ? 'Adresse email copiée.' : 'Email address copied.';
+    } catch (error) {
+      console.error('Unable to copy the contact email address.', error);
+      copyStatus.textContent = isFr
+        ? 'Copie impossible. Sélectionnez et copiez l’adresse affichée.'
+        : 'Could not copy. Select and copy the displayed address.';
+    }
+  });
+</script>
+
+<style>
+  .contact-section {
+    padding-block: var(--space-20);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(var(--space-8), 6vw, var(--space-16));
+    align-items: start;
+  }
+
+  .contact-intro {
+    position: sticky;
+    top: var(--space-8);
+  }
+
+  .section-kicker {
+    margin-bottom: var(--space-3);
+    color: var(--color-accent-primary);
+    font: var(--weight-semibold) var(--font-size-xs) var(--font-mono);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-2xl);
+  }
+
+  .contact-lead {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .contact-card {
+    padding: clamp(var(--space-5), 4vw, var(--space-8));
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .contact-label {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .direct-email {
+    display: inline-block;
+    margin-top: var(--space-2);
+    color: var(--color-accent-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--weight-semibold);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .contact-button,
+  .copy-button {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: 0.75rem 1.25rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+
+  .contact-button {
+    background: var(--color-accent-primary);
+    color: #fff;
+  }
+
+  .contact-button:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .copy-button {
+    border: 1px solid var(--color-border-medium);
+    background: var(--color-canvas-default);
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+
+  .copy-button:hover {
+    border-color: var(--color-accent-primary);
+  }
+
+  .contact-button:focus-visible,
+  .copy-button:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .copy-status {
+    min-height: 1.5em;
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  @media (max-width: 760px) {
+    .contact-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .contact-intro {
+      position: static;
+    }
+  }
+</style>

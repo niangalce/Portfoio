@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sitePath } from '../utils/urls';
+import { contactMailto } from '../utils/contact';
 
 if (!Astro.site) throw new Error('Astro.site must be configured for 404 metadata.');
 const canonicalUrl = new URL(sitePath('/404.html'), Astro.site).href;
@@ -21,12 +22,12 @@ const canonicalUrl = new URL(sitePath('/404.html'), Astro.site).href;
     <nav aria-label="Navigation après erreur">
       <a href={sitePath('/')}>Accueil</a>
       <a href={sitePath('/#projects')}>Projets</a>
-      <a href={sitePath('/contact/')}>Contact</a>
+      <a href={contactMailto('fr')}>Contact</a>
     </nav>
     <nav lang="en" aria-label="English navigation after error">
       <a href={sitePath('/en/')}>Home</a>
       <a href={sitePath('/en/#projects')}>Projects</a>
-      <a href={sitePath('/en/contact/')}>Contact</a>
+      <a href={contactMailto('en')}>Contact</a>
     </nav>
   </section>
 </BaseLayout>

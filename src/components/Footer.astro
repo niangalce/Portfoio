@@ -1,6 +1,7 @@
 ---
 import profileData from '../../content/profile.json';
 import { sitePath } from '../utils/urls';
+import { contactMailto } from '../utils/contact';
 
 interface Props {
   lang?: 'fr' | 'en';
@@ -41,7 +42,7 @@ const homePath = isFr ? '/' : '/en/';
           <li><a href={sitePath(`${homePath}#services`)}>{isFr ? 'Services disponibles' : 'Services'}</a></li>
           <li><a href={sitePath(`${homePath}#currently-learning`)}>{isFr ? 'Apprentissage continu' : 'Currently learning'}</a></li>
           <li><a href={sitePath(`${homePath}#certifications`)}>{isFr ? 'Certifications' : 'Certifications'}</a></li>
-          <li><a href={sitePath(isFr ? '/contact/' : '/en/contact/')}>{isFr ? 'Contact direct' : 'Contact'}</a></li>
+          <li><a href={contactMailto(lang)}>{isFr ? 'Contact direct' : 'Contact'}</a></li>
           <li><a href={sitePath(isFr ? '/faq/' : '/en/faq/')}>FAQ</a></li>
           <li><a href={sitePath(isFr ? '/privacy/' : '/en/privacy/')}>{isFr ? 'Confidentialité' : 'Privacy'}</a></li>
         </ul>

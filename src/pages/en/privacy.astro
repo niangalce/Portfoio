@@ -2,12 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { sitePath } from '../../utils/urls';
+import { contactMailto } from '../../utils/contact';
 ---
 
 <BaseLayout
   title="Privacy Policy — Alce Niang"
-  description="Information about this portfolio’s technical data, Google Fonts, and contact form."
+  description="Information about this portfolio’s technical data, Google Fonts, and email contact links."
   lang="en"
 >
   <Header slot="header" lang="en" currentPath="/en/privacy/" />
@@ -33,9 +33,9 @@ import { sitePath } from '../../utils/urls';
     </section>
 
     <section>
-      <h2>Contact form</h2>
-      <p>The form validates fields in your browser and prepares an email draft addressed to niangalce@gmail.com in your mail application. The portfolio does not receive or store the form entries. No email is sent until you review and send it from that application.</p>
-      <p>Once sent, the message and its contact details are handled by the sender’s and recipient’s email services. You may also choose to email the address directly.</p>
+      <h2>Email contact</h2>
+      <p>This website does not include a submission form. Contact links open your email application with Alce’s address and a prefilled subject. The portfolio does not receive or store information you choose to include in your email. You remain in control of reviewing and sending the message.</p>
+      <p>If you send an email, its contents and contact details are handled by the sender’s and recipient’s email services. You may also copy the displayed address and use it in the email application of your choice.</p>
     </section>
 
     <section>
@@ -46,10 +46,10 @@ import { sitePath } from '../../utils/urls';
 
     <section>
       <h2>Questions or requests</h2>
-      <p>For questions about personal information included in an email you sent, contact Alce at <a href="mailto:niangalce@gmail.com">niangalce@gmail.com</a>.</p>
+      <p>For questions about personal information included in an email you sent, contact Alce at <a href={contactMailto('en')}>niangalce@gmail.com</a>.</p>
     </section>
 
-    <a class="back-link" href={sitePath('/en/contact/')}>Contact Alce Niang</a>
+    <a class="back-link" href={contactMailto('en')}>Contact Alce Niang</a>
   </article>
   <Footer slot="footer" lang="en" />
 </BaseLayout>

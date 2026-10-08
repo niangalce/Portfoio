@@ -1,5 +1,6 @@
 ---
 import { getAlternatePath, sitePath } from '../utils/urls';
+import { contactMailto } from '../utils/contact';
 
 interface Props {
   lang?: 'fr' | 'en';
@@ -13,7 +14,7 @@ const alternateUrl = getAlternatePath(currentPath, lang);
 const homePath = isFr ? '/' : '/en/';
 const isHome = currentPath === '/' || currentPath === '/en/';
 const sectionUrl = (section: string) => {
-  if (section === 'contact') return sitePath(isFr ? '/contact/' : '/en/contact/');
+  if (section === 'contact') return contactMailto(lang);
   return isHome
     ? `#${section}`
     : `${sitePath(homePath)}#${section}`;
