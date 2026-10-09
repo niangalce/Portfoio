@@ -98,19 +98,14 @@ const getStatusClass = (status: string) => `status-${status.toLowerCase()}`;
     </a>
 
     <div class="learning-callout-panel">
-      <div class="callout-heading">
-        <span class="callout-icon" aria-hidden="true">i</span>
-        <div>
-          <h3 class="callout-title">
-            {isFr ? 'Périmètre des prestations' : 'Service scope'}
-          </h3>
-          <p class="callout-sub">
-            {isFr
-              ? 'Les offres présentées ci-dessus sont les services proposés. Les compétences techniques en progression restent identifiées séparément et ne sont pas incluses comme expertises disponibles.'
-              : 'The offerings above are the services currently presented. Technical skills still in progress are listed separately and are not represented as available expertise.'}
-          </p>
-        </div>
-      </div>
+      <h3 class="callout-title">
+        {isFr ? 'Périmètre des prestations' : 'Service scope'}
+      </h3>
+      <p class="callout-sub">
+        {isFr
+          ? 'Les offres présentées ci-dessus sont les services proposés. Les compétences techniques en progression restent identifiées séparément et ne sont pas incluses comme expertises disponibles.'
+          : 'The offerings above are the services currently presented. Technical skills still in progress are listed separately and are not represented as available expertise.'}
+      </p>
     </div>
   </div>
 </section>
@@ -246,10 +241,13 @@ const getStatusClass = (status: string) => `status-${status.toLowerCase()}`;
 
   .progress-category {
     min-width: 0;
-    padding: var(--space-5);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-md);
-    background: var(--color-surface-card);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .progress-category:first-child {
+    padding-top: 0;
+    border-top: 0;
   }
 
   .progress-category h4 {
@@ -356,17 +354,6 @@ const getStatusClass = (status: string) => `status-${status.toLowerCase()}`;
     border: 1.5px dashed var(--color-border-medium);
     border-radius: var(--radius-lg);
     padding: var(--space-8);
-  }
-
-  .callout-heading {
-    display: flex;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
-  }
-
-  .callout-icon {
-    font-size: 24px;
-    line-height: 1;
   }
 
   .callout-title {

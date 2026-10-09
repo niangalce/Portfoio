@@ -168,7 +168,8 @@ const jefScreens = [
         />
         <span>{isFr ? 'Produit SaaS personnel · en développement' : 'Personal SaaS product · in development'}</span>
       </div>
-      <figure data-reveal>
+      <!-- Capture principale : la vue produit -->
+      <figure class="jef-preview-main" data-reveal>
         <img
           src={sitePath(jefScreens[0].src)}
           alt={jefScreens[0].alt}
@@ -177,8 +178,30 @@ const jefScreens = [
           loading="lazy"
           decoding="async"
         />
-        <figcaption>{isFr ? 'Aperçu illustratif — données fictives' : 'Illustrative preview — fictitious data'}</figcaption>
+        <figcaption>
+          <strong>{jefScreens[0].title}</strong>
+          <span>{isFr ? 'Aperçu illustratif — données fictives' : 'Illustrative preview — fictitious data'}</span>
+        </figcaption>
       </figure>
+      <!-- Captures d'appui : tableau de bord et usage mobile -->
+      <div class="jef-preview-secondary">
+        {jefScreens.slice(1).map((screen) => (
+          <figure data-reveal>
+            <img
+              src={sitePath(screen.src)}
+              alt={screen.alt}
+              width="1350"
+              height={screen.title?.endsWith('Tableau de bord') || screen.title?.endsWith('Dashboard') ? 578 : 634}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <strong>{screen.title}</strong>
+              <span>{screen.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   ) : (
     <section class="jef-story" id="product-visual-story" aria-labelledby="jef-visual-title">
@@ -433,11 +456,39 @@ const jefScreens = [
     height: auto;
   }
 
+  /* Légendes des captures de l'aperçu JËF */
   .jef-preview figcaption {
-    margin-top: var(--space-2);
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-3);
+    text-align: left;
+  }
+
+  .jef-preview figcaption strong {
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--weight-semibold);
+  }
+
+  .jef-preview figcaption span {
     color: var(--color-text-secondary);
     font-size: var(--font-size-xs);
-    text-align: right;
+    line-height: var(--leading-normal);
+  }
+
+  /* Bande des captures d'appui (tableau de bord + mobile) */
+  .jef-preview-secondary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 700px) {
+    .jef-preview-secondary {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .jef-story {

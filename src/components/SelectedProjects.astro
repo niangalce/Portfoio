@@ -109,107 +109,78 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
       </div>
     </article>
 
-    <!-- Grille asymétrique pour TèrangaDigital et Portfolio -->
-    <div class="secondary-projects-grid">
-      <!-- Projet 2 : TèrangaDigital (Initiative de marque & Storefront) -->
-      <article class="brand-project-card" aria-labelledby="teranga-title">
-        <div class="project-header-bar">
-          <span class="project-category-tag">Digital Platform & Brand</span>
-          <span class="status-badge-active">
-            <span>{isFr ? 'Marque fondée par Alce' : 'Brand founded by Alce'}</span>
-          </span>
-        </div>
-
-        <ProjectVisualStory projectId="terangadigital" lang={lang} variant="preview" />
-
-        <h3 id="teranga-title" class="project-title">{teranga.title}</h3>
-        <p class="project-tagline">{isFr ? teranga.tagline.fr : teranga.tagline.en}</p>
-        <p class="project-desc">{isFr ? teranga.caseStudy.context.fr : teranga.caseStudy.context.en}</p>
-
-        <!-- Preuve matérielle : Le guide e-commerce rédigé de 30 pages -->
-        <div class="deliverable-callout">
-          <div class="deliverable-icon">📖</div>
-          <div class="deliverable-content">
-            <strong>{isFr ? 'Guide e-commerce de 30 pages' : '30-page E-commerce Guide'}</strong>
-            <p>{isFr ? '« Réussir sur l’e-commerce en Afrique en 30 jours » — rédigé, structuré et diffusé.' : '"Succeeding in African E-commerce in 30 Days" — fully authored and published.'}</p>
+    <!-- TèrangaDigital : bande éditoriale de marque (composition distincte de JËF) -->
+    <article class="brand-project" aria-labelledby="teranga-title">
+      <div class="brand-project-grid">
+        <div class="brand-narrative">
+          <div class="brand-meta">
+            <span class="project-category-tag">Digital Platform & Brand</span>
+            <span class="status-badge-active">
+              <span>{isFr ? 'Marque fondée par Alce' : 'Brand founded by Alce'}</span>
+            </span>
           </div>
+
+          <h3 id="teranga-title" class="project-title">{teranga.title}</h3>
+          <p class="project-tagline">{isFr ? teranga.tagline.fr : teranga.tagline.en}</p>
+          <p class="project-desc">{isFr ? teranga.caseStudy.context.fr : teranga.caseStudy.context.en}</p>
+
+          <!-- Preuve matérielle : le guide e-commerce rédigé de 30 pages -->
+          <div class="deliverable-callout">
+            <div class="deliverable-content">
+              <strong>{isFr ? 'Guide e-commerce de 30 pages' : '30-page E-commerce Guide'}</strong>
+              <p>{isFr ? '« Réussir sur l’e-commerce en Afrique en 30 jours » — rédigé, structuré et diffusé.' : '"Succeeding in African E-commerce in 30 Days" — fully authored and published.'}</p>
+            </div>
+          </div>
+
+          <div class="project-actions">
+            {teranga.liveUrl && <a
+              href={teranga.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link-btn"
+            >
+              <span>{isFr ? 'Visiter la boutique en ligne' : 'Visit the online store'}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>}
+            <a href={getCaseStudyUrl(teranga.slug)} class="project-link-secondary">
+              {isFr ? 'Lire l’étude de cas' : 'Read the case study'}
+            </a>
+            <a
+              href={teranga.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link-secondary"
+            >
+              {isFr ? 'Code GitHub' : 'GitHub Code'}
+            </a>
+          </div>
+
+          <GitHubRepositoryMeta owner="niangalce" repository="TerangaDigital.shop" lang={lang} />
         </div>
 
-        <div class="tech-tags" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
-          {teranga.stack.slice(0, 5).map((tech) => (
-            <span class="tech-tag">{tech}</span>
-          ))}
+        <div class="brand-visuals">
+          <ProjectVisualStory projectId="terangadigital" lang={lang} variant="preview" />
         </div>
+      </div>
+    </article>
 
-        <div class="project-actions">
-          <a href={getCaseStudyUrl(teranga.slug)} class="project-link-secondary">
-            {isFr ? 'Lire l’étude de cas' : 'Read the case study'}
-          </a>
-          {teranga.liveUrl && <a
-            href={teranga.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-link-btn"
-          >
-            <span>{isFr ? 'Visiter la boutique en ligne' : 'Visit the online store'}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </a>}
-          <a
-            href={teranga.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-link-secondary"
-          >
-            {isFr ? 'Code GitHub' : 'GitHub Code'}
-          </a>
-        </div>
-        <GitHubRepositoryMeta owner="niangalce" repository="TerangaDigital.shop" lang={lang} />
-      </article>
-
-      <!-- Projet 3 : Portfolio Personnel (Standards Web & Performance) -->
-      <article class="standards-project-card" aria-labelledby="portfolio-title">
-        <div class="project-header-bar">
-          <span class="project-category-tag">Engineering Standards</span>
-          <span class="status-badge-active">
-            <span>Astro 7 + TypeScript</span>
-          </span>
-        </div>
-
-        <h3 id="portfolio-title" class="project-title">{portfolio.title}</h3>
-        <p class="project-tagline">{isFr ? portfolio.tagline.fr : portfolio.tagline.en}</p>
-        <p class="project-desc">
-          {isFr
-            ? portfolio.caseStudy.context.fr
-            : portfolio.caseStudy.context.en}
-        </p>
-
-        <div class="tech-tags" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
-          {portfolio.stack.slice(0, 4).map((tech) => (
-            <span class="tech-tag">{tech}</span>
-          ))}
-        </div>
-
-        <div class="project-actions">
-          {portfolio.githubUrl && <a
-            href={portfolio.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-link-btn"
-          >
-            <span>{isFr ? 'Dépôt GitHub du portfolio' : 'GitHub Repository'}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </a>}
-        </div>
-      </article>
-    </div>
+    <!-- Portfolio Personnel : rangée éditoriale compacte (standards web) -->
+    <article class="standards-project-row" aria-labelledby="portfolio-title">
+      <div class="row-lead">
+        <span class="project-category-tag">Engineering Standards</span>
+        <h3 id="portfolio-title" class="row-title">{portfolio.title}</h3>
+        <p class="row-tagline">{isFr ? portfolio.tagline.fr : portfolio.tagline.en}</p>
+      </div>
+      <div class="row-stack" aria-label={isFr ? 'Stack technique' : 'Tech stack'}>
+        {portfolio.stack.slice(0, 4).map((tech) => (
+          <span class="tech-tag">{tech}</span>
+        ))}
+      </div>
+    </article>
   </div>
 </section>
 
@@ -267,7 +238,7 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
     border-radius: var(--radius-lg);
     padding: var(--space-8);
     box-shadow: var(--shadow-card);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-10);
   }
 
   .project-header-bar {
@@ -479,85 +450,111 @@ const getCaseStudyUrl = (slug: string) => sitePath(`${isFr ? '' : '/en'}/project
     color: var(--color-accent-primary);
   }
 
-  /* Grille des 2 projets secondaires */
-  .secondary-projects-grid {
+  /* TèrangaDigital : bande éditoriale de marque (plate, sans carte boxée) */
+  .brand-project {
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding: var(--space-10) 0;
+    margin-bottom: var(--space-10);
+  }
+
+  .brand-project-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-8);
+    align-items: start;
   }
 
   @media (min-width: 960px) {
-    .secondary-projects-grid {
-      grid-template-columns: 1fr 1fr;
+    .brand-project-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: var(--space-12);
     }
   }
 
-  .brand-project-card,
-  .standards-project-card {
-    background-color: var(--color-surface-card);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-card);
+  .brand-meta {
     display: flex;
-    flex-direction: column;
-  }
-
-  .deliverable-callout {
-    display: flex;
+    align-items: center;
     gap: var(--space-3);
-    background-color: var(--color-accent-tint);
-    border: 1px solid var(--color-accent-border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-3) var(--space-4);
-    margin-top: var(--space-4);
-    margin-bottom: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-5);
   }
 
-  .deliverable-icon {
-    font-size: 18px;
-    line-height: 1;
+  .brand-narrative .project-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .brand-narrative .deliverable-callout {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .brand-narrative .project-actions {
+    margin-top: 0;
+    margin-bottom: var(--space-6);
+  }
+
+  .brand-visuals {
+    min-width: 0;
+  }
+
+  /* Guide e-commerce : mise en valeur typographique (sans icône décorative) */
+  .deliverable-callout {
+    background-color: var(--color-accent-tint);
+    border-left: 3px solid var(--color-accent-primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: var(--space-4) var(--space-5);
   }
 
   .deliverable-content strong {
     display: block;
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
     color: var(--color-accent-primary);
+    margin-bottom: var(--space-1);
   }
 
   .deliverable-content p {
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
-    line-height: 1.35;
+    line-height: var(--leading-normal);
     margin: 0;
   }
 
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-    background-color: var(--color-canvas-subtle);
-    padding: var(--space-3);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border-subtle);
-  }
-
-  .metric-box {
+  /* Portfolio : rangée structurée compacte */
+  .standards-project-row {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    gap: var(--space-4);
+    padding: var(--space-6) 0 var(--space-2);
   }
 
-  .metric-val {
-    font-family: var(--font-display);
+  @media (min-width: 760px) {
+    .standards-project-row {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-8);
+    }
+  }
+
+  .row-title {
+    font-size: var(--font-size-md);
     font-weight: var(--weight-bold);
-    font-size: var(--font-size-sm);
     color: var(--color-text-primary);
+    margin: var(--space-1) 0 var(--space-1);
   }
 
-  .metric-lbl {
-    font-size: 10px;
+  .row-tagline {
+    font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    max-width: 520px;
+  }
+
+  .row-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: flex-start;
   }
 </style>

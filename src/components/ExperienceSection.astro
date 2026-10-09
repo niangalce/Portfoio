@@ -9,6 +9,8 @@ interface Props {
 const { lang = 'fr' } = Astro.props;
 const isFr = lang === 'fr';
 
+// Chaque catégorie dispose d'une identité chromatique distincte,
+// construite à partir des tokens sémantiques existants.
 const getCategoryColor = (category: string) => {
   switch (category) {
     case 'Tech':
@@ -18,7 +20,7 @@ const getCategoryColor = (category: string) => {
     case 'Communication':
       return { bg: 'var(--color-verified-bg)', text: 'var(--color-verified-text)', border: 'var(--color-verified-border)' };
     case 'Entrepreneurship':
-      return { bg: 'var(--color-accent-tint)', text: 'var(--color-accent-primary)', border: 'var(--color-accent-border)' };
+      return { bg: 'var(--color-status-dev-bg)', text: 'var(--color-status-dev-text)', border: 'var(--color-status-dev-border)' };
     case 'Other':
       return { bg: 'var(--color-canvas-subtle)', text: 'var(--color-text-secondary)', border: 'var(--color-border-medium)' };
     default:
@@ -66,19 +68,25 @@ const getCategoryLabel = (category: string) =>
       </p>
     </div>
 
-    <!-- Timeline des expériences structurée -->
+    <!-- Chronologie éditoriale : rangées structurées, séparées par des filets -->
     <div class="experience-timeline">
-      {experiencesData.map((exp) => {
+      {experiencesData.map((exp, index) => {
         const evidenceLinks = getEvidenceLinks(exp.id);
+        const primaryColor = getCategoryColor(exp.categories[0] ?? 'Other');
+        const isLast = index === experiencesData.length - 1;
         return (
-          <article id={`experience-${exp.id}`} class="timeline-item" aria-labelledby={`experience-title-${exp.id}`}>
+          <article
+            id={`experience-${exp.id}`}
+            class:list={['timeline-item', isLast && 'timeline-item-last']}
+            aria-labelledby={`experience-title-${exp.id}`}
+          >
             <div class="timeline-marker" aria-hidden="true">
-              <span class="timeline-dot"></span>
+              <span class="timeline-dot" style={`background-color: ${primaryColor.text};`}></span>
               <span class="timeline-line"></span>
             </div>
 
-            <div class="timeline-content-card">
-              <div class="card-header">
+            <div class="timeline-content">
+              <div class="exp-header">
                 <div class="role-group">
                   <h3 id={`experience-title-${exp.id}`} class="role-title">{isFr ? exp.role.fr : exp.role.en}</h3>
                   <p class="role-org">
@@ -177,16 +185,24 @@ const getCategoryLabel = (category: string) =>
     line-height: var(--leading-relaxed);
   }
 
+  /* Chronologie : chaque expérience est une rangée, pas une carte boxée */
   .experience-timeline {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
   }
 
   .timeline-item {
     display: grid;
     grid-template-columns: 24px 1fr;
     gap: var(--space-4);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .timeline-item:last-child,
+  .timeline-item-last {
+    border-bottom: 0;
+    padding-bottom: 0;
   }
 
   @media (min-width: 768px) {
@@ -209,8 +225,9 @@ const getCategoryLabel = (category: string) =>
     background-color: var(--color-accent-primary);
     border: 3px solid var(--color-canvas-default);
     box-shadow: 0 0 0 1px var(--color-border-medium);
-    margin-top: 24px;
+    margin-top: 6px;
     z-index: 2;
+    flex: 0 0 auto;
   }
 
   .timeline-line {
@@ -220,28 +237,27 @@ const getCategoryLabel = (category: string) =>
     margin-top: 4px;
   }
 
-  .timeline-content-card {
-    background-color: var(--color-surface-card);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-md);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-card);
+  .timeline-item-last .timeline-line {
+    display: none;
   }
 
-  .card-header {
+  .timeline-content {
+    min-width: 0;
+  }
+
+  .exp-header {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border-subtle);
     margin-bottom: var(--space-4);
   }
 
   @media (min-width: 640px) {
-    .card-header {
+    .exp-header {
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
+      gap: var(--space-4);
     }
   }
 

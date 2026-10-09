@@ -107,6 +107,52 @@ const getStatusBadgeClass = (status: string) => {
       return 'badge-default';
   }
 };
+
+// Hiérarchie par niveau de maîtrise (statut qualitatif), toutes domaines confondus.
+// Chaque compétence conserve l'étiquette de son domaine d'origine.
+type SkillEntry = (typeof skillsData.categories)[number]['skills'][number] & {
+  domain: { fr: string; en: string };
+};
+
+const allSkills: SkillEntry[] = skillsData.categories.flatMap((category) =>
+  category.skills.map((skill) => ({ ...skill, domain: category.title }))
+);
+
+const provenSkills = allSkills.filter((skill) => skill.status === 'Comfortable');
+const consolidatingSkills = allSkills.filter(
+  (skill) => skill.status === 'Practicing' || skill.status === 'Building'
+);
+const learningSkills = allSkills.filter((skill) => skill.status === 'Learning');
+
+const tierLabels = {
+  proven: {
+    fr: 'Maîtrises opérationnelles',
+    en: 'Operational mastery'
+  },
+  consolidating: {
+    fr: 'En consolidation sur les projets',
+    en: 'Being consolidated on projects'
+  },
+  learning: {
+    fr: 'En apprentissage',
+    en: 'Currently learning'
+  }
+};
+
+const tierNotes = {
+  proven: {
+    fr: 'Compétences utilisées dans les projets, les expériences et les certifications documentées.',
+    en: 'Skills used across projects, experiences, and documented certifications.'
+  },
+  consolidating: {
+    fr: 'Pratique régulière et construction active, notamment sur JËF et TèrangaDigital.',
+    en: 'Regular practice and active building, notably on JËF and TèrangaDigital.'
+  },
+  learning: {
+    fr: 'Prochaines briques explorées ; elles ne sont pas présentées comme des expertises disponibles.',
+    en: 'Next building blocks being explored; not presented as available expertise.'
+  }
+};
 ---
 
 <section id="skills" class="skills-section" aria-labelledby="skills-title">
@@ -125,47 +171,100 @@ const getStatusBadgeClass = (status: string) => {
       </p>
     </div>
 
-    <!-- Grille des 4 domaines -->
-    <div class="skills-categories-grid">
-      {skillsData.categories.map((category) => (
-        <div class="skill-category-card">
-          <h3 class="category-title">{isFr ? category.title.fr : category.title.en}</h3>
-          <ul class="skills-list">
-            {category.skills.map((skill) => {
-              const evidenceLinks = getEvidenceLinks(skill.name);
-              return (
-                <li class="skill-item">
-                <div class="skill-header">
-                  <span class="skill-name">{skill.name}</span>
-                  <span class={`skill-status ${getStatusBadgeClass(skill.status)}`}>
-                    {skill.status}
-                  </span>
-                </div>
-                <p class="skill-context">
-                  {isFr ? skill.context.fr : skill.context.en}
+    <!-- Niveau 1 : compétences éprouvées par les projets et certifications -->
+    <div class="skill-tier">
+      <div class="tier-header">
+        <h3 class="tier-title">{isFr ? tierLabels.proven.fr : tierLabels.proven.en}</h3>
+        <p class="tier-note">{isFr ? tierNotes.proven.fr : tierNotes.proven.en}</p>
+      </div>
+      <ul class="skill-rows">
+        {provenSkills.map((skill) => {
+          const evidenceLinks = getEvidenceLinks(skill.name);
+          return (
+            <li class="skill-row">
+              <div class="skill-row-main">
+                <span class="skill-name">{skill.name}</span>
+                <span class="skill-domain">{isFr ? skill.domain.fr : skill.domain.en}</span>
+              </div>
+              {evidenceLinks.length > 0 ? (
+                <ul class="skill-evidence" aria-label={isFr ? 'Preuves associées' : 'Related evidence'}>
+                  {evidenceLinks.map((evidence) => (
+                    <li>
+                      <a href={evidence.href}>
+                        <span class="evidence-type">{evidenceLabels[evidence.type][lang]}</span>
+                        <span>{evidence.label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="skill-no-evidence">
+                  {isFr ? 'Aucune preuve publiée pour le moment.' : 'No published evidence yet.'}
                 </p>
-                {evidenceLinks.length > 0 ? (
-                  <ul class="skill-evidence" aria-label={isFr ? 'Preuves associées' : 'Related evidence'}>
-                    {evidenceLinks.map((evidence) => (
-                      <li>
-                        <a href={evidence.href}>
-                          <span class="evidence-type">{evidenceLabels[evidence.type][lang]}</span>
-                          <span>{evidence.label}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p class="skill-no-evidence">
-                    {isFr ? 'Aucune preuve publiée pour le moment.' : 'No published evidence yet.'}
-                  </p>
-                )}
-              </li>
-              );
-            })}
-          </ul>
-        </div>
-      ))}
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+
+    <!-- Niveau 2 : compétences en pratique ou en construction -->
+    <div class="skill-tier">
+      <div class="tier-header">
+        <h3 class="tier-title">{isFr ? tierLabels.consolidating.fr : tierLabels.consolidating.en}</h3>
+        <p class="tier-note">{isFr ? tierNotes.consolidating.fr : tierNotes.consolidating.en}</p>
+      </div>
+      <ul class="skill-rows">
+        {consolidatingSkills.map((skill) => {
+          const evidenceLinks = getEvidenceLinks(skill.name);
+          return (
+            <li class="skill-row">
+              <div class="skill-row-main">
+                <span class="skill-name">{skill.name}</span>
+                <span class={`skill-status ${getStatusBadgeClass(skill.status)}`}>
+                  {skill.status}
+                </span>
+                <span class="skill-domain">{isFr ? skill.domain.fr : skill.domain.en}</span>
+              </div>
+              <p class="skill-context">{isFr ? skill.context.fr : skill.context.en}</p>
+              {evidenceLinks.length > 0 ? (
+                <ul class="skill-evidence" aria-label={isFr ? 'Preuves associées' : 'Related evidence'}>
+                  {evidenceLinks.map((evidence) => (
+                    <li>
+                      <a href={evidence.href}>
+                        <span class="evidence-type">{evidenceLabels[evidence.type][lang]}</span>
+                        <span>{evidence.label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+
+    <!-- Niveau 3 : compétences en cours d'apprentissage -->
+    <div class="skill-tier">
+      <div class="tier-header">
+        <h3 class="tier-title">{isFr ? tierLabels.learning.fr : tierLabels.learning.en}</h3>
+        <p class="tier-note">{isFr ? tierNotes.learning.fr : tierNotes.learning.en}</p>
+      </div>
+      <ul class="skill-rows skill-rows-compact">
+        {learningSkills.map((skill) => (
+          <li class="skill-row">
+            <div class="skill-row-main">
+              <span class="skill-name">{skill.name}</span>
+              <span class={`skill-status ${getStatusBadgeClass(skill.status)}`}>
+                {skill.status}
+              </span>
+              <span class="skill-domain">{isFr ? skill.domain.fr : skill.domain.en}</span>
+            </div>
+            <p class="skill-context">{isFr ? skill.context.fr : skill.context.en}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
@@ -218,74 +317,97 @@ const getStatusBadgeClass = (status: string) => {
     line-height: var(--leading-relaxed);
   }
 
-  .skills-categories-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    min-width: 0;
-    gap: var(--space-6);
+  /* Niveaux de maîtrise : séparés par des filets, pas par des cartes */
+  .skill-tier {
+    padding-top: var(--space-8);
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--color-border-subtle);
   }
 
-  @media (min-width: 640px) {
-    .skills-categories-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  /* Le premier niveau suit directement l'en-tête de section : pas de filet supérieur */
+  .section-heading + .skill-tier {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: 0;
   }
 
-  @media (min-width: 1024px) {
-    .skills-categories-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  .skill-category-card {
-    min-width: 0;
-    background-color: var(--color-surface-card);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-md);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-subtle);
+  .tier-header {
     display: flex;
     flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
   }
 
-  .category-title {
+  @media (min-width: 760px) {
+    .tier-header {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+  }
+
+  .tier-title {
     font-family: var(--font-display);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
     font-weight: var(--weight-bold);
     color: var(--color-text-primary);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border-subtle);
-    margin-bottom: var(--space-5);
   }
 
-  .skills-list {
+  .tier-note {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    max-width: 460px;
+  }
+
+  /* Rangées structurées (liste éditoriale) */
+  .skill-rows {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    padding: 0;
+    margin: 0;
   }
 
-  .skill-item {
+  .skill-row {
     display: flex;
-    min-width: 0;
     flex-direction: column;
-    gap: 3px;
+    gap: var(--space-2);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
   }
 
-  .skill-header {
+  .skill-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .skill-row-main {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-2);
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
   }
 
   .skill-name {
-    min-width: 0;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     font-weight: var(--weight-semibold);
     color: var(--color-text-primary);
     overflow-wrap: anywhere;
+  }
+
+  .skill-rows-compact .skill-name {
+    font-size: var(--font-size-sm);
+  }
+
+  .skill-domain {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
   }
 
   .skill-status {
@@ -322,21 +444,23 @@ const getStatusBadgeClass = (status: string) => {
   }
 
   .skill-context {
-    font-size: 12px;
+    font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
-    line-height: 1.4;
+    line-height: var(--leading-normal);
+    margin: 0;
   }
 
   .skill-evidence {
-    display: grid;
-    gap: var(--space-1);
-    margin-top: var(--space-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .skill-evidence a {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: var(--space-1) var(--space-2);
@@ -349,7 +473,7 @@ const getStatusBadgeClass = (status: string) => {
   }
 
   .skill-no-evidence {
-    margin-top: var(--space-2);
+    margin: 0;
     color: var(--color-text-secondary);
     font-size: 11px;
     font-style: italic;
